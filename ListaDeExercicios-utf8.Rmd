@@ -1,6 +1,6 @@
 ---
 title: "Métodos Inferenciais em Pesquisas Legislativas - Lista de Exercícios"
-author: William PPeixoto
+author: William Peixoto
 output: html_document
 ---
 
@@ -137,7 +137,7 @@ hist(desempregados$age)
 hist(desempregados$age[desempregados$state == 94])
 ```
 
-<div style="background-color:#a9e970; border-color:navy;">
+<div style="background-color:#a9e970; border-color:navy;padding:5px">
 **Comentários**: Com intervalo de 5 anos, as distribuições não parecem ser normais. Há um desvio para os valores entre 20 e 35 anos, mas a diversidade de idades vai de 20 a 61 anos. TODO: positivo ou negativo?
 
 Aumentar o número de intervalos (e consequentemente diminuir a amplitude de cada barra) não parece mudar radicalmente a forma da distribuição.
