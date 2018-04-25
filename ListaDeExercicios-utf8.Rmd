@@ -176,15 +176,17 @@ b. Construa tabelas de frequência que ilustrem os seguintes cruzamentos de vari
     
 ```{r, echo=FALSE}
 
-
+# osestados = desempregados[desempregados$state == c(21, 44, 58, 82, 94)]  # não funciona
+osestados = desempregados[desempregados$state %in% c(21, 44, 58, 82, 94),] # Pra quê essa vírgula?
 # 1. 
-
+"Estado x Sexo"
+table(osestados$state, osestados$sex)
 
 # 2. 
-
+table(osestados$state, osestados$school12)
 
 # 3. 
-
+table()
 
 # 4. 
 
