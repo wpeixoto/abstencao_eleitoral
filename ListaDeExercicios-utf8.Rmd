@@ -209,7 +209,8 @@ c. Altere, no script a seguir, os valores dos atributos **eval** e **include** p
 # TSE
 rm(list = ls(all = TRUE))
 # votação por zona eleitoral de SC
-votZona <- read.table("votacao_candidato_munzona_2016_SC.txt",sep=";") 
+# votZona <- read.table("votacao_candidato_munzona_2016_SC.txt",sep=";")
+votZona <- read.table("votacao_candidato_munzona_2016_SC.utf8.txt",sep=";") 
 names(votZona) <- c(
 "DATA_GERACAO", "HORA_GERACAO", "ANO_ELEICAO",  "NUM_TURNO", "DESCRICAO_ELEICAO", "SIGLA_UF", "SIGLA_UE", "CODIGO_MUNICIPIO", "NOME_MUNICIPIO", "NUMERO_ZONA", "CODIGO_CARGO", "NUMERO_CAND",
 "SQ_CANDIDATO", "NOME_CANDIDATO", "NOME_URNA_CANDIDATO", "DESCRICAO_CARGO", "COD_SIT_CAND_SUPERIOR", "DESC_SIT_CAND_SUPERIOR",
@@ -317,15 +318,23 @@ i. Estude o funcionamento da função **aggregate** do pacote **stats**. Identif
 
 ```{r}
 library(knitr)
+mais_novos = votZona[votZona$IDADE_DATA_ELEICAO == min(votZona$IDADE_DATA_ELEICAO), ]
+mais_novos = mais_novos[, c('NOME_CANDIDATO', 'IDADE_DATA_ELEICAO', 'DESCRICAO_CARGO', 'NOME_MUNICIPIO', 'TOTAL_VOTOS')]  # Apenas algumas colunas
+names(mais_novos) = c('NOME', 'IDADE', 'CARGO', 'MUNICIPIO', 'VOTOS')  # Renomear campos
 
+kable(mais_novos, format='pandoc')
 
 ```
 
 j. Qual a razão entre o quantitativo de votos para o cargo de VEREADOR recebido por mulheres e o recebido por homens na cidade de CAMBORIÚ.
 
 ```{r}
+camb = votZona[votZona$NOME_MUNICIPIO == 'CAMBORIÚ',]  # Apenas município de Camboriú
+camb = camb[camb$DESCRICAO_CARGO == 'VEREADOR', ]  # Apenas candidatos a vereador
+votos_para_mulheres = sum(camb$TOTAL_VOTOS[camb$DESCRICAO_SEXO == 'FEMININO'])
+votos_para_homens = sum(camb$TOTAL_VOTOS[camb$DESCRICAO_SEXO == 'MASCULINO'])
 
-
+votos_para_mulheres / votos_para_homens
 
 ```
 
