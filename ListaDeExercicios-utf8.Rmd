@@ -146,7 +146,7 @@ Há 2811 (57,63%) pessoas com idade inferior à média, e 2066 (42,36%) acima. A
 </div>
 
 
-e. Considerando o tempo que a pessoa permaneceu empregada (**tenure**), qual dos estados relaciondados (21, 44, 58, 82 e 94) proporciona maior establilidade no emprego?
+e. Considerando o tempo que a pessoa permaneceu empregada (**tenure**), qual dos estados relaciondados (21, 44, 58, 82 e 94) proporciona maior establilidade no emprego? <span style="color:red">Pendente</span>
 
 ```{r, echo=FALSE}
 # todos os estados
@@ -167,6 +167,8 @@ any(is.na(desempregados))
 # FALSE significa que não há valores NA nesse data frame
 ```
 
+O resultado de `any(is.na(desempregados))` é `FALSE`, o que significa que não há valores `NA` nessa variável.
+
 b. Construa tabelas de frequência que ilustrem os seguintes cruzamentos de variáveis, considerando os estados 21, 44, 58, 82 e 94:
 
     1. estado (state) versus sexo (sex): dados absolutos
@@ -182,13 +184,13 @@ osestados = desempregados[desempregados$state %in% c(21, 44, 58, 82, 94),] # Pra
 "Estado x Sexo"
 table(osestados$state, osestados$sex)
 
-# 2. 
+# 2. Estado x Anos de escolaridade (>12)
 table(osestados$state, osestados$school12)
 
-# 3. 
-table()
+# 3.Motivo da perda do emprego
+#empregos_perdidos = table(osestados$joblost, )
 
-# 4. 
+# 4. Estado civil:
 
 
 ```    
@@ -203,7 +205,7 @@ b. Acesse a área **Candidatos**, selecione o ano **2016** e baixe o arquivo dis
 
 c. Altere, no script a seguir, os valores dos atributos **eval** e **include** para **TRUE** e execute o código instrução-a-instrução, tentando compreender cada passo. 
 
-```{r, eval=FALSE, include=FALSE}
+```{r, eval=T, include=T}
 # TSE
 rm(list = ls(all = TRUE))
 # votação por zona eleitoral de SC
@@ -266,10 +268,10 @@ d. Informe as dimensões do conjunto de dados votZona resultante.
 
 ```{r}
 # linhas
-
+nrow(votZona)
 
 # colunas
-
+ncol(votZona)
 ```
 
 e. Investigue as formas de extração de subconjuntos de dados a partir de um conjunto maior (consulte [Quick-R](https://www.statmethods.net/management/subset.html) e **?subset**).
@@ -278,10 +280,10 @@ f. A partir do conjunto de dados **votZona** resultante, informe a quantidade de
 
 ```{r}
 # qtd municípios
-
+length(table(votZona$CODIGO_MUNICIPIO))
 
 # qtd zonas eleitorais
-
+length(table(votZona$CODIGO_MUNICIPIO))
 
 ```
 
