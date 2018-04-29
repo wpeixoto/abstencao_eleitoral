@@ -283,14 +283,21 @@ f. A partir do conjunto de dados **votZona** resultante, informe a quantidade de
 length(table(votZona$CODIGO_MUNICIPIO))
 
 # qtd zonas eleitorais
-length(table(votZona$CODIGO_MUNICIPIO))
+length(table(votZona$NUMERO_ZONA))
 
 ```
 
 g. Construa uma tabela contendo os campos NOME_URNA_CANDIDATO, DESCRICAO_CARGO, NOME_MUNICIPIO, TOTAL_VOTOS e PERCENTUAL_VOTOS para os **dez** candidatos a cargo de vereador mais votados na cidade de SANTIAGO DO SUL. A tabela deve ser apresentada na ordem decrescente do total de votos recebidos pelos candidatos.
 
 ```{r}
+SANT = votZona[votZona$NOME_MUNICIPIO == 'SANTIAGO DO SUL',]  # Apenas o município solicitado
+SANT = SANT[SANT$DESCRICAO_CARGO == 'VEREADOR',]  # Apenas vereadores
+SANT = SANT[,c('NOME_URNA_CANDIDATO', 'DESCRICAO_CARGO', 'NOME_MUNICIPIO', 'TOTAL_VOTOS')]  # desprezar outras colunas 
+TOT_VOTOS = sum(SANT$TOTAL_VOTOS)  # Calcular total de votos 
+SANT$PERCENTUAL_VOTOS = SANT$TOTAL_VOTOS/TOT_VOTOS*100  # Nova coluna com percentual de votos
 
+# Exibir tabela
+head(SANT[order(SANT$TOTAL_VOTOS, decreasing = T),], 10)
 
 ```
 
@@ -298,7 +305,11 @@ g. Construa uma tabela contendo os campos NOME_URNA_CANDIDATO, DESCRICAO_CARGO, 
 h. Plote um histograma do quantitativo de votos para VEREADOR em todo o estado de Santa Catarina, considerando os casos em que o total de votos recebidos foi menor ou igual a 1000.
 
 ```{r}
-
+VEREADORES = votZona[votZona$DESCRICAO_CARGO == 'VEREADOR', ]  # apenas vereadores
+hist(VEREADORES$TOTAL_VOTOS[VEREADORES$TOTAL_VOTOS <= 1000], 
+     main = "Quantidades de votos para vereador (<=1000 votos)",
+     xlab = "Quantidade de votos",
+     ylab = "Qtd. candidatos")
 
 ```
 
