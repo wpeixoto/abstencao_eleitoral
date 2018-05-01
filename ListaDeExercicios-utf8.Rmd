@@ -33,11 +33,16 @@ b. Quantas observações (linhas) e quantas variáveis (colunas) contém o conju
 ```{r}
 dim(desempregados)
 # linhas
-nrow(desempregados)
+linhas = nrow(desempregados)
 
 # colunas
-ncol(desempregados)
+colunas = ncol(desempregados)
+
 ```
+<div style="background-color:#a9e970; border-color:navy;padding:5px">
+A quantidade de linhas é **`r linhas`** e a de colunas é **`r colunas`**.
+</div>
+
 
 c. Altere, no script a seguir, os valores dos atributos **eval** e **include** para **TRUE** e escreva o código necessário para calcular as medidas de tendência central (média e mediana) e de dispersão (amplitude, amplitude interquartil, desvio padrão e coeficiente de variação) para a idade das pessoas que perderam o emprego nos Estados Unidos, no ano de 1972, nos estados cujos códigos são: 21, 44, 58, 82 e 94.
 
