@@ -146,13 +146,32 @@ Há 2811 (57,63%) pessoas com idade inferior à média, e 2066 (42,36%) acima. A
 </div>
 
 
-e. Considerando o tempo que a pessoa permaneceu empregada (**tenure**), qual dos estados relaciondados (21, 44, 58, 82 e 94) proporciona maior establilidade no emprego? <span style="color:red">Pendente</span>
+e. Considerando o tempo que a pessoa permaneceu empregada (**tenure**), qual dos estados relaciondados (21, 44, 58, 82 e 94) proporciona maior establilidade no emprego? 
 
-```{r, echo=FALSE}
+```{r, echo=T}
 # todos os estados
-
+osestados = desempregados[desempregados$state %in% c(21, 44, 58, 82, 94),] # Selecionar as LINHAS cujos estados sejam os listados
+# Apenas os estados 21, 44, 58, 82, 94
+print("Estado => Média de permanência")
+for (est in c(21, 44, 58, 82, 94)) {
+     print(paste(est, "==>", mean(osestados$tenure[osestados$state==est])))
+}
 
 ```
+
+<div style="background-color:#a9e970; border-color:navy;padding:5px">
+A média de permanência do estado 21 é superior às dos demais estados.
+</div>
+
+```{r}
+print("Anos de permanência ---->")
+ table(as.factor(osestados$state),osestados$tenure)
+```
+
+<div style="background-color:#a9e970; border-color:navy;padding:5px">
+Além disso, há mais observações de permanência superior a 15 anos no mesmo estado, o que permite estimar que nele  permanência no emprego apresentou períodos maiores que nos outros. 
+</div>
+
 
 ## Questão 2
 
@@ -179,7 +198,7 @@ b. Construa tabelas de frequência que ilustrem os seguintes cruzamentos de vari
 ```{r, echo=FALSE}
 
 # osestados = desempregados[desempregados$state == c(21, 44, 58, 82, 94)]  # não funciona
-osestados = desempregados[desempregados$state %in% c(21, 44, 58, 82, 94),] # Pra quê essa vírgula?
+osestados = desempregados[desempregados$state %in% c(21, 44, 58, 82, 94),] # Selecionar as LINHAS cujos estados sejam os listados
 # 1. 
 "Estado x Sexo"
 table(osestados$state, osestados$sex)
