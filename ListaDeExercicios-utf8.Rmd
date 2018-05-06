@@ -136,22 +136,56 @@ cov <- cov(idades)
 # sprintf("Para todos os estados mencionados:  Média: %5.2f   Mediana: %5.2f   Amplitude: %d   Amp. Interquartil: %5.2f   Devio Padrão: %5.2f   Coeficiente de Variação: %5.2f", media, mediana, amplitude, interq, dpadrao, cov)
 ```
 
-d. Utilizando a função **hist()** (consulte ?hist), plote o histograma das idades (1) considerando todos os respondentes e (2) considerando apenas os respondentes do estado 94. Alguma das distribuições parece ser normal? Comente. `r pend`
+d. Utilizando a função **hist()** (consulte ?hist), plote o histograma das idades (1) considerando todos os respondentes e (2) considerando apenas os respondentes do estado 94. Alguma das distribuições parece ser normal? Comente. `r done`
 
 ```{r}
 # todos os estados
 hist(desempregados$age)
+media_idades = mean(desempregados$age)
+mediana_idades = quantile(desempregados$age, probs = c(0.5))[[1]]
+moda_idades = names(which.max(table(desempregados$age)))
 
 # somente o estado 94
-hist(desempregados$age[desempregados$state == 94])
+idades_estado_94 = desempregados$age[desempregados$state == 94]
+hist(idades_estado_94)
+mediana_estado_94 = quantile(idades_estado_94, c(0.5))[[1]] # Mediana
+media_idades_estado_94 = mean(idades_estado_94)
+moda_idades_94 = names(which.max(table(idades_estado_94)))
+```
+
+|                 | Média | Moda | Mediana |
+|-----------------|-------|------|---------|
+|Todos os estados | `r media_idades` | `r moda_idades` | `r mediana_idades` |
+| Estado 94       | `r media_idades_estado_94` | `r moda_idades_94` | `r mediana_estado_94` |
+
+```{r, echo=F}
+# assimcurt = function(x) {
+#  quartis = quantile(x)  # Quartis
+#  percentis = quantile(x, c(0.1, 0.9)) # Percentis 10% e 90%
+#  media = mean(x)
+#  assimetria = 3 * (media - quartis[[3]]) / sd(x)
+#  curtose = (quartis[[4]] - quartis[[2]]) / 2 * (percentis[[2]] - percentis[[1]])
+#  resposta =   c(assimetria, curtose)
+#  names(resposta) = c("Assimetria", "Curtose")
+#  resposta
+#}
+#
+#asc = assimcurt(desempregados$age[desempregados$state == 94])
+#asc
 ```
 
 <div style="background-color:#a9e970; border-color:navy;padding:5px">
-**Comentários**: Com intervalo de 5 anos, as distribuições não parecem ser normais. Há um desvio para os valores entre 20 e 35 anos, mas a diversidade de idades vai de 20 a 61 anos. TODO: positivo ou negativo?
+**Comentários**: Apesar de a média, moda e mediana das idades do estado 94 parecerem bem próximas, o histograma mostra uma curva bem diferente da normal.
+
+Com intervalo de 5 anos, as distribuições não parecem ser normais. Os valores entre 20 e 35 anos são mais frequentes, mas a diversidade de idades vai de 20 a 61 anos, o que caracteriza uma assimetria positiva (a média é maior que a mediana)
 
 Aumentar o número de intervalos (e consequentemente diminuir a amplitude de cada barra) não parece mudar radicalmente a forma da distribuição.
 
-Há 2811 (57,63%) pessoas com idade inferior à média, e 2066 (42,36%) acima. Apesar da diferença entre a média e a mediana ser pequena (apenas 2 anos e pouco), considero que essa distribuição não parece normal. Isso pode ser causado por alguma restrição às idades das pessoas empregadas, que impede o aparecimento de qualquer ocorrência com idade menor que 20 anos.
+TODO: `r pend` Especificar o conjunto de onde as médias foram calculadas.
+
+Há 2811 (57,63%) pessoas com idade inferior à média, e 2066 (42,36%) acima. Apesar da diferença entre a média e a mediana ser pequena (apenas 2 anos e pouco), considero que essa distribuição não parece normal. 
+
+Isso pode ser causado, por exemplo, por alguma restrição às idades das pessoas empregadas, que impede o aparecimento de qualquer ocorrência com idade menor que 20 anos.
 </div>
 
 
@@ -201,8 +235,8 @@ b. Construa tabelas de frequência que ilustrem os seguintes cruzamentos de vari
 
     1. estado (state) versus sexo (sex): dados absolutos `r done`
     2. estado (state) versus mais de 12 anos de escolaridade (school12): dados absolutos `r done`
-    3. tipo do emprego perdido (joblost): dados absolutos, relativos e acumulados `r pend`
-    4. casado (married): dados absolutos, relativos e acumulados `r pend`
+    3. tipo do emprego perdido (joblost): dados absolutos, relativos e acumulados `r done`
+    4. casado (married): dados absolutos, relativos e acumulados `r done`
     
 ```{r, echo=FALSE}
 
@@ -212,14 +246,50 @@ osestados = desempregados[desempregados$state %in% c(21, 44, 58, 82, 94),] # Sel
 "Estado x Sexo"
 table(osestados$state, osestados$sex)
 
-# 2. Estado x Anos de escolaridade (>12)
+# 2. 
+"Estado x Anos de escolaridade (>12)"
 table(osestados$state, osestados$school12)
 
-# 3.Motivo da perda do emprego
-#empregos_perdidos = table(osestados$joblost, )
+# Função auxiliar
+absrelacum = function(x, nomes = c('Fator', 'val.abs', 'val%', 'val.acum')) {
+    df = data.frame(table(x))
+    names(df) = c('Fator', 'val.abs')
+    soma = sum(df$val.abs)
+    df = cbind(df, df[[2]]/soma*100)
+    names(df)[[3]] = "val%"  # Valores relativos (percentuais)
+    acumul = integer(length(df[['val.abs']]))  # Vetor com tamanho adequado
+    acum = 0
+    for (i in 1:length(df[['val.abs']])) {
+      acum = acum + df$'val.abs'[i]
+      acumul[i]  = acum 
+    }
+    df = cbind(df, acumul)
+    names(df) = nomes
+    df
+}
 
-# 4. Estado civil:
+# 3.
+"Motivos da perda do emprego (valores absolutos, relativos e acumulados)"
+# empregos_perdidos = table(osestados$state, osestados$joblost)
+empregos_perdidos = data.frame(table(osestados$joblost))
+names(empregos_perdidos) = c('Motivo dispensa', 'val.abs')
+soma = sum(empregos_perdidos$val.abs)
+empregos_perdidos = cbind(empregos_perdidos, empregos_perdidos[[2]]/soma*100)
+names(empregos_perdidos)[[3]] = "val%"  # Valores relativos (percentuais)
+acumul = integer(length(empregos_perdidos[['val.abs']]))  # Vetor com 4 elementos
+acum = 0
+for (i in 1:length(empregos_perdidos[['val.abs']])) {
+  acum = acum + empregos_perdidos$'val.abs'[i]
+  acumul[i]  = acum 
+}
+empregos_perdidos = cbind(empregos_perdidos, acumul)
 
+empregos_perdidos
+
+# 4. 
+"Estado civil:"
+dosest_married = absrelacum(osestados$married, c('Casados', "Valores absolutos", "Valores relativos", "Valores acumulados"))
+dosest_married
 
 ```    
 
