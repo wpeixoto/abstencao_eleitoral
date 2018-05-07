@@ -411,6 +411,9 @@ head(SANT[order(SANT$TOTAL_VOTOS, decreasing = T),], 10)
 
 ```
 
+<div style="`r answer_style`">
+Acredito que seria melhor omitir as colunas DESCRICAO_CARGO e NOME_MUNICIPIO, que não acrescentam valor porque o exercício especificou um valor fixo para elas.
+</div>
 
 h. Plote um histograma do quantitativo de votos para VEREADOR em todo o estado de Santa Catarina, considerando os casos em que o total de votos recebidos foi menor ou igual a 1000. `r done`
 
