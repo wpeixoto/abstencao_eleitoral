@@ -4,10 +4,12 @@ author: William Peixoto
 output: html_document
 ---
 
+> O código-fonte e os arquivos de dados estão também [no Github](https://github.com/wpeixoto/metodos-inferenciais/tree/master/Lista_01). Foi necessário modificar o encoding do script e dos dados para UTF-8 para a correta execução de certos comandos.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-asnwer_style="background-color:#a9e970;border-color:navy;padding:5px"
-#done = paste0("<span style=`", asnwer_style, "`>Done</span>")
+answer_style="background-color:#a9e970;border-color:navy;padding:5px"
+#done = paste0("<span style=`", answer_style, "`>Done</span>")
 done="<span style='color:green'>Done</span>"
 pend="<span style='color:red' title='Falta alguma coisa'>Pending</span>"
 ```
@@ -363,7 +365,7 @@ votZona <- merge(votZona, cand)
 
 
 # Estilo para blocos de comentários
-asnwer_style="background-color:#a9e970;border-color:navy;padding:5px"
+answer_style="background-color:#a9e970;border-color:navy;padding:5px"
 # Marcadores de conferência
 done="<span style='color:green'>Done</span>"
 pend="<span style='color:red' title='Falta alguma coisa'>Pending</span>"
@@ -392,7 +394,7 @@ zonas = length(table(votZona$NUMERO_ZONA))
 
 ```
 
-<div style="`r asnwer_style`">
+<div style="`r answer_style`">
 Há `r municipios` municípios e `r zonas` zonas eleitorais relatados no arquivo `votacao_candidato_munzona_2016_SC.txt`.
 </div>
 
@@ -408,6 +410,7 @@ SANT$PERCENTUAL_VOTOS = SANT$TOTAL_VOTOS/TOT_VOTOS*100  # Nova coluna com percen
 
 # Exibir tabela
 head(SANT[order(SANT$TOTAL_VOTOS, decreasing = T),], 10)
+answer_style="background-color:#a9e970;border-color:navy;padding:5px"
 
 ```
 
