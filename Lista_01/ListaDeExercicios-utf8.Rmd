@@ -183,8 +183,6 @@ Com intervalo de 5 anos, as distribuições não parecem ser normais. Os valores
 
 Aumentar o número de intervalos (e consequentemente diminuir a amplitude de cada barra) não parece mudar radicalmente a forma da distribuição.
 
-TODO: `r pend` Especificar o conjunto de onde as médias foram calculadas.
-
 Há 2811 (57,63%) pessoas com idade inferior à média, e 2066 (42,36%) acima. Apesar da diferença entre a média e a mediana ser pequena (apenas 2 anos e pouco), considero que essa distribuição não parece normal. 
 
 Isso pode ser causado, por exemplo, por alguma restrição às idades das pessoas empregadas, que impede o aparecimento de qualquer ocorrência com idade menor que 20 anos.
@@ -362,8 +360,8 @@ cand <- cand[(cand$DES_SITUACAO_CANDIDATURA == "DEFERIDO" |
    cand$NUM_TURNO == 1, c(47,11,29,31)] 
 #  combina os dois data.frames
 votZona <- merge(votZona, cand)
-
-
+```
+```{r, echo=FALSE}
 # Estilo para blocos de comentários
 answer_style="background-color:#a9e970;border-color:navy;padding:5px"
 # Marcadores de conferência
@@ -484,6 +482,7 @@ municipios_zona_menor = tab_mun_zona[tab_mun_zona$NUMERO_ZONA == menor_zona[[1]]
 
 ```
 
+<div style="background-color:#a9e970; border-color:navy;padding:5px">
 A zona com menos votos foi a `r menor_zona[1]`, 
 com `r format(menor_zona[2], big.mark=".", decimal.mark=",")` votos, 
 e o município `r menor_municipio[1]` 
@@ -494,6 +493,7 @@ com `r format(menor_municipio[2], big.mark=".", decimal.mark=",")` votos, foi o 
 
 `r kable(municipios_zona_menor)`
 
+</div>
 
 # Bom trabalho a todos!
 # DATA DE ENTREGA: 17/05/2018
