@@ -191,7 +191,7 @@ Isso pode ser causado, por exemplo, por alguma restrição às idades das pessoa
 </div>
 
 
-e. Considerando o tempo que a pessoa permaneceu empregada (**tenure**), qual dos estados relaciondados (21, 44, 58, 82 e 94) proporciona maior establilidade no emprego?`r pend`
+e. Considerando o tempo que a pessoa permaneceu empregada (**tenure**), qual dos estados relaciondados (21, 44, 58, 82 e 94) proporciona maior establilidade no emprego?`r done`
 
 ```{r, echo=T}
 # todos os estados
@@ -399,7 +399,7 @@ Há `r municipios` municípios e `r zonas` zonas eleitorais relatados no arquivo
 </div>
 
 
-g. Construa uma tabela contendo os campos NOME_URNA_CANDIDATO, DESCRICAO_CARGO, NOME_MUNICIPIO, TOTAL_VOTOS e PERCENTUAL_VOTOS para os **dez** candidatos a cargo de vereador mais votados na cidade de SANTIAGO DO SUL. A tabela deve ser apresentada na ordem decrescente do total de votos recebidos pelos candidatos. `r paste(done, "or", pend, "?") `
+g. Construa uma tabela contendo os campos NOME_URNA_CANDIDATO, DESCRICAO_CARGO, NOME_MUNICIPIO, TOTAL_VOTOS e PERCENTUAL_VOTOS para os **dez** candidatos a cargo de vereador mais votados na cidade de SANTIAGO DO SUL. A tabela deve ser apresentada na ordem decrescente do total de votos recebidos pelos candidatos. `r done `
 
 ```{r}
 SANT = votZona[votZona$NOME_MUNICIPIO == 'SANTIAGO DO SUL',]  # Apenas o município solicitado
@@ -453,14 +453,46 @@ votos_para_mulheres / votos_para_homens
 
 ```
 
-k. Considerando o quantitativo total de votos para os cargos de VEREADOR e PREFEITO, identifique qual a menor zona eleitoral de SC e qual (quais) município (municípios) é (são) abrangido(s) por essa zona. `r pend`
+k. Considerando o quantitativo total de votos para os cargos de VEREADOR e PREFEITO, identifique qual a menor zona eleitoral de SC e qual (quais) município (municípios) é (são) abrangido(s) por essa zona. `r done`
 
 ```{r}
+#conta_zonas = votZona[,c("DESCRICAO_CARGO", "CODIGO_MUNICIPIO", "NUMERO_ZONA", "TOTAL_VOTOS")]
+conta_zonas = votZona[,c("DESCRICAO_CARGO", "NUMERO_ZONA", "TOTAL_VOTOS")]
+conta_zonas$NUMERO_ZONA = as.factor(conta_zonas$NUMERO_ZONA)
+attach(conta_zonas)
+soma_zonas = aggregate(TOTAL_VOTOS ~NUMERO_ZONA, conta_zonas, sum)
+detach(conta_zonas)
+menos_votos = soma_zonas[order(soma_zonas$TOTAL_VOTOS, decreasing = T), ]
+head(menos_votos)
+menor_zona = menos_votos[1,]
+# menor_zona
 
 
+conta_municipios = votZona[,c("DESCRICAO_CARGO", "CODIGO_MUNICIPIO", "TOTAL_VOTOS")]
+attach(conta_municipios)
+soma_municipios = aggregate(TOTAL_VOTOS ~CODIGO_MUNICIPIO, conta_municipios, sum)
+detach(conta_municipios)
+muni_menos_votos = soma_municipios[order(soma_zonas$TOTAL_VOTOS, decreasing = T), ]
+head(muni_menos_votos)
+menor_municipio = muni_menos_votos[1, ]
+
+tab_mun_zona = unique(votZona[c('NOME_MUNICIPIO', 'CODIGO_MUNICIPIO', 'NUMERO_ZONA')])
+menor_municipio$NOME_MUNICIPIO = tab_mun_zona$NOME_MUNICIPIO[tab_mun_zona$CODIGO_MUNICIPIO == menor_municipio$CODIGO_MUNICIPIO]
+
+# municipios_zona_menor = tab_mun_zona[tab_mun_zona$NUMERO_ZONA == 105, ]
+municipios_zona_menor = tab_mun_zona[tab_mun_zona$NUMERO_ZONA == menor_zona[[1]], ]
 
 ```
 
+A zona com menos votos foi a `r menor_zona[1]`, 
+com `r format(menor_zona[2], big.mark=".", decimal.mark=",")` votos, 
+e o município `r menor_municipio[1]` 
+(`r menor_municipio$NOME_MUNICIPIO`), 
+com `r format(menor_municipio[2], big.mark=".", decimal.mark=",")` votos, foi o com menos votações.
+
+### Municípios da zona `r menor_zona[1]`
+
+`r kable(municipios_zona_menor)`
 
 
 # Bom trabalho a todos!
