@@ -87,17 +87,36 @@ for (ano in ANOS) {
 # ===============================================================
 # Carregar os arquivos
 # ===============================================================
+filenames = filenames[filenames!=""]
+NOMES_CAMPOS = c("DATA_GERACAO", "HORA_GERACAO", "ANO_ELEICAO", "NUM_TURNO", 
+                 "DESCRICAO_ELEICAO", "SIGLA_UF", "SIGLA_UE", "CODIGO_MUNICIPIO", 
+                 "NOME_MUNICIPIO", "NUMERO_ZONA", "NUMERO_SECAO", "CODIGO_CARGO", 
+                 "DESCRICAO_CARGO", "QTD_APTOS", "QTD_COMPARECIMENTO", "QTD_ABSTENCOES", 
+                 "QT_VOTOS_NOMINAIS", "QT_VOTOS_BRANCOS", "QT_VOTOS_NULOS", 
+                 "QT_VOTOS_LEGENDA", "QT_VOTOS_ANULADOS_APU_SEP")
 
-for (filename in filenames[filenames!=""]) {
+
+ktchall = function(o) {
+  print(paste("::>:: MSG", o, "\nArquivo", filename))
+}
+
+print(paste("Há", length(filenames), "arquivos existentes"))
+for (filename in filenames) {
   # break
     all = FALSE
     full=FALSE 
     # cargo=3
     cargos = c(3, 9)  # Vereador e prefeito
-    dv = read.csv(filename, header = F, encoding = "ISO-8859", sep = ";")
+    tryCatch({
+      dv = read.csv(filename, header = F, encoding = "ISO-8859", sep = ";")
+    }, error=ktchall, warning=ktchall)
     orig_lines = nrow(dv)
-    names(dv) = c("DATA_GERACAO", "HORA_GERACAO", "ANO_ELEICAO", "NUM_TURNO", "DESCRICAO_ELEICAO", "SIGLA_UF", "SIGLA_UE", "CODIGO_MUNICIPIO", "NOME_MUNICIPIO", "NUMERO_ZONA", "NUMERO_SECAO", "CODIGO_CARGO", "DESCRICAO_CARGO", "QTD_APTOS", "QTD_COMPARECIMENTO", "QTD_ABSTENCOES", "QT_VOTOS_NOMINAIS", "QT_VOTOS_BRANCOS", "QT_VOTOS_NULOS", "QT_VOTOS_LEGENDA", "QT_VOTOS_ANULADOS_APU_SEP")
-    
+    if (length(dv) != length(NOMES_CAMPOS)) {
+      print(paste("Erro no arquivo", filename, ":: Largura diferente:", length(dv)))
+      next
+    }
+    names(dv) = NOMES_CAMPOS
+
     dv$TAXA_COMPARECIMENTO = dv$QTD_COMPARECIMENTO / dv$QTD_APTOS
     dv$TAXA_ABSTENCAO = dv$QTD_ABSTENCOES / dv$QTD_APTOS
     verif_taxa = dv$TAXA_ABSTENCAO + dv$TAXA_COMPARECIMENTO
