@@ -1,3 +1,10 @@
+# ====================================================================
+# Verificação de sanidade dos arquivos
+#
+# Este script tenta descobrir quais arquivos têm problemas que podem
+# dificultar ou impedir a análise.
+
+library(utils)
 UFs = c("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", 
         "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
         "PE", "RJ", "PI", "RN", "RS", "RO", "RR", "SC", 
@@ -64,7 +71,8 @@ ttt = data.frame(
  orig_rows=rep(NA, MaxSize),
  n_rows_gov=rep(NA, MaxSize),
  verif_taxa_consistente=rep(NA, MaxSize),
- qtd_faltam_colunas=rep(NA, MaxSize),
+ # qtd_faltam_colunas=rep(NA, MaxSize),
+ qtd_colunas=rep(NA, MaxSize),
  stringsAsFactors = F
  )
 
@@ -79,8 +87,11 @@ not_found_filenames = character(MaxSize/2)  # Estimo que haverá poucos inexiste
 i = 1
 j = 1
 
+pb = txtProgressBar(min=0, max=MaxSize, style = 3)
+pbc = 0
 for (ano in ANOS) {
   for (uf in UFs) {
+    pbc = pbc + 1
     s_ano = as.character(ano)
     filename = paste0("~/data/TSE/Resultados/", s_ano, "/", "detalhe_votacao_secao_", s_ano, "_", uf, ".txt")
     if (file.exists(filename)) {
@@ -94,6 +105,7 @@ for (ano in ANOS) {
       # print(paste("Arquivo '", filename, "' não encontrado"))
       # next
     }
+    setTxtProgressBar(pb, pbc)
   }
 }
 
@@ -114,12 +126,16 @@ ktchall = function(o) {
 }
 
 print(paste("Há", length(filenames), "arquivos existentes"))
+pb = txtProgressBar(min=0, max=MaxSize, style = 3)
+pbc = 0
+
 for (filename in filenames) {
   # break
     all = FALSE
     full=FALSE 
     # cargo=3
     cargos = c(3, 9)  # Vereador e prefeito
+    pbc = pbc + 1
     tryCatch({
       dv = read.csv(filename, header = F, encoding = "ISO-8859", sep = ";")
     }, error=ktchall, warning=ktchall)
@@ -140,10 +156,11 @@ for (filename in filenames) {
     
     Any_NA = any(is.na(dv))
     # Faltam_colunas = any(is.na(dv$QT_VOTOS_ANULADOS_APU_SEP))
-    qtd_faltam_colunas = length(dv[is.na(dv$QT_VOTOS_ANULADOS_APU_SEP), ])
+    # qtd_faltam_colunas = length(dv[is.na(dv$QT_VOTOS_ANULADOS_APU_SEP), ])
     
-    ttt[cont,] = list(ano, uf, Any_NA,orig_lines,  nrow(dv), !any(verif_taxa != 1))
+    ttt[cont,] = list(ano, uf, Any_NA,orig_lines,  nrow(dv), !any(verif_taxa != 1), length(dv))
     cont = cont + 1
+    setTxtProgressBar(pb, pbc)
   }
 
 
