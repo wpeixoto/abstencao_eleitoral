@@ -2,8 +2,21 @@ UFs = c("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES",
         "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
         "PE", "RJ", "PI", "RN", "RS", "RO", "RR", "SC", 
         "SP", "SE", "TO")
-# UFs = c("AC", "AL")  # , "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "RJ", "PI", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO")
-ANOS = seq(1994,2016,2)
+
+ANOS = seq(1994,2016,2) # Todos os anos, para verificações gerais
+ANOS_GERAIS = seq(1994, 2014, 4)  # Eleições gerais (Presidente, Senador, Governador e Deputados)
+ANOS_MUNICIPAIS = seq(1996, 2016, 4)  # Eleições municipais (Prefeito e vereadores)
+
+# Campos relevantes para chegagem de sanidade
+CAMPOS_RELEVANTES_S = c("ANO_ELEICAO", "NUM_TURNO", "SIGLA_UF", "SIGLA_UE", 
+                        "CODIGO_MUNICIPIO", "NOME_MUNICIPIO", "NUMERO_ZONA", "MUMERO_SECAO", "CODIGO_CARGO",
+                        "DESCRICAO_CARGO", "QTD_APTOS", "QTD_COMPARECIMENTO", "QTD_ABSTENCOES",
+                        "QTD_VOTOS_BRANCOS", "QTD_VOTOS_NULOS", "TAXA_COMPARECIMENTO", "TAXA_ABSTENCAO")
+
+# Mínimo para a análise
+CAMPOS_MAIS_RELEVANTES = c("ANO_ELEICAO", "NUM_TURNO", "SIGLA_UF", "SIGLA_UE", 
+                           "CODIGO_MUNICIPIO", "NUMERO_ZONA", "MUMERO_SECAO", "CODIGO_CARGO",
+                           "QTD_VOTOS_BRANCOS", "QTD_VOTOS_NULOS", "TAXA_ABSTENCAO")
 
 
 get_dv = function(filename, all = FALSE, full=FALSE, cargos= c(3, 9))  {
