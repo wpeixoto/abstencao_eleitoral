@@ -18,6 +18,29 @@ dnormC = function(x, y) {  # Abrevia dnormalComp
   dnormalComp(mean(x), sd(x), mean(y), sd(y))
 }
 
+comparaTaxaA = function(x, y, turno=1) {
+  x_t = split(x, x$NUM_TURNO)
+  y_t = split(y, y$NUM_TURNO)
+  return(dnormC(x_t[[turno]]$TAXA_ABSTENCAO, y_t[[turno]]$TAXA_ABSTENCAO))
+}
+
+comparaTurnos = function(x) {
+  x_t = split(x, x$NUM_TURNO, drop = T)
+  if (length(x_t) == 1) {
+    return(function(x) {"Não houve segundo turno"})
+  }
+  return(dnormC(x_1[[1]]), x_t[[2]])
+  
+}
+
+spliTurno = function(x) {
+  list(x[x$NUM_TURNO == 1,], x[x$NUM_TURNO == 2,])  
+}
+
+taxaA = function(x) {
+  x$TAXA_ABSTENCAO
+}
+
 FN_PREFIXO = "detalhe_votacao_secao_"
 FN_SUFIXO = "_DF.txt"
 DATA_DIR = ""
@@ -80,7 +103,81 @@ kable(parametros)
 df98_t = split(df98, df98$NUM_TURNO)
 df02_t = split(df02, df02$NUM_TURNO)
 dnormC(df98_t[[1]]$TAXA_ABSTENCAO, df02_t[[1]]$TAXA_ABSTENCAO)
+```
+
+Again
+
+```{r echo=F}
+comparaTaxaA(df98, df02)
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### 2002 x 2006
+
+```{r echo=F}
+comparaTaxaA(df02, df06)
+```
+
+### 2006 x 2010
+```{r echo=F}
+comparaTaxaA(df06, df10)
+
+```
+
+### 2010 x 2014
+```{r echo=F}
+comparaTaxaA(df10, df14)
+```
+
+## Idem, segundos turnos
+### 1998 x 2002
+```{r echo=F}
+comparaTaxaA(df98, df02, turno = 2)
+```
+
+### 2002 x 2006
+```{r echo=F}
+comparaTaxaA(df02, df06)
+```
+
+### 2006 x 2010
+```{r echo=F}
+comparaTaxaA(df06, df10)
+```
+
+### 2010 x 2014
+```{r echo=F}
+comparaTaxaA(df10, df14)
+```
+
+## Primeiros turnos x segundos turnos
+
+### 1998
+```{r echo=F}
+#dnormC(df98[df98$NUM_TURNO == 1,]$TAXA_ABSTENCAO, df98[df98$NUM_TURNO == 2,]$TAXA_ABSTENCAO)
+#df98_t = split(df98, df98$NUM_TURNO)
+df98_t = list(df98[df98$NUM_TURNO == 1,]$TAXA_ABSTENCAO, df98[df98$NUM_TURNO == 2,]$TAXA_ABSTENCAO)
+dnormC(df98_t[[1]], df98_t[[2]])
+```
+
+### 2002
+```{r echo=F}
+df_t = list(df02[df98$NUM_TURNO == 1,]$TAXA_ABSTENCAO, df98[df98$NUM_TURNO == 2,]$TAXA_ABSTENCAO)
+dnormC(df_t[[1]], df_t[[2]])
+```
+
+### 2006
+
+Não houve segundo turno para governador
+
+### 2010
+```{r echo=F}
+df_t = list(df10[df98$NUM_TURNO == 1,]$TAXA_ABSTENCAO, df10[df98$NUM_TURNO == 2,]$TAXA_ABSTENCAO)
+dnormC(df_t[[1]], df_t[[2]])
+```
+
+### 2014
+```{r echo=F}
+df_t = spliTurno(df14)
+dnormC(df_t[[1]]$TAXA_ABSTENCAO, df_t[[2]]$TAXA_ABSTENCAO)
+```
