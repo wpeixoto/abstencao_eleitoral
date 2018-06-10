@@ -137,17 +137,26 @@ comparaTaxaA(df98, df02, turno = 2)
 
 ### 2002 x 2006
 ```{r echo=F}
-comparaTaxaA(df02, df06)
+# comparaTaxaA(df02, df06, turno = 2)
 ```
+
+Não houve 2º turno em 2006
 
 ### 2006 x 2010
 ```{r echo=F}
-comparaTaxaA(df06, df10)
+# comparaTaxaA(df06, df10, turno = 2)
+```
+
+Não houve 2º turno em 2006
+
+### 2002 x 2010
+```{r echo=F}
+comparaTaxaA(df02, df10, turno = 2)
 ```
 
 ### 2010 x 2014
 ```{r echo=F}
-comparaTaxaA(df10, df14)
+comparaTaxaA(df10, df14, turno = 2)
 ```
 
 ## Primeiros turnos x segundos turnos
