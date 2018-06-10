@@ -22,10 +22,13 @@ eleicoes = rep(NA, length(ANOS_GERAIS))
 c_e = 1
 source("get_dv.R")
 
+FN_PREFIXO = "detalhe_votacao_secao_"
+FN_SUFIXO = "_DF.txt"
+
 # ddv = get_dv()
 
-for (ano in ANOS_GERAIS) {
+for (ano in ANOS_GERAIS) {  # NÃO fnciona
     s_ano = as.character(ano) 
-    eleicoes[c_e] = get_dv(paste0(DATA_DIR, "detalhe_votacao_secao_", s_ano, "_DF.txt"))
+    eleicoes[c_e] = get_dv(paste0(DATA_DIR, FN_PREFIXO, s_ano, FN_SUFIXO))
     c_e = c_e + 1
 }
