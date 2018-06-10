@@ -72,12 +72,7 @@ get_dv = function(filename,        # Nome de um arquivo do TSE
     # dv$QTD_COMPARECIMENTO = NULL
     # dv$QTD_APTOS = NULL
     # dv$DESCRICAO_CARGO = NULL
-    dv = dv[, c("ANO_ELEICAO", "NUM_TURNO", "SIGLA_UF", "SIGLA_UE", 
-                "CODIGO_MUNICIPIO", "NOME_MUNICIPIO", 
-                "NUMERO_ZONA", "NUMERO_SECAO", "
-                CODIGO_CARGO", "NUM_ZONECAO"
-                )
-            ]
+    dv = dv[, CAMPOS_MAIS_RELEVANTES]
     
   }
   
