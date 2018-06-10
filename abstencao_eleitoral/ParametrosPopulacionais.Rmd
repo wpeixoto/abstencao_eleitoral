@@ -1,0 +1,86 @@
+---
+title: "Comparação de parâmetros populacionais"
+author: "William Peixoto"
+date: "10 de junho de 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("get_dv.R")
+source("NormalCompara.R")
+
+fmtP = function(x) {
+  paste0(format(x * 100, digits=4), "%")
+}
+
+dnormC = function(x, y) {  # Abrevia dnormalComp
+  dnormalComp(mean(x), sd(x), mean(y), sd(y))
+}
+
+FN_PREFIXO = "detalhe_votacao_secao_"
+FN_SUFIXO = "_DF.txt"
+DATA_DIR = ""
+
+df98 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 1998, FN_SUFIXO), full = T)
+df02 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2002, FN_SUFIXO), full = T)
+df06 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2006, FN_SUFIXO), full = T)
+df10 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2010, FN_SUFIXO), full = T)
+df14 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2014, FN_SUFIXO), full = T)
+
+parametros = data.frame(
+  ANO = rep(NA, 10),
+  TURNO = rep(NA, 10),
+  TAXA_MEDIA = rep(NA, 10),
+  DP = rep(NA, 10)
+)
+```
+
+```{r echo=F}
+c = 1
+for (df in list(df98, df02, df06, df10, df14)) {
+  # turnos = c(df[df$NUM_TURNO == 1], df[df$NUM_TURNO == 2])
+  #attach(df)
+  # print(unique(ANO_ELEICAO))
+  # print(unique(NUM_TURNO))
+  # print(paste("df is " ,class(df)))
+  turnos = split(df, df$NUM_TURNO)
+  # detach(df)
+  # print(paste("turnos is", class(turnos)))
+  # print(class(turnos[[1]]))
+  for (t in turnos) {
+    NUM_TURNO = unique(t$NUM_TURNO)
+    ANO_ELEICAO = unique(t$ANO_ELEICAO)
+    parametros[c,] = list(
+      ANO_ELEICAO,
+      NUM_TURNO,
+      fmtP(mean(t$TAXA_ABSTENCAO)),
+      fmtP(sd(t$TAXA_ABSTENCAO))
+    )
+    c = c+1
+  }
+}
+
+```
+
+## Comparação dos parâmetros das taxas de abstenção
+
+Levando em consideração todos os dados disponibilizados pelo TSe para as eleições de 1998, 2002, 2006, 2010 e 2014, temos o seguinte:
+
+```{r echo=F}
+library(knitr)
+kable(parametros)
+```
+
+## Comparações dois a dois, primeiro turno
+
+### 1998 x 2002
+
+```{r echo=FALSE}
+df98_t = split(df98, df98$NUM_TURNO)
+df02_t = split(df02, df02$NUM_TURNO)
+dnormC(df98_t[[1]]$TAXA_ABSTENCAO, df02_t[[1]]$TAXA_ABSTENCAO)
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
