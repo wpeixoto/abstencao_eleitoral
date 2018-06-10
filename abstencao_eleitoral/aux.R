@@ -3,8 +3,8 @@ fmtP = function(x) {
   paste0(format(x * 100, digits=4), "%")
 }
 
-dnormC = function(x, y) {  # Abrevia dnormalComp
-  dnormalComp(mean(x), sd(x), mean(y), sd(y))
+dnormC = function(x, y, main_title="Curva Normal") {  # Abrevia dnormalComp
+  dnormalComp(mean(x), sd(x), mean(y), sd(y), main_title=main_title)
 }
 
 comparaTaxaA = function(x, y, turno=1) {
@@ -23,7 +23,13 @@ comparaTurnos = function(x) {
 }
 
 spliTurno = function(x) {
-  list(x[x$NUM_TURNO == 1,], x[x$NUM_TURNO == 2,])  
+  t1 = x[x$NUM_TURNO == 1,]
+  t2 = x[x$NUM_TURNO == 2,]
+  if (nrow(t2) == 0 ) {
+    return(list(t1))
+  }
+  #list(x[x$NUM_TURNO == 1,], x[x$NUM_TURNO == 2,])  
+  list(t1, t2)
 }
 
 taxaA = function(x) {
