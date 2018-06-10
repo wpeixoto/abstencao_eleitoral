@@ -1,5 +1,13 @@
 
-dnormalComp <- function(media1=0, dp1=1, media2=0, dp2=1, nc=.95, rc="=")
+dnormalComp <- function(
+  media1=0, 
+  dp1=1, 
+  media2=0, 
+  dp2=1, 
+  nc=.95, 
+  rc="=",
+  main_title = "Curva Normal"
+)
 {
   
   ########################
@@ -20,11 +28,11 @@ dnormalComp <- function(media1=0, dp1=1, media2=0, dp2=1, nc=.95, rc="=")
   # traça as curvas normais 1 e 2
   if(cn1(media1)>=cn2(media2)){
     plot(x,cn1(x),ylab="Densidade",xlab="x",
-         main="Curva Normal",type="l",lwd=2)
+         main=main_title,type="l",lwd=2)
     lines(x,cn2(x),lwd=2, col="red")
   } else {
     plot(x,cn2(x),ylab="Densidade",xlab="x",
-         main="Curva Normal",type="l",lwd=2,col="red")
+         main=main_title,type="l",lwd=2,col="red")
     lines(x,cn1(x),lwd=2)
   }
   
