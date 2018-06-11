@@ -1,0 +1,65 @@
+---
+title: 'Parâmetros: cada turno é uma eleição'
+author: "William Peixoto"
+date: "10 de junho de 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("get_dv.R")
+source("NormalCompara.R")
+source("aux.R")
+
+FN_PREFIXO = "detalhe_votacao_secao_"
+FN_SUFIXO = "_DF.txt"
+DATA_DIR = ""
+
+df98 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 1998, FN_SUFIXO), full = T)
+df02 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2002, FN_SUFIXO), full = T)
+df06 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2006, FN_SUFIXO), full = T)
+df10 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2010, FN_SUFIXO), full = T)
+df14 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2014, FN_SUFIXO), full = T)
+
+eleicoes = list(df98, df02, df06, df10, df14)
+
+```
+
+# Cada turno é uma eleição
+
+Para contabilizar a participação ou abstenção de um eleitor, cada turno conta como uma eleição separada. Isso quer dizer que um eleitor que falte ao segundo turno estará em débito com a Justiça Eleitoral mesmo que tenha votado no primeiro.
+
+Nesta página, as comparações dois a dois serão feitas segundo esse critério.
+
+```{r echo=F}
+elet = list()
+c = 1
+for (dd in eleicoes) {
+  # sp = split(dd, dd$NUM_TURNO, drop = T)  # Não funciona. Por quê?
+  sp = spliTurno(dd)
+  for (e in sp) {
+    if (nrow(e) == 0) {
+      next
+    }
+    elet[[c]] = e
+    c = c + 1
+  }
+}
+```
+
+```{r results="asis", echo=F}
+library(knitr)
+
+for (i in 2:length(elet)) {
+  #print(i)
+  ANO1 = unique(elet[[i-1]]$ANO_ELEICAO)
+  TURNO1 = unique(elet[[i-1]]$NUM_TURNO)
+  ANO2 = unique(elet[[i]]$ANO_ELEICAO)
+  TURNO2 = unique(elet[[i]]$NUM_TURNO)
+
+  # print(paste("## ", ANO1, "/", TURNO1, " x ", ANO2, "/", TURNO2))
+  el_1 = elet[[i-1]]$TAXA_ABSTENCAO
+  el_2 = elet[[i]]$TAXA_ABSTENCAO
+  dnormC(el_1, el_2, paste0("Taxas de abstenção: ", ANO1, "/", TURNO1, "º Turno x ", ANO2, "/", TURNO2, "º Turno"))
+}
+```
