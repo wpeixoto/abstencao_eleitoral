@@ -30,7 +30,7 @@ dnormalpIC <- function(p=95)
       
       # traça a curva normal padronizada
       plot(x,dnorm(x,0,1),ylab="Densidade",xlab="x",
-           main="Curva normal padronizada",type="l",lwd=2,ylim=c(-0.05,0.4))
+           main="Curva normal padronizada", sub="Intervalo de confianca", type="l",lwd=2,ylim=c(-0.05,0.4))
       # linha horzontal em zero
       lines(c(lim[1],lim[2]),c(0,0))
       
@@ -65,8 +65,8 @@ dnormalpIC <- function(p=95)
           i<-i+inc
         }
         phachura<-round(integral(cnp,z1,z2),4)
-        text(-4.3,0.38,paste("Área hachurada =",phachura),cex=0.8,pos=4)
-        text(-4.3,0.35,paste("Área branca =",1-phachura),cex=0.8,pos=4)
+        text(-4.3,0.38,paste("Area hachurada =",phachura),cex=0.8,pos=4)
+        text(-4.3,0.35,paste("Area branca =",1-phachura),cex=0.8,pos=4)
         text(-4.3,0.32,paste("x1 =",x1),cex=0.8,pos=4)
       }
 
