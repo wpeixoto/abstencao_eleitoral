@@ -6,7 +6,8 @@ dnormalComp <- function(
   dp2=1, 
   nc=.95, 
   rc="=",
-  main_title = "Curva Normal"
+  main_title = "Curva Normal",
+  subtitle = ""
 )
 {
   
@@ -19,7 +20,7 @@ dnormalComp <- function(
     min(c(media1+c(-4,4)*dp1, media2+c(-4,4)*dp2)), 
     max(c(media1+c(-4,4)*dp1, media2+c(-4,4)*dp2))
   )
-  x <- seq(lim[1], lim[2], by = 0.01)
+  x <- seq(lim[1], lim[2], by = 0.0001)
   
   # curva normal
   cn1 <- function(x) {dnorm(x,media1,dp1)} # curva normal
@@ -28,11 +29,12 @@ dnormalComp <- function(
   # traça as curvas normais 1 e 2
   if(cn1(media1)>=cn2(media2)){
     plot(x,cn1(x),ylab="Densidade",xlab="x",
-         main=main_title,type="l",lwd=2)
+         main=main_title,type="l",lwd=2, sub = subtitle)
     lines(x,cn2(x),lwd=2, col="red")
   } else {
     plot(x,cn2(x),ylab="Densidade",xlab="x",
-         main=main_title,type="l",lwd=2,col="red")
+         main=main_title,type="l",lwd=2,col="red",
+         sub = subtitle)
     lines(x,cn1(x),lwd=2)
   }
   
