@@ -10,6 +10,10 @@ O jornal afirma que a abstenção está crescendo. Mas realemnte está?
 
 A hipótese a ser testada (H<sub>1</sub>) é: A abstenção eleitoral aumenta de uma eleição para outra. Portanto, a hipótese nula (H<sub>0</sub>) será a de que não há diferença relevante entre as taxas de abstenção de um ano para outro.
 
+## Andamentos
+
+- Descobri sujeira nos dados. Melhor verificar tudo de novo 
+
 ## Outras pesquisas
 Por enquanto, encontrei apenas essa:
 - [CULTURA POLÍTICA E ABSTENÇÃO ELEITORAL](http://e-legis.camara.leg.br/cefor/index.php/e-legis/article/view/279/369), de Hemerson Luiz Pase, Luis Gustavo Teixeira Silva, Everton Rodrigo Santos, publicada na revista e-Legis V.9, n.21, Set/Dez.2016
