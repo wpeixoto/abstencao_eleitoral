@@ -9,7 +9,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 source("get_dv.R")
 source("NormalCompara.R")
+source("NormalPadrao.R")
 source("aux.R")
+
+z_s = function(media, mu_0, sigma, n) {(media - mu_0)/(sigma/sqrt(n))}
 
 FN_PREFIXO = "detalhe_votacao_secao_"
 FN_SUFIXO = "_DF.txt"
@@ -29,7 +32,7 @@ eleicoes = list(df98, df02, df06, df10, df14)
 
 Para contabilizar a participação ou abstenção de um eleitor, cada turno conta como uma eleição separada. Isso quer dizer que um eleitor que falte ao segundo turno estará em débito com a Justiça Eleitoral mesmo que tenha votado no primeiro.
 
-Nesta página, as comparações dois a dois serão feitas segundo esse critério.
+Nesta página, as comparações dois a dois serão feitas segundo esse critério. *Comparação simples! Veja os testes estatísticos em outra página!*
 
 ```{r echo=F}
 elet = list()
@@ -61,5 +64,7 @@ for (i in 2:length(elet)) {
   el_1 = elet[[i-1]]$TAXA_ABSTENCAO
   el_2 = elet[[i]]$TAXA_ABSTENCAO
   dnormC(el_1, el_2, paste0("Taxas de abstenção: ", ANO1, "/", TURNO1, "º Turno x ", ANO2, "/", TURNO2, "º Turno"))
+  
+  dnormCC(el_1, el_2, paste0("EP Taxas de abstenção: ", ANO1, "/", TURNO1, "º Turno x ", ANO2, "/", TURNO2, "º Turno"))
 }
 ```
