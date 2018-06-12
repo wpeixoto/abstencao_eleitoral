@@ -79,13 +79,14 @@ Again
 
 ```{r echo=F}
 comparaTaxaA(df98, df02)
-
+comparaTaxaA_EP(df98, df02)
 ```
 
 ### 2002 x 2006
 
 ```{r echo=F}
 comparaTaxaA(df02, df06)
+comparaTaxaA_EP(df02, df06)
 ```
 
 ### 2006 x 2010
