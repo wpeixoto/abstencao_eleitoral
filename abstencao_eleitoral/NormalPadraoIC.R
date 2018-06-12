@@ -1,5 +1,5 @@
 
-dnormalpIC <- function(p=95)
+dnormalpIC <- function(p=95, title="Curva normal padronizada", subtitle="Intervalo de confianca")
 {
 
       ##################################################
@@ -30,7 +30,7 @@ dnormalpIC <- function(p=95)
       
       # traça a curva normal padronizada
       plot(x,dnorm(x,0,1),ylab="Densidade",xlab="x",
-           main="Curva normal padronizada", sub="Intervalo de confianca", type="l",lwd=2,ylim=c(-0.05,0.4))
+           main=title, sub=subtitle, type="l",lwd=2,ylim=c(-0.05,0.4))
       # linha horzontal em zero
       lines(c(lim[1],lim[2]),c(0,0))
       
