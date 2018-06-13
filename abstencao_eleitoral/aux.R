@@ -3,14 +3,30 @@ fmtP = function(x) {
   paste0(format(x * 100, digits=4), "%")
 }
 
-dnormC = function(x, y, main_title="Curva Normal", subtitle="Naïve") {  # Abrevia dnormalComp Naive
-  dnormalComp(mean(x), sd(x), mean(y), sd(y), main_title=main_title, subtitle = subtitle)
+dnormC = function(x, y,                      # Abrevia dnormalComp Naive
+                  main_title="Curva Normal", 
+                  subtitle="Naïve",
+                  a1n = "",
+                  a2n = "") {  
+  dnormalComp(mean(x), sd(x), 
+              mean(y), sd(y), 
+              main_title=main_title, 
+              subtitle = subtitle,
+              a1n = a1n,
+              a2n = a2n)
 }
 
 ErrP = function(x, sigma=sd(x)) {sigma/sqrt(length(x))}
 
-dnormCC = function(x, y, main_title="Curva Normal (EP)", subtitle="Com Erro Padrão") {  # Abrevia dnormalComp com Erro Padrão
-  dnormalComp(media1 = mean(x), dp1=ErrP(x), media2=mean(y), dp2 = ErrP(y), main_title=main_title, subtitle = subtitle)
+dnormCC = function(x, y, 
+                   main_title="Curva Normal (EP)", 
+                   subtitle="Com Erro Padrão",
+                   a1n = "",
+                   a2n = "") {  # Abrevia dnormalComp com Erro Padrão
+  dnormalComp(media1 = mean(x), dp1=ErrP(x), 
+              media2=mean(y), dp2 = ErrP(y), 
+              main_title=main_title, subtitle = subtitle,
+              a1n = a1n, a2n = a2n)
 }
 
 tit = function(x) {
@@ -32,15 +48,32 @@ tit = function(x) {
   return(paste0(uf, ": ", ano, "(", turno, ")"))
 }
 
-comparaTaxaA = function(x, y, turno=1, main_title=paste("Compara", tit(x), " e ", tit(y), "<Naïve>")) {
-  x_t = split(x, x$NUM_TURNO)
-  y_t = split(y, y$NUM_TURNO)
+comparaTaxaA = function(x, y, 
+                        turno=1, 
+                        main_title=paste("Compara", tit(x), " e ", tit(y), "<Naïve>")) {
+  # x_t = split(x, x$NUM_TURNO)
+  # y_t = split(y, y$NUM_TURNO)
+  x_t = spliTurno(x)
+  y_t = spliTurno(y)
+  
+  if (length(x_t) == 1) {
+    warning(paste("Não há segundo turno pada", tit(x)))
+    return()
+  }
+  
+  if (length(y_t) == 1) {
+    warning(paste("Não há segundo turno pada", tit(y)))
+    return()
+  }
+  
   #return(
     dnormC(x_t[[turno]]$TAXA_ABSTENCAO, y_t[[turno]]$TAXA_ABSTENCAO, main_title = main_title)
   #)
 }
 
-comparaTaxaA_EP = function(x, y, turno=1, main_title=paste("Compara", tit(x), " e ", tit(y), "<Naïve>")) {
+comparaTaxaA_EP = function(x, y, 
+                           turno=1, 
+                           main_title=paste("Compara", tit(x), " e ", tit(y), "<EP>")) {
   x_t = split(x, x$NUM_TURNO)
   y_t = split(y, y$NUM_TURNO)
   return(
