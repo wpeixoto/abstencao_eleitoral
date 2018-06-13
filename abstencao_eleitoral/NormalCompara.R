@@ -7,7 +7,9 @@ dnormalComp <- function(
   nc=.95, 
   rc="=",
   main_title = "Curva Normal",
-  subtitle = ""
+  subtitle = "",
+  a1n = "",
+  a2n = ""
 )
 {
   
@@ -29,12 +31,12 @@ dnormalComp <- function(
   # traça as curvas normais 1 e 2
   if(cn1(media1)>=cn2(media2)){
     plot(x,cn1(x),ylab="Densidade",xlab="x",
-         main=main_title,type="l",lwd=2, sub = subtitle)
+         main=main_title,type="l",lwd=2, sub = paste(subtitle, "black"))
     lines(x,cn2(x),lwd=2, col="red")
   } else {
     plot(x,cn2(x),ylab="Densidade",xlab="x",
          main=main_title,type="l",lwd=2,col="red",
-         sub = subtitle)
+         sub = paste(subtitle, "red"))
     lines(x,cn1(x),lwd=2)
   }
   
@@ -82,4 +84,10 @@ dnormalComp <- function(
     i<-i+inc
   }
   lines(c(i,i),c(-1,cn2(i)),col="red",lty=4,lwd=2)
+  
+  if (a1n != "" & a2n != "") {
+    legend("topright", 
+           text.col=c("black", "red"), 
+           legend = c(a1n, a2n))
+  }
 }
