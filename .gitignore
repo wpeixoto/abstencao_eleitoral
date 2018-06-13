@@ -1,0 +1,8 @@
+.RData
+
+*.zip
+
+*.tar.gz
+
+*~lock*
+
