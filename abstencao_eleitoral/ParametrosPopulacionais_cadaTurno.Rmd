@@ -19,6 +19,7 @@ FN_SUFIXO = "_DF.txt"
 DATA_DIR = ""
 
 df98 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 1998, FN_SUFIXO), full = T)
+df98$SIGLA_UF <- "DF"  # Corrige erro nos dados
 df02 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2002, FN_SUFIXO), full = T)
 df06 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2006, FN_SUFIXO), full = T)
 df10 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2010, FN_SUFIXO), full = T)
@@ -63,8 +64,12 @@ for (i in 2:length(elet)) {
   # print(paste("## ", ANO1, "/", TURNO1, " x ", ANO2, "/", TURNO2))
   el_1 = elet[[i-1]]$TAXA_ABSTENCAO
   el_2 = elet[[i]]$TAXA_ABSTENCAO
-  dnormC(el_1, el_2, paste0("Taxas de abstenção: ", ANO1, "/", TURNO1, "º Turno x ", ANO2, "/", TURNO2, "º Turno"))
+  a1n = paste0(ANO1, "/", TURNO1, "º Turno")
+  a2n = paste0(ANO2, "/", TURNO2, "º Turno")
+  dnormC(el_1, el_2, paste0("Taxas de abstenção: ", a1n, " x ", a2n), a1n=a1n, a2n = a2n)
   
-  dnormCC(el_1, el_2, paste0("EP Taxas de abstenção: ", ANO1, "/", TURNO1, "º Turno x ", ANO2, "/", TURNO2, "º Turno"))
+  dnormCC(el_1, el_2, paste0("Taxas de abstenção: ", a1n, " x ", a2n), a1n=a1n, a2n = a2n)
+  
+  #dnormCC(el_1, el_2, paste0("EP Taxas de abstenção: ", ANO1, "/", TURNO1, "º Turno x ", ANO2, "/", TURNO2, "º Turno"))
 }
 ```
