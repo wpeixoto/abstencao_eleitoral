@@ -1,4 +1,5 @@
 # Função get_dv para todos
+# Lê um dafatrame de dados de seções eleitorais
 
 warn_nas = function(x, ignore.nas = F, field.name = "", msg="") {
   if (msg == "") {
@@ -18,7 +19,8 @@ get_dv = function(filename,        # Nome de um arquivo do TSE
                   all = FALSE,     #  TRUE == Todas as linhas
                   full=FALSE,      #  TRUE == todas as colunas originais
                   cargos= c(3, 9), #  Vetor com cargos para filtrar. Default: Governador e Presidente
-                  ignore.nas = F)  
+                  ignore.nas = F,  # Ignorar NA
+                  no_factors = T)  # Não converter strings em fatores
   {
   NOMES_CAMPOS_ORIG = c("DATA_GERACAO", "HORA_GERACAO", "ANO_ELEICAO", "NUM_TURNO", "DESCRICAO_ELEICAO", 
                         "SIGLA_UF", "SIGLA_UE", "CODIGO_MUNICIPIO", "NOME_MUNICIPIO", "NUMERO_ZONA", "NUMERO_SECAO", 
@@ -40,13 +42,18 @@ get_dv = function(filename,        # Nome de um arquivo do TSE
     stop(paste("Arquivo '", filename, "' não foi encontrado."))
     return()
   }
-  dv = read.csv(filename, header = F, encoding = "ISO-8859", sep = ";")
+  dv = read.csv(filename, header = F, encoding = "ISO-8859", sep = ";", stringsAsFactors = F)
 
   if (length(dv) != length(NOMES_CAMPOS_ORIG)) {
     warning(paste("Largura diferente!", length(dv)))
   } 
 
   names(dv) = NOMES_CAMPOS_ORIG
+  
+  UFs = unique(dv$SIGLA_UF)
+  if (length(UFs) > 1) {
+    warning(paste("Há mais de uma UF neste data frame:", paste(UFs, collapse = ", ")))
+  }
   
   if (!all) {
     dv = dv[dv$CODIGO_CARGO %in% cargos, ]  # Restringir a Governador e prefeito, que tem os dois turnos. TODO: O que fazer se não tiver tido 2º turno? Presidente quase sempre tem. Prefeito parece ser o contrário
@@ -76,5 +83,27 @@ get_dv = function(filename,        # Nome de um arquivo do TSE
     
   }
   
+  if (!no_factors) {
+    # O que vale a pena converter em Factor?
+  }
+  
   return(dv)
+}
+
+filtra_UF = function(df, uf) {
+  df[df$SIGLA_UF == uf,]
+}
+
+get_dv_df = function(filename,        # Nome de um arquivo do TSE
+                   all = FALSE,     #  TRUE == Todas as linhas
+                   full=FALSE,      #  TRUE == todas as colunas originais
+                   cargos= c(3, 9), #  Vetor com cargos para filtrar. Default: Governador e Presidente
+                   ignore.nas = F,  # Ignorar NA
+                   no_factors = T)  # Não converter strings em fatores
+{
+  filtra_UF(get_dv(filename, all, full, cargos, ignore.nas, no_factors), "DF")
+}
+
+filtra_DF = function(x) {
+  filtra_UF(x, "DF")
 }
