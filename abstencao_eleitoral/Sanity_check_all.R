@@ -5,12 +5,15 @@
 # dificultar ou impedir a análise.
 
 library(utils)
-UFs = c("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", 
-        "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
-        "PE", "RJ", "PI", "RN", "RS", "RO", "RR", "SC", 
-        "SP", "SE", "TO")
+# UFs = c("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", 
+#        "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
+#        "PE", "RJ", "PI", "RN", "RS", "RO", "RR", "SC", 
+#        "SP", "SE", "TO")
 
-ANOS = seq(1994,2016,2) # Todos os anos, para verificações gerais
+UFs = c("DF", "ES", "GO")
+
+# ANOS = seq(1994,2016,2) # Todos os anos, para verificações gerais
+ANOS = c(1998, 2006, 2014)
 ANOS_GERAIS = seq(1994, 2014, 4)  # Eleições gerais (Presidente, Senador, Governador e Deputados)
 ANOS_MUNICIPAIS = seq(1996, 2016, 4)  # Eleições municipais (Prefeito e vereadores)
 
@@ -93,7 +96,7 @@ ktchall = function(o) {
   print(paste("::>:: MSG", o, "\nArquivo", filename))
 }
 
-print(paste("Há", length(filenames), "arquivos existentes"))
+print(paste("Foram encontrados", length(filenames), "arquivos."))
 pb = txtProgressBar(min=0, max=MaxSize, style = 3)
 pbc = 0
 
@@ -125,6 +128,12 @@ for (filename in filenames) {
     Any_NA = any(is.na(dv))
     # Faltam_colunas = any(is.na(dv$QT_VOTOS_ANULADOS_APU_SEP))
     # qtd_faltam_colunas = length(dv[is.na(dv$QT_VOTOS_ANULADOS_APU_SEP), ])
+    ano = unique(dv$ANO_ELEICAO)
+    uf = unique(dv$SIGLA_UF)
+    if (length(uf) > 1) {
+      warning(paste("Mais de uma UF no arquivo", filename, "ano", ano, "UFS:", paste(uf, collapse = ", ")))
+    }
+    uf = paste(uf, collapse = ", ")
     
     ttt[cont,] = list(ano, uf, Any_NA,orig_lines,  nrow(dv), !any(verif_taxa != 1), length(dv))
     cont = cont + 1
