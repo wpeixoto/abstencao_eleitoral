@@ -15,7 +15,9 @@ FN_PREFIXO = "detalhe_votacao_secao_"
 FN_SUFIXO = "_DF.txt"
 DATA_DIR = ""
 
+#df98 = filtra_UF(get_dv(paste0(DATA_DIR, FN_PREFIXO, 1998, FN_SUFIXO), full = T), "DF")
 df98 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 1998, FN_SUFIXO), full = T)
+df98$SIGLA_UF <- "DF"  # Corrige erro nos dados
 df02 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2002, FN_SUFIXO), full = T)
 df06 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2006, FN_SUFIXO), full = T)
 df10 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2010, FN_SUFIXO), full = T)
@@ -31,6 +33,7 @@ parametros = data.frame(
 
 ```{r echo=F}
 c = 1
+#for (df in lapply(list(df98, df02, df06, df10, df14), FUN = filtra_DF)) {
 for (df in list(df98, df02, df06, df10, df14)) {
   # turnos = c(df[df$NUM_TURNO == 1], df[df$NUM_TURNO == 2])
   #attach(df)
