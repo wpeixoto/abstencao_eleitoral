@@ -162,6 +162,7 @@ for (filename in filenames) {
       }
     }
     qtds_aptos_v = unlist(qtds_aptos)
+    qtds_aptos_v = qtds_aptos_v[qtds_aptos_v > 0]
     diverg = "None"
     if (any(abs(qtds_aptos_v - mean(qtds_aptos_v)) != 0)) {
       diverg = paste(qtds_aptos_v, collapse = ", ")
