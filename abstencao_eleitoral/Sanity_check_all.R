@@ -4,6 +4,9 @@
 # Este script tenta descobrir quais arquivos têm problemas que podem
 # dificultar ou impedir a análise.
 
+# env = list()
+avisos = list()
+
 library(utils)
 # UFs = c("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", 
 #        "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
@@ -44,6 +47,10 @@ ttt = data.frame(
  verif_taxa_consistente=rep(NA, MaxSize),
  # qtd_faltam_colunas=rep(NA, MaxSize),
  qtd_colunas=rep(NA, MaxSize),
+ cargos=rep(NA, MaxSize),    # Listar os cargos encontrados
+ turnos=rep(NA, MaxSize),
+ qtd_aptos=rep(NA, MaxSize),
+ min_max_aptos=rep(NA, MaxSize),  # Listar (mín, máx) de qtd aptos
  stringsAsFactors = F
  )
 
@@ -71,6 +78,7 @@ for (ano in ANOS) {
     } 
     else
     {
+      avisos[[paste0(UF,"/",s_ano)]] == paste("Arquivo ", filename, "não encontrado")
       not_found_filenames[j] = filename
       j = j+1
       # print(paste("Arquivo '", filename, "' não encontrado"))
@@ -99,6 +107,7 @@ ktchall = function(o) {
 print(paste("Foram encontrados", length(filenames), "arquivos."))
 pb = txtProgressBar(min=0, max=MaxSize, style = 3)
 pbc = 0
+fln = 0
 
 for (filename in filenames) {
   # break
@@ -111,8 +120,11 @@ for (filename in filenames) {
       dv = read.csv(filename, header = F, encoding = "ISO-8859", sep = ";")
     }, error=ktchall, warning=ktchall)
     orig_lines = nrow(dv)
+    fln = fln + 1
     if (length(dv) != length(NOMES_CAMPOS)) {
-      print(paste("Erro no arquivo", filename, ":: Largura diferente:", length(dv)))
+      avi = paste("Erro no arquivo", filename, ":: Largura diferente:", length(dv))
+      avisos[[paste0("FN", as.character(fln))]] = avi
+      print(avi)
       next
     }
     names(dv) = NOMES_CAMPOS
@@ -120,10 +132,12 @@ for (filename in filenames) {
     dv$TAXA_COMPARECIMENTO = dv$QTD_COMPARECIMENTO / dv$QTD_APTOS
     dv$TAXA_ABSTENCAO = dv$QTD_ABSTENCOES / dv$QTD_APTOS
     verif_taxa = dv$TAXA_ABSTENCAO + dv$TAXA_COMPARECIMENTO
-    # if (any(verif_taxa != 1)) { 
+    if (any(verif_taxa != 1)) { 
     #  head(dv[verif_taxa != 1, ])
-    #  print(paste("Inconsistênca entre quantidades de abstenções e de comparecimentos em ", unique(dv$ANO_ELEICAO), " ", unique(dv$SIGLA_UF), "\n"))
-    #}
+      avi2 = paste("Inconsistênca entre quantidades de abstenções e de comparecimentos em ", unique(dv$ANO_ELEICAO), " ", paste(unique(dv$SIGLA_UF), collapse = ", "), "\n")
+      avisos[[paste0("Verif_taxa_", as.character(fln))]] = avi2
+      print(avi2)
+    }
     
     Any_NA = any(is.na(dv))
     # Faltam_colunas = any(is.na(dv$QT_VOTOS_ANULADOS_APU_SEP))
@@ -131,14 +145,31 @@ for (filename in filenames) {
     ano = unique(dv$ANO_ELEICAO)
     uf = unique(dv$SIGLA_UF)
     if (length(uf) > 1) {
-      warning(paste("Mais de uma UF no arquivo", filename, "ano", ano, "UFS:", paste(uf, collapse = ", ")))
+      avi3 = paste("Mais de uma UF no arquivo", filename, "ano", ano, "UFS:", paste(uf, collapse = ", "))
+      avisos[[paste0("uniq_UF_", as.character(fln))]] = avi3
+      warning(avi3)
     }
     uf = paste(uf, collapse = ", ")
     
-    ttt[cont,] = list(ano, uf, Any_NA,orig_lines,  nrow(dv), !any(verif_taxa != 1), length(dv))
+    turnos_l = unique(dv$NUM_TURNO)
+    
+    ttt[cont,] = list(ano, uf, Any_NA,orig_lines,  
+                      nrow(dv), !any(verif_taxa != 1), 
+                      length(dv),
+                      cargos = paste(unique(dv$CODIGO_CARGO), collapse = ","),
+                      turnos = paste(unique(dv$NUM_TURNO), collapse = ","),
+                      qtd_aptos = "None",
+                      min_max_aptos = paste0("(", min(dv$QTD_APTOS), ",",max(dv$QTD_APTOS), ")")
+                      )
     cont = cont + 1
     setTxtProgressBar(pb, pbc)
   }
 
+# Cleanup environment
+#rm(ANOS, ANOS_GERAIS, ANOS_MUNICIPAIS, all, ano, Any_NA, 
+#   CAMPOS_MAIS_RELEVANTES, CAMPOS_RELEVANTES_S, NOMES_CAMPOS,
+#   cargos, cont, s_ano, uf, UFs, pbc, verif_taxa,
+#   filename, filenames, full, i, j, MaxSize, dv, not_found_filenames, orig_lines)
 
+avisos
 # ttt
