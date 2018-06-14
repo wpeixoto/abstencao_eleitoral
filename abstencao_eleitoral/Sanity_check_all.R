@@ -8,14 +8,14 @@
 avisos = list()
 
 library(utils)
-# UFs = c("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", 
-#        "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
-#        "PE", "RJ", "PI", "RN", "RS", "RO", "RR", "SC", 
-#        "SP", "SE", "TO")
+UFs = c("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", 
+        "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
+        "PE", "RJ", "PI", "RN", "RS", "RO", "RR", "SC", 
+        "SP", "SE", "TO")
 
-UFs = c("DF", "ES", "GO")
+UFs = c("DF") # , "ES", "GO")
 
-# ANOS = seq(1994,2016,2) # Todos os anos, para verificações gerais
+ANOS = seq(1994,2016,2) # Todos os anos, para verificações gerais
 ANOS = c(1998, 2006, 2014)
 ANOS_GERAIS = seq(1994, 2014, 4)  # Eleições gerais (Presidente, Senador, Governador e Deputados)
 ANOS_MUNICIPAIS = seq(1996, 2016, 4)  # Eleições municipais (Prefeito e vereadores)
@@ -50,6 +50,7 @@ ttt = data.frame(
  cargos=rep(NA, MaxSize),    # Listar os cargos encontrados
  turnos=rep(NA, MaxSize),
  qtd_aptos=rep(NA, MaxSize),
+ qtd_aptos_diverg=rep(NA, MaxSize),
  min_max_aptos=rep(NA, MaxSize),  # Listar (mín, máx) de qtd aptos
  stringsAsFactors = F
  )
@@ -78,7 +79,7 @@ for (ano in ANOS) {
     } 
     else
     {
-      avisos[[paste0(UF,"/",s_ano)]] == paste("Arquivo ", filename, "não encontrado")
+      avisos[[paste0(uf,"/",s_ano)]] == paste("Arquivo ", filename, "não encontrado")
       not_found_filenames[j] = filename
       j = j+1
       # print(paste("Arquivo '", filename, "' não encontrado"))
@@ -152,13 +153,27 @@ for (filename in filenames) {
     uf = paste(uf, collapse = ", ")
     
     turnos_l = unique(dv$NUM_TURNO)
+    cargos_l = unique(dv$CODIGO_CARGO)
+    qtds_aptos = list()
+    
+    for (c in cargos_l) {
+      for (t in turnos_l) {
+        qtds_aptos[[paste(c(c,t), collapse = ",")]] = sum(dv$QTD_APTOS[dv$CODIGO_CARGO == c & dv$NUM_TURNO == t])
+      }
+    }
+    qtds_aptos_v = unlist(qtds_aptos)
+    diverg = "None"
+    if (any(abs(qtds_aptos_v - mean(qtds_aptos_v)) != 0)) {
+      diverg = paste(qtds_aptos_v, collapse = ", ")
+    }
     
     ttt[cont,] = list(ano, uf, Any_NA,orig_lines,  
                       nrow(dv), !any(verif_taxa != 1), 
                       length(dv),
-                      cargos = paste(unique(dv$CODIGO_CARGO), collapse = ","),
-                      turnos = paste(unique(dv$NUM_TURNO), collapse = ","),
+                      cargos = paste(cargos_l, collapse = ","),
+                      turnos = paste(turnos_l, collapse = ","),
                       qtd_aptos = "None",
+                      qtd_aptos_diverg = diverg,
                       min_max_aptos = paste0("(", min(dv$QTD_APTOS), ",",max(dv$QTD_APTOS), ")")
                       )
     cont = cont + 1
@@ -166,10 +181,15 @@ for (filename in filenames) {
   }
 
 # Cleanup environment
-#rm(ANOS, ANOS_GERAIS, ANOS_MUNICIPAIS, all, ano, Any_NA, 
-#   CAMPOS_MAIS_RELEVANTES, CAMPOS_RELEVANTES_S, NOMES_CAMPOS,
-#   cargos, cont, s_ano, uf, UFs, pbc, verif_taxa,
-#   filename, filenames, full, i, j, MaxSize, dv, not_found_filenames, orig_lines)
+rm(ANOS, ANOS_GERAIS, ANOS_MUNICIPAIS, all, ano, Any_NA, 
+   CAMPOS_MAIS_RELEVANTES, CAMPOS_RELEVANTES_S, NOMES_CAMPOS,
+   cargos, cont, s_ano, uf, UFs, pbc, verif_taxa,
+   filename, filenames, full, i, j, MaxSize, dv, not_found_filenames, orig_lines,
+   avi3, fln, turnos_l)
 
-avisos
+rm(filtra_DF, filtra_UF, get_dv_df, ktchall, warn_nas)
+
+if (length(avisos) > 0) {
+  print(avisos)
+}
 # ttt
