@@ -37,8 +37,8 @@ source("get_dv.R")
 # ===============================================================
 
 MaxSize = length(UFs) * length(ANOS)
-rm(ttt)
-ttt = data.frame(
+rm(resultados_checagem)
+resultados_checagem = data.frame(
  ano=rep(NA, MaxSize), 
  uf=rep("", MaxSize), 
  any_na=rep(NA, MaxSize),
@@ -124,8 +124,10 @@ for (filename in filenames) {
     orig_lines = nrow(dv)
     fln = fln + 1
     if (length(dv) != length(NOMES_CAMPOS)) {
-      avi = paste("Erro no arquivo", filename, ":: Largura diferente:", length(dv))
-      avisos[[paste0("FN", as.character(fln))]] = avi
+      # avi = paste("Erro no arquivo", filename, ":: Largura diferente:", length(dv))
+      avi = msg_err_file(filename, ":: Largura diferente:", length(dv))
+      # avisos[[paste0("FN", as.character(fln))]] = avi
+      avisos[[identix("FN", "", as.character(fln))]] = avi
       print(avi)
       next
     }
@@ -147,7 +149,12 @@ for (filename in filenames) {
     ano = unique(dv$ANO_ELEICAO)
     uf = unique(dv$SIGLA_UF)
     if (length(uf) > 1) {
-      avi3 = paste("Mais de uma UF no arquivo", filename, "ano", ano, "UFS:", paste(uf, collapse = ", "))
+      # avi3 = paste("Mais de uma UF no arquivo", filename, "ano", ano, "UFS:", paste(uf, collapse = ", "))
+      avi3 = msg_err_file(
+        filename = filename,
+        label = "Mais de uma UF no arquivo",
+        particular = paste("Ano", ano, "UFs", paste(uf, collapse = ", "))
+      )
       avisos[[paste0("uniq_UF_", as.character(fln))]] = avi3
       warning(avi3)
     }
@@ -160,7 +167,11 @@ for (filename in filenames) {
     
     for (c in cargos_l) {
       for (t in turnos_l) {
-        idd = paste(c(c,t), collapse = ",")
+        # idd = paste(c(c,t), collapse = ",")
+        idd - identix(label =  l_anoUF(ano, uf), 
+                      particular = "",
+                      seqq = paste(c(c,t), collapse = ",")
+                      )
         #dv$QTD_APTOS[dv$CODIGO_CARGO == c & dv$NUM_TURNO == t]
         grupo = dv[dv$CODIGO_CARGO == c & dv$NUM_TURNO == t,]
         qtds_aptos[[idd]] = sum(grupo$QTD_APTOS)
@@ -169,7 +180,7 @@ for (filename in filenames) {
     }
     qtds_aptos_v = unlist(qtds_aptos)
     qtds_aptos_v = qtds_aptos_v[qtds_aptos_v > 0]
-    diverg = "None"
+    diverg_qtd_aptos = "None"
     converg_qtd_aptos = "None"
     if (any(abs(qtds_aptos_v - mean(qtds_aptos_v)) != 0)) {
       diverg = paste(qtds_aptos_v, collapse = ", ")
@@ -189,13 +200,13 @@ for (filename in filenames) {
     }
     
     
-    ttt[cont,] = list(ano, uf, Any_NA,orig_lines,  
+    resultados_checagem[cont,] = list(ano, uf, Any_NA,orig_lines,  
                       nrow(dv), !any(verif_taxa != 1), 
                       length(dv),
                       cargos = paste(cargos_l, collapse = ","),
                       turnos = paste(turnos_l, collapse = ","),
                       qtd_aptos = converg_qtd_aptos,
-                      qtd_aptos_diverg = diverg,
+                      qtd_aptos_diverg = diverg_qtd_aptos,
                       min_max_aptos = paste0("(", min(dv$QTD_APTOS), ",",max(dv$QTD_APTOS), ")"),
                       grupos_linhas_diverg = grupo_diverg
     )
@@ -215,4 +226,4 @@ rm(filtra_DF, filtra_UF, get_dv_df, ktchall, warn_nas)
 if (length(avisos) > 0) {
   print(avisos)
 }
-# ttt
+# resultados_checagem

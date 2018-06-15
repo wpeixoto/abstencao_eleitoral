@@ -3,6 +3,16 @@ fmtP = function(x) {
   paste0(format(x * 100, digits=4), "%")
 }
 
+identix = function(label, particular, seqq) {
+  # Compõe um identificador para quadros de avisos
+  paste0(label, particular, as.character(seqq))
+}
+
+msg_err_file = function(filename, label, particular, title="Erro no arquivo") {
+  # Formata mensagem de erro em um arquivo
+  paste(title, filename, label, particular)
+}
+
 dnormC = function(x, y,                      # Abrevia dnormalComp Naive
                   main_title="Curva Normal", 
                   subtitle="Naïve",
