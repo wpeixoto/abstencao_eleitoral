@@ -33,7 +33,7 @@ CAMPOS_MAIS_RELEVANTES = c("ANO_ELEICAO", "NUM_TURNO", "SIGLA_UF", "SIGLA_UE",
 
 source("get_dv.R")
 # ===============================================================
-# AQUI
+# Construção de Data Frame vazio com colunas adequadas
 # ===============================================================
 
 MaxSize = length(UFs) * length(ANOS)
@@ -52,6 +52,7 @@ ttt = data.frame(
  qtd_aptos=rep(NA, MaxSize),
  qtd_aptos_diverg=rep(NA, MaxSize),
  min_max_aptos=rep(NA, MaxSize),  # Listar (mín, máx) de qtd aptos
+ grupos_linhas_diverg=rep(NA, MaxSize),  # Divergências entre quantidades de linhas por grupo
  stringsAsFactors = F
  )
 
@@ -155,28 +156,49 @@ for (filename in filenames) {
     turnos_l = unique(dv$NUM_TURNO)
     cargos_l = unique(dv$CODIGO_CARGO)
     qtds_aptos = list()
+    qtds_linhas = list()
     
     for (c in cargos_l) {
       for (t in turnos_l) {
-        qtds_aptos[[paste(c(c,t), collapse = ",")]] = sum(dv$QTD_APTOS[dv$CODIGO_CARGO == c & dv$NUM_TURNO == t])
+        idd = paste(c(c,t), collapse = ",")
+        #dv$QTD_APTOS[dv$CODIGO_CARGO == c & dv$NUM_TURNO == t]
+        grupo = dv[dv$CODIGO_CARGO == c & dv$NUM_TURNO == t,]
+        qtds_aptos[[idd]] = sum(grupo$QTD_APTOS)
+        qtds_linhas[[idd]] = nrow(grupo)
       }
     }
     qtds_aptos_v = unlist(qtds_aptos)
     qtds_aptos_v = qtds_aptos_v[qtds_aptos_v > 0]
     diverg = "None"
+    converg_qtd_aptos = "None"
     if (any(abs(qtds_aptos_v - mean(qtds_aptos_v)) != 0)) {
       diverg = paste(qtds_aptos_v, collapse = ", ")
+    } else {
+      converg_qtd_aptos = qtds_aptos_v[1]
     }
+    # print(ano)
+    # print(qtds_linhas)
+    
+    #stop()
+    qtds_linhas_v = unlist(qtds_linhas)
+    print(qtds_linhas_v)
+    grupo_diverg = "None"
+    if (any(abs(qtds_linhas_v - mean(qtds_linhas_v)) != 0)) {
+      avisos[[paste0("linhas_diverg_", as.character(fln))]] = qtds_linhas
+      grupo_diverg = paste(qtds_linhas_v, collapse = ", ")
+    }
+    
     
     ttt[cont,] = list(ano, uf, Any_NA,orig_lines,  
                       nrow(dv), !any(verif_taxa != 1), 
                       length(dv),
                       cargos = paste(cargos_l, collapse = ","),
                       turnos = paste(turnos_l, collapse = ","),
-                      qtd_aptos = "None",
+                      qtd_aptos = converg_qtd_aptos,
                       qtd_aptos_diverg = diverg,
-                      min_max_aptos = paste0("(", min(dv$QTD_APTOS), ",",max(dv$QTD_APTOS), ")")
-                      )
+                      min_max_aptos = paste0("(", min(dv$QTD_APTOS), ",",max(dv$QTD_APTOS), ")"),
+                      grupos_linhas_diverg = grupo_diverg
+    )
     cont = cont + 1
     setTxtProgressBar(pb, pbc)
   }
