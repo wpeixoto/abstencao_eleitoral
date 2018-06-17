@@ -3,3 +3,6 @@ dados
 *.csv
 *.tar.gz
 
+ud.sh
+Sanity_check_3.R
+Rasc_001.R
