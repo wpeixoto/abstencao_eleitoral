@@ -90,20 +90,20 @@ get_dv = function(filename,        # Nome de um arquivo do TSE
   return(dv)
 }
 
-filtra_UF = function(df, uf) {
-  df[df$SIGLA_UF == uf,]
-}
+# filtra_UF = function(df, uf) {
+#   df[df$SIGLA_UF == uf,]
+# }
 
-get_dv_df = function(filename,        # Nome de um arquivo do TSE
-                   all = FALSE,     #  TRUE == Todas as linhas
-                   full=FALSE,      #  TRUE == todas as colunas originais
-                   cargos= c(3, 9), #  Vetor com cargos para filtrar. Default: Governador e Presidente
-                   ignore.nas = F,  # Ignorar NA
-                   no_factors = T)  # Não converter strings em fatores
-{
-  filtra_UF(get_dv(filename, all, full, cargos, ignore.nas, no_factors), "DF")
-}
-
-filtra_DF = function(x) {
-  filtra_UF(x, "DF")
-}
+# get_dv_df = function(filename,        # Nome de um arquivo do TSE
+#                    all = FALSE,     #  TRUE == Todas as linhas
+#                    full=FALSE,      #  TRUE == todas as colunas originais
+#                    cargos= c(3, 9), #  Vetor com cargos para filtrar. Default: Governador e Presidente
+#                    ignore.nas = F,  # Ignorar NA
+#                    no_factors = T)  # Não converter strings em fatores
+# {
+#   filtra_UF(get_dv(filename, all, full, cargos, ignore.nas, no_factors), "DF")
+# }
+# 
+# filtra_DF = function(x) {
+#   filtra_UF(x, "DF")
+# }
