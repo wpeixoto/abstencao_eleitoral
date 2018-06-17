@@ -3,6 +3,11 @@ fmtP = function(x) {
   paste0(format(x * 100, digits=4), "%")
 }
 
+to_z = function(x) {
+  x = x[!is.na(x)]
+  (x - mean(x))/sd(x)
+}
+
 identix = function(label, particular, seqq) {
   # Compõe um identificador para quadros de avisos
   paste0(label, particular, as.character(seqq))
