@@ -4,14 +4,14 @@ source("aux.R")
 # TODO: Verificar existência da lista de avisos
 
 get_filenames = function (anos, ufs, data_dir = "~/data/TSE/Resultados/")  {
+  # ===============================================================
+  # Geração de nomes de arquivos
+  # ===============================================================
   MaxSize = length(anos) * length(ufs)
   
   file_base_name = "detalhe_votacao_secao_"
   cont = 1
   
-  # ===============================================================
-  # Geração de nomes de arquivos
-  # ===============================================================
   filenames = character(MaxSize)
   not_found_filenames = character(MaxSize/2)  # Estimo que haverá poucos inexistentes
   i = 1
