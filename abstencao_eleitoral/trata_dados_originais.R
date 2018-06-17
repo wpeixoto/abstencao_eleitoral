@@ -14,15 +14,6 @@ input_data_dir = "~/data/TSE/Resultados/"
 output_data_dir = "~/data/TSE/Resultados/recortes/"
 file_base_name = "detalhe_votacao_secao_"
 
-# build_filename <- function(data_dir = input_data_dir, 
-#                            data_subdir = "", 
-#                            file_base_name = file_base_name, 
-#                            ano,
-#                            uf) {
-#   s_ano = paste0(as.character(ano), "/")
-#   return(paste0(data_dir, data_subdir, file_base_name, s_ano, uf) )
-# }
-
 print("Apenas 1998")
 # br_1998 = read.csv("./dados/recortes/detalhe_votacao_secao_1998_BR.txt", header = F, encoding = "ISO-8859", sep = ";", stringsAsFactors = F)
 # # br_1998 = read.csv(build_filename(data_subdir = "1998/", ano=1998, uf="DF"), header = F, encoding = "ISO-8859", sep = ";", stringsAsFactors = F)

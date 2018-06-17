@@ -76,9 +76,6 @@ get_dv = function(filename,        # Nome de um arquivo do TSE
   dv$NUM_ZONECAO = paste0(dv$NUMERO_ZONA, dv$NUMERO_SECAO)  
   
   if (!full) {  # Excluir campos desnecessários
-    # dv$QTD_COMPARECIMENTO = NULL
-    # dv$QTD_APTOS = NULL
-    # dv$DESCRICAO_CARGO = NULL
     dv = dv[, CAMPOS_MAIS_RELEVANTES]
     
   }
@@ -90,20 +87,3 @@ get_dv = function(filename,        # Nome de um arquivo do TSE
   return(dv)
 }
 
-# filtra_UF = function(df, uf) {
-#   df[df$SIGLA_UF == uf,]
-# }
-
-# get_dv_df = function(filename,        # Nome de um arquivo do TSE
-#                    all = FALSE,     #  TRUE == Todas as linhas
-#                    full=FALSE,      #  TRUE == todas as colunas originais
-#                    cargos= c(3, 9), #  Vetor com cargos para filtrar. Default: Governador e Presidente
-#                    ignore.nas = F,  # Ignorar NA
-#                    no_factors = T)  # Não converter strings em fatores
-# {
-#   filtra_UF(get_dv(filename, all, full, cargos, ignore.nas, no_factors), "DF")
-# }
-# 
-# filtra_DF = function(x) {
-#   filtra_UF(x, "DF")
-# }

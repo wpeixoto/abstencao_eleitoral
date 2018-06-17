@@ -61,36 +61,6 @@ resultados_checagem = data.frame(
 cont = 1
 
 source("get_filenames.R")
-# ===============================================================
-# Geração de nomes de arquivos
-# ===============================================================
-# filenames = character(MaxSize)
-# not_found_filenames = character(MaxSize/2)  # Estimo que haverá poucos inexistentes
-# i = 1
-# j = 1
-# 
-# pb = txtProgressBar(min=0, max=MaxSize, style = 3)
-# pbc = 0
-# for (ano in ANOS) {
-#   for (uf in UFs) {
-#     pbc = pbc + 1
-#     s_ano = as.character(ano)
-#     filename = paste0("~/data/TSE/Resultados/", s_ano, "/", "detalhe_votacao_secao_", s_ano, "_", uf, ".txt")
-#     if (file.exists(filename)) {
-#       filenames[i] = filename
-#       i = i + 1
-#     } 
-#     else
-#     {
-#       avisos[[paste0(uf,"/",s_ano)]] == paste("Arquivo ", filename, "não encontrado")
-#       not_found_filenames[j] = filename
-#       j = j+1
-#       # print(paste("Arquivo '", filename, "' não encontrado"))
-#       # next
-#     }
-#     setTxtProgressBar(pb, pbc)
-#   }
-# }
 
 filenames = get_filenames(anos=ANOS, ufs = UFs)
 
@@ -130,9 +100,7 @@ for (filename in filenames) {
     orig_lines = nrow(dv)
     fln = fln + 1
     if (length(dv) != length(NOMES_CAMPOS)) {
-      # avi = paste("Erro no arquivo", filename, ":: Largura diferente:", length(dv))
       avi = msg_err_file(filename, ":: Largura diferente:", length(dv))
-      # avisos[[paste0("FN", as.character(fln))]] = avi
       avisos[[identix("FN", "", as.character(fln))]] = avi
       print(avi)
       next
@@ -143,9 +111,7 @@ for (filename in filenames) {
     dv$TAXA_ABSTENCAO = dv$QTD_ABSTENCOES / dv$QTD_APTOS
     verif_taxa = dv$TAXA_ABSTENCAO + dv$TAXA_COMPARECIMENTO
     if (any(verif_taxa != 1)) { 
-    #  head(dv[verif_taxa != 1, ])
       avi2 = paste("Inconsistênca entre quantidades de abstenções e de comparecimentos em ", unique(dv$ANO_ELEICAO), " ", paste(unique(dv$SIGLA_UF), collapse = ", "), "\n")
-      #avisos[[paste0("Verif_taxa_", as.character(fln))]] = avi2
       avisos[[identix("Verif_taxa_", tit(dv), fln)]] = avi2
       print(avi2)
     }
@@ -156,7 +122,6 @@ for (filename in filenames) {
     ano = unique(dv$ANO_ELEICAO)
     uf = unique(dv$SIGLA_UF)
     if (length(uf) > 1) {
-      # avi3 = paste("Mais de uma UF no arquivo", filename, "ano", ano, "UFS:", paste(uf, collapse = ", "))
       avi3 = msg_err_file(
         filename = filename,
         label = "Mais de uma UF no arquivo",
@@ -174,26 +139,16 @@ for (filename in filenames) {
     
     for (c in cargos_l) {
       for (t in turnos_l) {
-        # idd = paste(c(c,t), collapse = ",")
         idd = identix(label =  l_anoUF(ano, uf), 
                       particular = "",
-                      seqq = lpar(c(c,t)) # paste(c(c,t), collapse = ",")
+                      seqq = lpar(c(c,t)) 
                       )
-        #dv$QTD_APTOS[dv$CODIGO_CARGO == c & dv$NUM_TURNO == t]
         grupo = dv[dv$CODIGO_CARGO == c & dv$NUM_TURNO == t,]
         qtds_aptos[[idd]] = sum(grupo$QTD_APTOS)
         qtds_linhas[[idd]] = nrow(grupo)
       }
     }
-    # qtds_aptos_v = unlist(qtds_aptos)
-    # qtds_aptos_v = qtds_aptos_v[qtds_aptos_v > 0]
-    # diverg_qtd_aptos = "None"
-    # converg_qtd_aptos = "None"
-    # if (any(abs(qtds_aptos_v - mean(qtds_aptos_v)) != 0)) {
-    #   diverg = paste(qtds_aptos_v, collapse = ", ")
-    # } else {
-    #   converg_qtd_aptos = qtds_aptos_v[1]
-    # }
+
     ## print(ano)
     ## print(qtds_linhas)
     diverg_aptos = find_divergences(qtds_aptos)
@@ -201,14 +156,6 @@ for (filename in filenames) {
     diverg_qtd_aptos = diverg_aptos$divergencies
     
     
-    #stop()
-    # qtds_linhas_v = unlist(qtds_linhas)
-    # print(qtds_linhas_v)
-    # grupo_diverg = "None"
-    # if (any(abs(qtds_linhas_v - mean(qtds_linhas_v)) != 0)) {
-    #   avisos[[paste0("linhas_diverg_", as.character(fln))]] = qtds_linhas
-    #   grupo_diverg = paste(qtds_linhas_v, collapse = ", ")
-    # }
     diverg_linhas = find_divergences(qtds_linhas)
     if (diverg_linhas$converges) {
       avisos[[identix("linhas_diverg", "", fln)]] = qtds_linhas
