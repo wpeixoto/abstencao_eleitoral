@@ -59,36 +59,39 @@ resultados_checagem = data.frame(
 
 cont = 1
 
+source("get_filenames.R")
 # ===============================================================
 # Geração de nomes de arquivos
 # ===============================================================
-filenames = character(MaxSize)
-not_found_filenames = character(MaxSize/2)  # Estimo que haverá poucos inexistentes
-i = 1
-j = 1
+# filenames = character(MaxSize)
+# not_found_filenames = character(MaxSize/2)  # Estimo que haverá poucos inexistentes
+# i = 1
+# j = 1
+# 
+# pb = txtProgressBar(min=0, max=MaxSize, style = 3)
+# pbc = 0
+# for (ano in ANOS) {
+#   for (uf in UFs) {
+#     pbc = pbc + 1
+#     s_ano = as.character(ano)
+#     filename = paste0("~/data/TSE/Resultados/", s_ano, "/", "detalhe_votacao_secao_", s_ano, "_", uf, ".txt")
+#     if (file.exists(filename)) {
+#       filenames[i] = filename
+#       i = i + 1
+#     } 
+#     else
+#     {
+#       avisos[[paste0(uf,"/",s_ano)]] == paste("Arquivo ", filename, "não encontrado")
+#       not_found_filenames[j] = filename
+#       j = j+1
+#       # print(paste("Arquivo '", filename, "' não encontrado"))
+#       # next
+#     }
+#     setTxtProgressBar(pb, pbc)
+#   }
+# }
 
-pb = txtProgressBar(min=0, max=MaxSize, style = 3)
-pbc = 0
-for (ano in ANOS) {
-  for (uf in UFs) {
-    pbc = pbc + 1
-    s_ano = as.character(ano)
-    filename = paste0("~/data/TSE/Resultados/", s_ano, "/", "detalhe_votacao_secao_", s_ano, "_", uf, ".txt")
-    if (file.exists(filename)) {
-      filenames[i] = filename
-      i = i + 1
-    } 
-    else
-    {
-      avisos[[paste0(uf,"/",s_ano)]] == paste("Arquivo ", filename, "não encontrado")
-      not_found_filenames[j] = filename
-      j = j+1
-      # print(paste("Arquivo '", filename, "' não encontrado"))
-      # next
-    }
-    setTxtProgressBar(pb, pbc)
-  }
-}
+filenames = get_filenames(anos=ANOs, ufs = UFs)
 
 # ===============================================================
 # Carregar os arquivos
@@ -107,6 +110,8 @@ ktchall = function(o) {
 }
 
 print(paste("Foram encontrados", length(filenames), "arquivos."))
+
+
 pb = txtProgressBar(min=0, max=MaxSize, style = 3)
 pbc = 0
 fln = 0
