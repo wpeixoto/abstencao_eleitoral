@@ -1,9 +1,21 @@
 
 fmtP = function(x) {
+  # Formata uma percentagem
   paste0(format(x * 100, digits=4), "%")
 }
 
+lpar <- function(x, sep=",") {
+  # Formata uma lista entre parêntesis
+  paste0("(", paste(x, collapse = sep), ")")
+}
+
+l_anoUF <- function(ano, uf) {
+  # Formata label para ano e uf, sem turno
+  paste0(uf, "_", ano)
+}
+
 to_z = function(x) {
+  # Calcula z-score
   x = x[!is.na(x)]
   (x - mean(x))/sd(x)
 }
@@ -126,3 +138,23 @@ spliTurno = function(x) {
 taxaA = function(x) {
   x$TAXA_ABSTENCAO
 }
+
+find_divergences = function(x) {
+  # Procura divergências em uma lista cujos valores
+  # deveriam ser iguais.
+  x_v = unlist(x)
+  x_v = x_v[x_v > 0]
+  diverg = NA
+  converg = NA
+  if (any(abs(x_v - mean(x_v)) != 0)) {
+    diverg = paste(x_v, collapse = ", ")
+  } else {
+    converg = x_v[1]
+  }  
+  return(
+    list(
+      converges = is.na(diverg),
+      divergencies = diverg,
+      convergent_value = converg
+    )
+  )}

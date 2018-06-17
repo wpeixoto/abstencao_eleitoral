@@ -13,12 +13,13 @@ UFs = c("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES",
         "PE", "RJ", "PI", "RN", "RS", "RO", "RR", "SC", 
         "SP", "SE", "TO")
 
-UFs = c("DF") # , "ES", "GO")
+UFs = c("DF", "BR_DF") # , "ES", "GO")
 
-ANOS = seq(1994,2016,2) # Todos os anos, para verificações gerais
-ANOS = c(1998, 2006, 2014)
 ANOS_GERAIS = seq(1994, 2014, 4)  # Eleições gerais (Presidente, Senador, Governador e Deputados)
 ANOS_MUNICIPAIS = seq(1996, 2016, 4)  # Eleições municipais (Prefeito e vereadores)
+ANOS = seq(1994,2016,2) # Todos os anos, para verificações gerais
+ANOS = c(1998, 2006, 2014)
+ANOS = ANOS_GERAIS
 
 # Campos relevantes para chegagem de sanidade
 CAMPOS_RELEVANTES_S = c("ANO_ELEICAO", "NUM_TURNO", "SIGLA_UF", "SIGLA_UE", 
@@ -91,7 +92,7 @@ source("get_filenames.R")
 #   }
 # }
 
-filenames = get_filenames(anos=ANOs, ufs = UFs)
+filenames = get_filenames(anos=ANOS, ufs = UFs)
 
 # ===============================================================
 # Carregar os arquivos
@@ -144,7 +145,8 @@ for (filename in filenames) {
     if (any(verif_taxa != 1)) { 
     #  head(dv[verif_taxa != 1, ])
       avi2 = paste("Inconsistênca entre quantidades de abstenções e de comparecimentos em ", unique(dv$ANO_ELEICAO), " ", paste(unique(dv$SIGLA_UF), collapse = ", "), "\n")
-      avisos[[paste0("Verif_taxa_", as.character(fln))]] = avi2
+      #avisos[[paste0("Verif_taxa_", as.character(fln))]] = avi2
+      avisos[[identix("Verif_taxa_", tit(dv), fln)]] = avi2
       print(avi2)
     }
     
@@ -173,9 +175,9 @@ for (filename in filenames) {
     for (c in cargos_l) {
       for (t in turnos_l) {
         # idd = paste(c(c,t), collapse = ",")
-        idd - identix(label =  l_anoUF(ano, uf), 
+        idd = identix(label =  l_anoUF(ano, uf), 
                       particular = "",
-                      seqq = paste(c(c,t), collapse = ",")
+                      seqq = lpar(c(c,t)) # paste(c(c,t), collapse = ",")
                       )
         #dv$QTD_APTOS[dv$CODIGO_CARGO == c & dv$NUM_TURNO == t]
         grupo = dv[dv$CODIGO_CARGO == c & dv$NUM_TURNO == t,]
@@ -183,26 +185,35 @@ for (filename in filenames) {
         qtds_linhas[[idd]] = nrow(grupo)
       }
     }
-    qtds_aptos_v = unlist(qtds_aptos)
-    qtds_aptos_v = qtds_aptos_v[qtds_aptos_v > 0]
-    diverg_qtd_aptos = "None"
-    converg_qtd_aptos = "None"
-    if (any(abs(qtds_aptos_v - mean(qtds_aptos_v)) != 0)) {
-      diverg = paste(qtds_aptos_v, collapse = ", ")
-    } else {
-      converg_qtd_aptos = qtds_aptos_v[1]
-    }
-    # print(ano)
-    # print(qtds_linhas)
+    # qtds_aptos_v = unlist(qtds_aptos)
+    # qtds_aptos_v = qtds_aptos_v[qtds_aptos_v > 0]
+    # diverg_qtd_aptos = "None"
+    # converg_qtd_aptos = "None"
+    # if (any(abs(qtds_aptos_v - mean(qtds_aptos_v)) != 0)) {
+    #   diverg = paste(qtds_aptos_v, collapse = ", ")
+    # } else {
+    #   converg_qtd_aptos = qtds_aptos_v[1]
+    # }
+    ## print(ano)
+    ## print(qtds_linhas)
+    diverg_aptos = find_divergences(qtds_aptos)
+    converg_qtd_aptos = diverg_aptos$convergent_value
+    diverg_qtd_aptos = diverg_aptos$divergencies
+    
     
     #stop()
-    qtds_linhas_v = unlist(qtds_linhas)
-    print(qtds_linhas_v)
-    grupo_diverg = "None"
-    if (any(abs(qtds_linhas_v - mean(qtds_linhas_v)) != 0)) {
-      avisos[[paste0("linhas_diverg_", as.character(fln))]] = qtds_linhas
-      grupo_diverg = paste(qtds_linhas_v, collapse = ", ")
+    # qtds_linhas_v = unlist(qtds_linhas)
+    # print(qtds_linhas_v)
+    # grupo_diverg = "None"
+    # if (any(abs(qtds_linhas_v - mean(qtds_linhas_v)) != 0)) {
+    #   avisos[[paste0("linhas_diverg_", as.character(fln))]] = qtds_linhas
+    #   grupo_diverg = paste(qtds_linhas_v, collapse = ", ")
+    # }
+    diverg_linhas = find_divergences(qtds_linhas)
+    if (diverg_linhas$converges) {
+      avisos[[identix("linhas_diverg", "", fln)]] = qtds_linhas
     }
+    grupo_diverg = diverg_linhas$divergencies
     
     
     resultados_checagem[cont,] = list(ano, uf, Any_NA,orig_lines,  
@@ -222,11 +233,12 @@ for (filename in filenames) {
 # Cleanup environment
 rm(ANOS, ANOS_GERAIS, ANOS_MUNICIPAIS, all, ano, Any_NA, 
    CAMPOS_MAIS_RELEVANTES, CAMPOS_RELEVANTES_S, NOMES_CAMPOS,
-   cargos, cont, s_ano, uf, UFs, pbc, verif_taxa,
-   filename, filenames, full, i, j, MaxSize, dv, not_found_filenames, orig_lines,
+   cargos, cont, uf, UFs, pbc, verif_taxa,
+   filename, filenames, full, MaxSize, dv, orig_lines,
    avi3, fln, turnos_l)
 
-rm(filtra_DF, filtra_UF, get_dv_df, ktchall, warn_nas)
+#rm(filtra_DF, filtra_UF, get_dv_df, ktchall, warn_nas)
+rm(get_dv_df, ktchall, warn_nas)
 
 if (length(avisos) > 0) {
   print(avisos)
