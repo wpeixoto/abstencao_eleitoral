@@ -1,7 +1,10 @@
 library(utils)
 source("aux.R")
 
-# TODO: Verificar existência da lista de avisos
+if (!exists("avisos")) {
+  avisos = list()
+}
+
 
 get_filenames = function (anos, ufs, data_dir = "~/data/TSE/Resultados/")  {
   # ===============================================================
