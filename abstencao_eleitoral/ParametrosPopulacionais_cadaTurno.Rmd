@@ -16,14 +16,14 @@ z_s = function(media, mu_0, sigma, n) {(media - mu_0)/(sigma/sqrt(n))}
 
 FN_PREFIXO = "detalhe_votacao_secao_"
 FN_SUFIXO = "_DF.txt"
-DATA_DIR = ""
+DATA_DIR = "~/data/TSE/Resultados/"
 
-df98 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 1998, FN_SUFIXO), full = T)
+df98 = get_dv(paste0(DATA_DIR, 1998, "/", FN_PREFIXO, 1998, FN_SUFIXO), full = T)
 df98$SIGLA_UF <- "DF"  # Corrige erro nos dados
-df02 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2002, FN_SUFIXO), full = T)
-df06 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2006, FN_SUFIXO), full = T)
-df10 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2010, FN_SUFIXO), full = T)
-df14 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2014, FN_SUFIXO), full = T)
+df02 = get_dv(paste0(DATA_DIR, 2002, "/", FN_PREFIXO, 2002, FN_SUFIXO), full = T)
+df06 = get_dv(paste0(DATA_DIR, 2006, "/", FN_PREFIXO, 2006, FN_SUFIXO), full = T)
+df10 = get_dv(paste0(DATA_DIR, 2010, "/", FN_PREFIXO, 2010, FN_SUFIXO), full = T)
+df14 = get_dv(paste0(DATA_DIR, 2014, "/", FN_PREFIXO, 2014, FN_SUFIXO), full = T)
 
 eleicoes = list(df98, df02, df06, df10, df14)
 
@@ -70,6 +70,6 @@ for (i in 2:length(elet)) {
   
   dnormCC(el_1, el_2, paste0("Taxas de abstenção: ", a1n, " x ", a2n), a1n=a1n, a2n = a2n)
   
-  #dnormCC(el_1, el_2, paste0("EP Taxas de abstenção: ", ANO1, "/", TURNO1, "º Turno x ", ANO2, "/", TURNO2, "º Turno"))
+    #dnormCC(el_1, el_2, paste0("EP Taxas de abstenção: ", ANO1, "/", TURNO1, "º Turno x ", ANO2, "/", TURNO2, "º Turno"))
 }
 ```
