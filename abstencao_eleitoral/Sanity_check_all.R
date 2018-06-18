@@ -157,8 +157,8 @@ for (filename in filenames) {
     
     
     diverg_linhas = find_divergences(qtds_linhas)
-    if (diverg_linhas$converges) {
-      avisos[[identix("linhas_diverg", "", fln)]] = qtds_linhas
+    if (!diverg_linhas$converges) {
+      avisos[[identix("linhas_diverg_", "", fln)]] = qtds_linhas
     }
     grupo_diverg = diverg_linhas$divergencies
     
