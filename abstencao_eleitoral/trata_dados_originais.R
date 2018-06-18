@@ -14,7 +14,7 @@ input_data_dir = "~/data/TSE/Resultados/"
 output_data_dir = "~/data/TSE/Resultados/recortes/"
 file_base_name = "detalhe_votacao_secao_"
 
-print("Apenas 1998")
+#print("Apenas 1998")
 # br_1998 = read.csv("./dados/recortes/detalhe_votacao_secao_1998_BR.txt", header = F, encoding = "ISO-8859", sep = ";", stringsAsFactors = F)
 # # br_1998 = read.csv(build_filename(data_subdir = "1998/", ano=1998, uf="DF"), header = F, encoding = "ISO-8859", sep = ";", stringsAsFactors = F)
 # NOMES_CAMPOS_ORIG = c("DATA_GERACAO", "HORA_GERACAO", "ANO_ELEICAO", "NUM_TURNO", "DESCRICAO_ELEICAO", 
@@ -47,3 +47,20 @@ recorte_1998 = recorte_1998[, c("ANO_ELEICAO", "NUM_TURNO",
 
 outfile_name = paste0(output_data_dir, "DF_1998.csv")
 write.csv(recorte_1998, outfile_name, sep=";", row.names = F)
+
+rm(df_1998, recorte_1998)
+
+for (ano in c(2002, 2006, 2010, 2014)) {
+  dd = get_dv(filename = bld_filename(ano), full=T)
+  
+
+  
+  df_rec = dd[dd$CODIGO_CARGO == 3, ]  
+  df_rec = df_rec[, c("ANO_ELEICAO", "NUM_TURNO",
+                      "NUMERO_ZONA", "NUMERO_SECAO", 
+                      "QT_VOTOS_BRANCOS", "QT_VOTOS_NULOS", 
+                      "TAXA_ABSTENCAO")]
+  outfile_name = paste0(output_data_dir, "DF_", ano, ".csv")
+  file.remove(outfile_name)
+  write.csv(df_rec, outfile_name, row.names = F)
+}
