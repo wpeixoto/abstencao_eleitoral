@@ -29,9 +29,9 @@ file_base_name = "detalhe_votacao_secao_"
 
 
 
-bld_filename <- function(ano) {  # Abrevia nome de arquivo
+bld_filename <- function(ano, uf="DF") {  # Abrevia nome de arquivo
   s_ano = as.character(ano)
-  paste0(input_data_dir, s_ano, "/", file_base_name, s_ano, "_", "DF", ".txt")
+  paste0(input_data_dir, s_ano, "/", file_base_name, s_ano, "_", uf, ".txt")
 }
 
 df_1998 = get_dv(filename = bld_filename(1998), full=T)
@@ -50,7 +50,7 @@ write.csv(recorte_1998, outfile_name, sep=";", row.names = F)
 
 rm(df_1998, recorte_1998)
 
-for (ano in c(2002, 2006, 2010, 2014)) {
+for (ano in c(2002, 2010, 2014)) {  # Ignora 2006 por não ter 2º turno
   dd = get_dv(filename = bld_filename(ano), full=T)
   
 
@@ -64,3 +64,15 @@ for (ano in c(2002, 2006, 2010, 2014)) {
   file.remove(outfile_name)
   write.csv(df_rec, outfile_name, row.names = F)
 }
+
+br2006 = get_dv(filename=bld_filename(2006, "BR"), full = T)  # eleição presidencial
+df2006 = br2006[br2006$SIGLA_UF == "DF"]  # Apenas DF
+rm(br2006)
+df2006 = df2006[, c("ANO_ELEICAO", "NUM_TURNO",
+                    "NUMERO_ZONA", "NUMERO_SECAO", 
+                    "QT_VOTOS_BRANCOS", "QT_VOTOS_NULOS", 
+                    "TAXA_ABSTENCAO")]
+
+outfile_name = paste0(output_data_dir, "DF_", 2006, ".csv")
+file.remove(outfile_name)
+write.csv(df_rec, outfile_name, row.names = F)
