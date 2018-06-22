@@ -1,0 +1,106 @@
+---
+title: "Análise do recorte"
+author: "William Peixoto"
+date: "21 de junho de 2018"
+output: html_document
+---
+
+# A abstenção
+
+O fenômeno sendo estudado é o da variação positva da taxa de abstenção eleitoral (ou sua ausência). Então, para cada eleição são conhecidos a quantidade de eleitores aptos e a quantidade de abstenções em cada seção eleitoral. A soma da quantidade de aptos em cada turno mostra o tamanho total do eleitorado (N) para aquela eleição.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# source("get_filenames.R")
+# source("get_dv.R")
+
+data_dir = "~/data/TSE/Resultados/recortes/"
+get_data_file = function(ano) {  # Lê dados tratados finais
+  read.csv(paste0(data_dir, "DF_", as.character(ano), ".csv"))
+}
+
+parametros = data.frame(
+  ano = rep(NA, 5),
+  tamanho = rep(NA, 5),
+  eleitorado = rep(NA, 5),
+  media = rep(NA, 5),
+  variancia = rep(NA, 5),
+  desviopadrao = rep(NA, 5)
+)
+
+cnt = 1
+
+dados = list()
+for (ano in c(1998, 2002, 2006, 2010, 2014)) {  # TODO E o segundo turno?
+    dv = get_data_file(ano)
+    
+    dv$QTD_ABSTENCOES = dv$QTD_APTOS * dv$TAXA_ABSTENCAO  # Bacalhau?
+    
+    dvt = dv$TAXA_ABSTENCAO[dv$NUM_TURNO == 1]
+    dvt_sd = sd(dvt)
+    parametros[cnt, ] = list(
+      ano = ano,
+      tamanho = length(dvt),
+      eleitorado = sum(dv$QTD_APTOS[dv$NUM_TURNO == 1]),
+      media = mean(dvt),
+      variancia = dvt_sd ^ 2,
+      desviopadrao = dvt_sd
+    )
+    cnt = cnt + 1
+  dados[[as.character(ano)]] = dv
+}
+
+```
+
+# Populações em cada ano
+
+Considero que as duas eleições de cada ano sejam eventos casados em uma mesma população. Em anos distintos, porém, o colégio eleitoral é modificado pela entrada de novos eleitores (alistados e migrados) e a saída dos idosos, falecidos e dos que mudaram seu domicílio eleitoral.
+
+
+```{r Tabela parâmetros, echo=FALSE}
+library(knitr)
+kable(parametros, 
+      col.names = c("Ano", "Tamanho (N)", "Eleitorado (aptos)", "média (μ)", "Variância σ²", "Desvio padrão σ"),
+      format.args = list(
+        decimal.mark=",",
+        big.mark = "."
+      ),
+      digits = 3,
+      caption = "Eleitorado total e taxa média de abstenção por ano")
+
+plot(parametros$ano, 
+     parametros$eleitorado / 10^6, 
+     main = "Evolução do tamanho do eleitorado", 
+     type="b",
+     xlab = "Anos",
+     ylab = "Eleitores (milhões)"
+     )
+```
+
+## Quatro populações
+
+Ao considerar os turnos de um mesmo ano como observações pareadas, posso analisar simplesmente o vetor diferença entre as taxas de abstenção de cada zona.
+
+
+```{r echo=FALSE}
+library(dplyr)
+
+agrupados = list()
+cnt = 1
+for (ano in c(1998, 2002, 2006, 2010, 2014)) {
+  ano_s = as.character(ano)
+  agr = dados[[ano_s]] %>% 
+        group_by(NUMERO_ZONA, NUM_TURNO) %>% 
+        summarise(tot_aptos = sum(QTD_APTOS), tot_abst = sum(QTD_ABSTENCOES), 
+                  media_taxa_abst = mean(TAXA_ABSTENCAO))
+  #d98_s$taxa_media = d98_s$tot_abst / d98_s$tot_aptos
+  agr$taxa_media = agr$tot_abst / agr$tot_aptos
+  #View(d98_s %>% group_by(NUM_TURNO) %>% summarise(ttapt = sum(tot_aptos), ttabst = sum(tot_abst)))
+  tx = agr$media_taxa_abst[agr$NUM_TURNO == 1] -
+    agr$media_taxa_abst[agr$NUM_TURNO == 2]
+  print(paste("Teste t para turnos de", ano_s))
+  print(t.test(tx))
+}
+
+```
