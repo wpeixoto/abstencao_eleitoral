@@ -8,3 +8,5 @@ Sanity_check_3.R
 Rasc_001.R
 .Rhistory
 
+# Ignorar os .html gerados aqui. Melhor copiá-los para /docs
+*.html
