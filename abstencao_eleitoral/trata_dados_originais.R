@@ -8,6 +8,7 @@
 # QT_VOTOS_BRANCOS, QT_VOTOS_NULOS
 
 library(utils)
+library(dplyr)
 source("get_filenames.R")
 source("get_dv.R")
 
@@ -66,9 +67,24 @@ for (ano in c(2002, 2010, 2014)) {  # Ignora 2006 por não ter 2º turno
                       "NUMERO_ZONA", "NUMERO_SECAO",  "QTD_APTOS",
                       "QT_VOTOS_BRANCOS", "QT_VOTOS_NULOS", 
                       "TAXA_ABSTENCAO")]
+  
+  
+  # Tratamento de erros descobertos
+  if (ano == 2002) {
+    # Retira seções ausentes de um dos turnos  
+    df_rec = filter(
+      df_rec, 
+      # NUMERO_ZONA == 4 & 
+        NUMERO_SECAO !=105 &
+        NUMERO_SECAO != 288)
+  }
+  
+  # Gravação do arquivo de dados tratados
   outfile_name = paste0(output_data_dir, "DF_", ano, ".csv")
   file.remove(outfile_name)
   write.csv(df_rec, outfile_name, row.names = F)
+  
+  # Avançar o indicador de progresso
   pbc = pbc + 1
   setTxtProgressBar(pb, pbc)
   
