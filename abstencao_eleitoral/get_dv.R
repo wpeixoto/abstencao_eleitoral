@@ -18,7 +18,7 @@ warn_nas = function(x, ignore.nas = F, field.name = "", msg="") {
 get_dv = function(filename,        # Nome de um arquivo do TSE
                   all = FALSE,     #  TRUE == Todas as linhas
                   full=FALSE,      #  TRUE == todas as colunas originais
-                  cargos= c(3, 9), #  Vetor com cargos para filtrar. Default: Governador e Presidente
+                  cargos= c(1, 3, 9), #  Vetor com cargos para filtrar. Default: Governador e Presidente
                   ignore.nas = F,  # Ignorar NA
                   no_factors = T)  # Não converter strings em fatores
   {
@@ -62,6 +62,8 @@ get_dv = function(filename,        # Nome de um arquivo do TSE
   warn_nas(dv$QTD_COMPARECIMENTO, ignore.nas, field.name = "QTD_COMPARECIMENTO")  
   warn_nas(dv$QTD_ABSTENCOES, ignore.nas, field.name = "QTD_ABSTENCOES")  
   warn_nas(dv$QTD_APTOS, ignore.nas, field.name = "QTD_APTOS")  
+  warn_nas(dv$QTD_VOTOS_BRANCOS, ignore.nas, field.name = "QTD_APTOS")  
+  warn_nas(dv$QTD_VOTOS_NULOS, ignore.nas, field.name = "QTD_APTOS")  
   
   dv$TAXA_COMPARECIMENTO = dv$QTD_COMPARECIMENTO / dv$QTD_APTOS
   dv$TAXA_ABSTENCAO = dv$QTD_ABSTENCOES / dv$QTD_APTOS
@@ -70,6 +72,7 @@ get_dv = function(filename,        # Nome de um arquivo do TSE
     head(dv[verif_taxa != 1, ])
     warning(paste("Inconsistênca entre quantidades de abstenções e de comparecimentos em ", unique(dv$ANO_ELEICAO), " ", unique(dv$SIGLA_UF), "\n"))
   }
+  # dv$TAXA_ALIENACAO = (dv$QTD_VOTOS_BRANCOS + dv$QTD_VOTOS_NULOS + dv$QTD_ABSTENCOES) / dv$QTD_APTOS
   
   library(stringr)
   dv$NUMERO_SECAO = str_pad(dv$NUMERO_SECAO, 3, pad="0") 
