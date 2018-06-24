@@ -13,7 +13,7 @@ plotak = function(x, title) {
   plot(density(x), main=title)
 }
 
-teste_shapiro <- function(vetFoco, title) {
+teste_shapiro <- function(vetfoco, title) {
   print(paste("Teste de normalidade de", title))
   if (length(vetfoco) > 5000) {
     print(paste("Shapiro, primeiros 4998 de", length(vetFoco)))
@@ -28,8 +28,8 @@ desc_norm <- function(dados) {
   vetfoco = dados$TAXA_ABSTENCAO
   plotak(vetfoco, title=tit(dados))
   
-  W = teste_shapiro(vetfoco, tit(dados))
-  W$data.name = tit(dados)
+  #W = teste_shapiro(vetfoco, tit(dados))
+  #W$data.name = tit(dados)
 }
 
 filenames = get_filenames(anos=c(1998, 2002, 2006, 2014),
@@ -67,6 +67,7 @@ for (fn in filenames) {
     rownames(grandezas)[cg] = tit(dd)
     cg = cg+1
     desc_norm(dd)
+    qqplot(dd)
   }
 
 }
