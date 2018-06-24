@@ -87,6 +87,20 @@ pb = txtProgressBar(min=0, max=MaxSize, style = 3)
 pbc = 0
 fln = 0
 
+source("aux.R")
+
+print_alert <- function(title, msg) {
+  print(paste("========================================================\n",
+  # print(paste("Inconsistência entre os turnos de ", filename))
+  # print(paste(">>> ", rows_t1, "no primeiro e", rows_t2, "no segundo turno"))
+  title, "\n",
+  #print(title)
+  msg, "\n",
+  # print(msg)
+  "========================================================"))
+}
+
+
 for (filename in filenames) {
   # break
     all = FALSE
@@ -106,7 +120,33 @@ for (filename in filenames) {
       next
     }
     names(dv) = NOMES_CAMPOS
+    dv = dv[dv$CODIGO_CARGO %in% c(1, 3), ]  # Apenas presidente e governador
+    
+    # Verificar consistência entre turnos
+    turnos = spliTurno(dv)
+    if (length(turnos) == 2) {
+      rows_t1 <- nrow(turnos[[1]])
+      rows_t2 <- nrow(turnos[[2]])
+      if (rows_t1 != rows_t2) {
+        print_alert(title = paste("Inconsistência (qtd linhas) entre os turnos de ", filename),
+                    msg = paste(">>> ", rows_t1, "no primeiro e", rows_t2, "no segundo turno"))
+        # TODO Identificar as linhas diferentes
+      } else {
+        total_aptos_t1 = sum(turnos[[1]]$QTD_APTOS)
+        total_aptos_t2 = sum(turnos[[2]]$QTD_APTOS)
+        if (total_aptos_t1 != total_aptos_t2) {
+          print_alert(title = paste("Inconsistência de quantidade de aptos em ", filename),
+                      msg=paste("Encontrados", 
+                                total_aptos_t1, "no primeiro turno e", 
+                                total_aptos_t2, "no segundo")
+                      )
+        }
+      }
+    } else {
+      print(paste("===\nApenas um turno encontrado em ", filename, "\n==="))
+    }
 
+    # Verificar se QTD_APTOS == QTD_COMPARECIMENTO + QTD_ABSTENCOES
     dv$TAXA_COMPARECIMENTO = dv$QTD_COMPARECIMENTO / dv$QTD_APTOS
     dv$TAXA_ABSTENCAO = dv$QTD_ABSTENCOES / dv$QTD_APTOS
     verif_taxa = dv$TAXA_ABSTENCAO + dv$TAXA_COMPARECIMENTO

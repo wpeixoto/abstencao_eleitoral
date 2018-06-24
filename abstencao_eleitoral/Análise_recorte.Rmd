@@ -90,6 +90,13 @@ agrupados = list()
 cnt = 1
 for (ano in c(1998, 2002, 2006, 2010, 2014)) {
   ano_s = as.character(ano)
+  
+  dd = dados[[ano_s]]
+  sessoes = dd$TAXA_ABSTENCAO[dd$NUM_TURNO == 1] - dd$TAXA_ABSTENCAO[dd$NUM_TURNO == 2]
+
+  print(paste("Teste t com sessoes eleiorais do ano ", ano_s))
+  print(t.test(sessoes))
+  
   agr = dados[[ano_s]] %>% 
         group_by(NUMERO_ZONA, NUM_TURNO) %>% 
         summarise(tot_aptos = sum(QTD_APTOS), tot_abst = sum(QTD_ABSTENCOES), 
@@ -97,10 +104,15 @@ for (ano in c(1998, 2002, 2006, 2010, 2014)) {
   #d98_s$taxa_media = d98_s$tot_abst / d98_s$tot_aptos
   agr$taxa_media = agr$tot_abst / agr$tot_aptos
   #View(d98_s %>% group_by(NUM_TURNO) %>% summarise(ttapt = sum(tot_aptos), ttabst = sum(tot_abst)))
-  tx = agr$media_taxa_abst[agr$NUM_TURNO == 1] -
+  por_zona_eleitoral = agr$media_taxa_abst[agr$NUM_TURNO == 1] -
     agr$media_taxa_abst[agr$NUM_TURNO == 2]
-  print(paste("Teste t para turnos de", ano_s))
-  print(t.test(tx))
+  print(paste("Teste t para turnos de", ano_s, "agrupados por zona eleitoral"))
+  
+  print(t.test(por_zona_eleitoral))
 }
 
 ```
+
+A hipótese nula (não há diferença entre as abstenções) foi rejeitada. TODO: Mostrar valores em tabela
+
+As 
