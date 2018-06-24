@@ -1,4 +1,5 @@
 library(utils)
+library(dplyr)
 source("aux.R")
 
 if (!exists("avisos")) {
@@ -6,13 +7,24 @@ if (!exists("avisos")) {
 }
 
 
-get_filenames = function (anos, ufs, data_dir = "~/data/TSE/Resultados/")  {
+get_filenames = function (anos, 
+                          ufs, 
+                          data_dir = "~/data/TSE/Resultados/",
+                          kind = "secao")  {
   # ===============================================================
   # Geração de nomes de arquivos
   # ===============================================================
   MaxSize = length(anos) * length(ufs)
   
-  file_base_name = "detalhe_votacao_secao_"
+  if (!kind %in% c("secao", "munzona")) {
+    stop(paste("kind deve ser secao ou munzona, e não", kind))
+  }
+  
+  if (kind == "secao") {
+    file_base_name = "detalhe_votacao_secao_"
+  } else {
+    file_base_name = "detalhe_votacao_munzona_"
+  }
   cont = 1
   
   filenames = character(MaxSize)
