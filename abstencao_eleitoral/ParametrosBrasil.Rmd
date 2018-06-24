@@ -1,0 +1,226 @@
+---
+title: "Comparação de parâmetros populacionais do país inteiro"
+author: "William Peixoto"
+date: "10 de junho de 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load data, include=FALSE}
+source("get_dv.R")
+source("NormalCompara.R")
+source("aux.R")
+
+get_dv2 = function(filename,        # Nome de um arquivo do TSE
+                  all = FALSE,     #  TRUE == Todas as linhas
+                  full=FALSE,      #  TRUE == todas as colunas originais
+                  cargos= c(3, 9), #  Vetor com cargos para filtrar. Default: Governador e Presidente
+                  ignore.nas = F,  # Ignorar NA
+                  no_factors = T)  # Não converter strings em fatores
+{
+    NOMES_CAMPOS_ORIG = c("DATA_GERACAO", "HORA_GERACAO", "ANO_ELEICAO", 
+                          "NUM_TURNO", "DESCRICAO_ELEICAO", "SIGLA_UF", "SIGLA_UE",
+                          "CODIGO_MUNICIPIO", "NOME_MUNICIPIO", "NUMERO_ZONA",
+                          "NUMERO_SECAO", "CODIGO_CARGO", "DESCRICAO_CARGO", 
+                        "QTD_APTOS", "QTD_COMPARECIMENTO", "QTD_ABSTENCOES", 
+                        "QT_VOTOS_NOMINAIS", "QT_VOTOS_BRANCOS", "QT_VOTOS_NULOS",
+                        "QT_VOTOS_LEGENDA", "QT_VOTOS_ANULADOS_APU_SEP")
+
+}
+
+FN_PREFIXO = "detalhe_votacao_secao_"
+FN_SUFIXO = "_BR.txt"
+DATA_DIR = "/home/william/temp/dd/"
+#setwd("~/Nextcloud_CD/Cursos/Mestrado/MetodosInferenciais01/abstencao_eleitoral/dados")
+
+# bld_filename <- function(DATA_DIR, ANO, FN_PREFIXO, FN_SUFIXO) {
+bld_filename <- function(ANO) {
+  #paste0(DATA_DIR, as.character(ANO), "/", FN_PREFIXO, 1998, FN_SUFIXO)
+  paste0(DATA_DIR, FN_PREFIXO, ANO, FN_SUFIXO)
+}
+
+#df98 = filtra_UF(get_dv(paste0(DATA_DIR, FN_PREFIXO, 1998, FN_SUFIXO), full = T), "DF")
+library(utils)
+library(tcltk)
+total = 5
+pbc = 1
+pb = tkProgressBar(title="Carregando datasets", min=0, max=total, width=300)
+df98 = get_dv(bld_filename(1998), full = T)
+setTkProgressBar(pb, 1, label="1998")
+df02 = get_dv(bld_filename(2002), full = T)
+setTkProgressBar(pb, 2, label="2002")
+df06 = get_dv(bld_filename(2006), full = T)
+setTkProgressBar(pb, 3, label="2006")
+df10 = get_dv(bld_filename(2010), full = T)
+setTkProgressBar(pb, 4, label="2010")
+df14 = get_dv(bld_filename(2014), full = T)
+setTkProgressBar(pb, 5, label="Acabou!")
+close(pb)
+
+
+
+parametros = data.frame(
+  ANO = rep(NA, 10),
+  TURNO = rep(NA, 10),
+  TAXA_ABSTENCAO_MEDIA = rep(NA, 10),
+  DP_ABST = rep(NA, 10),
+  TAXA_ALIENACAO_MEDIA = rep(0, 10),
+  DP_ALIENACAO = rep(0, 10)
+)
+```
+
+```{r build table, echo=TRUE}
+c = 1
+#for (df in lapply(list(df98, df02, df06, df10, df14), FUN = filtra_DF)) {
+for (df in list(df98, df02, df06, df10, df14)) {
+  # turnos = c(df[df$NUM_TURNO == 1], df[df$NUM_TURNO == 2])
+  #attach(df)
+  # print(unique(ANO_ELEICAO))
+  # print(unique(NUM_TURNO))
+  # print(paste("df is " ,class(df)))
+  df$QTD_ALIENACAO = df$QT_VOTOS_BRANCOS + df$QT_VOTOS_NULOS + df$QTD_ABSTENCOES
+  df$TAXA_ALIENACAO = df$QTD_ALIENACAO / df$QTD_APTOS
+  
+  #turnos = split(df, df$NUM_TURNO)
+  turnos = spliTurno(df)
+  
+  # detach(df)
+  # print(paste("turnos is", class(turnos)))
+  # print(class(turnos[[1]]))
+  for (t in turnos) {
+    NUM_TURNO = unique(t$NUM_TURNO)
+    ANO_ELEICAO = unique(t$ANO_ELEICAO)
+    print(paste(ANO_ELEICAO, NUM_TURNO))
+    if (nrow(t) == 0) {
+      stop(paste("Não há dados em ", ANO_ELEICAO))
+    }
+    parametros[c,] = list(  # Há um erro durante a atribuição, mas ainda não sei qual
+      ANO_ELEICAO,
+      NUM_TURNO,
+      # fmtP(mean(t$TAXA_ABSTENCAO)),
+      # fmtP(sd(t$TAXA_ABSTENCAO))
+      mean(t$TAXA_ABSTENCAO),
+      sd(t$TAXA_ABSTENCAO),
+      mean(t$TAXA_ALIENACAO),
+      sd(t$TAXA_ALIENACAO)
+    )
+    c = c+1
+  }
+}
+
+```
+
+```{r}
+print(parametros)
+```
+
+## Comparação dos parâmetros das taxas de abstenção
+
+Levando em consideração todos os dados disponibilizados pelo TSE para as eleições de 1998, 2002, 2006, 2010 e 2014, temos o seguinte:
+
+```{r Kable parameters, echo=F}
+library(knitr)
+kable(parametros[!is.na(parametros$ANO), ])
+```
+
+<!--
+## Comparações dois a dois, primeiro turno
+
+### 1998 x 2002
+
+```{r eval=FALSE, include=FALSE}
+df98_t = split(df98, df98$NUM_TURNO)
+df02_t = split(df02, df02$NUM_TURNO)
+dnormC(df98_t[[1]]$TAXA_ABSTENCAO, df02_t[[1]]$TAXA_ABSTENCAO)
+```
+
+Again
+
+```{r eval=FALSE, include=FALSE}
+comparaTaxaA(df98, df02)
+comparaTaxaA_EP(df98, df02)
+```
+
+### 2002 x 2006
+
+```{r eval=FALSE, include=FALSE}
+comparaTaxaA(df02, df06)
+comparaTaxaA_EP(df02, df06)
+```
+
+### 2006 x 2010
+```{r eval=FALSE, include=FALSE}
+comparaTaxaA(df06, df10)
+
+```
+
+### 2010 x 2014
+```{r eval=FALSE, include=FALSE}
+comparaTaxaA(df10, df14)
+```
+
+## Idem, segundos turnos
+### 1998 x 2002
+```{r eval=FALSE, include=FALSE}
+comparaTaxaA(df98, df02, turno = 2)
+```
+
+### 2002 x 2006
+```{r echo=F}
+# comparaTaxaA(df02, df06, turno = 2)
+```
+
+Não houve 2º turno em 2006
+
+### 2006 x 2010
+```{r echo=F}
+# comparaTaxaA(df06, df10, turno = 2)
+```
+
+Não houve 2º turno em 2006
+
+### 2002 x 2010
+```{r eval=FALSE, include=FALSE}
+comparaTaxaA(df02, df10, turno = 2)
+```
+
+### 2010 x 2014
+```{r eval=FALSE, include=FALSE}
+comparaTaxaA(df10, df14, turno = 2)
+```
+
+## Primeiros turnos x segundos turnos
+
+### 1998
+```{r eval=FALSE, include=FALSE}
+#dnormC(df98[df98$NUM_TURNO == 1,]$TAXA_ABSTENCAO, df98[df98$NUM_TURNO == 2,]$TAXA_ABSTENCAO)
+#df98_t = split(df98, df98$NUM_TURNO)
+df98_t = list(df98[df98$NUM_TURNO == 1,]$TAXA_ABSTENCAO, df98[df98$NUM_TURNO == 2,]$TAXA_ABSTENCAO)
+dnormC(df98_t[[1]], df98_t[[2]])
+```
+
+### 2002
+```{r eeval=FALSE, include=FALSE}
+# df_t = list(df02[df98$NUM_TURNO == 1,]$TAXA_ABSTENCAO, df98[df98$NUM_TURNO == 2,]$TAXA_ABSTENCAO)
+# dnormC(df_t[[1]], df_t[[2]])
+```
+
+### 2006
+
+Não houve segundo turno para governador
+
+### 2010
+```{r eval=FALSE, include=FALSE}
+df_t = list(df10[df98$NUM_TURNO == 1,]$TAXA_ABSTENCAO, df10[df98$NUM_TURNO == 2,]$TAXA_ABSTENCAO)
+dnormC(df_t[[1]], df_t[[2]])
+```
+
+### 2014
+```{r eval=FALSE, include=FALSE}
+df_t = spliTurno(df14)
+dnormC(df_t[[1]]$TAXA_ABSTENCAO, df_t[[2]]$TAXA_ABSTENCAO)
+```
+-->
