@@ -13,15 +13,21 @@ source("aux.R")
 
 FN_PREFIXO = "detalhe_votacao_secao_"
 FN_SUFIXO = "_DF.txt"
-DATA_DIR = ""
+DATA_DIR = "./"
+setwd("~/Nextcloud_CD/Cursos/Mestrado/MetodosInferenciais01/abstencao_eleitoral/dados")
+
+# bld_filename <- function(DATA_DIR, ANO, FN_PREFIXO, FN_SUFIXO) {
+bld_filename <- function(ANO) {
+  paste0(DATA_DIR, "1998/", FN_PREFIXO, 1998, FN_SUFIXO)
+}
 
 #df98 = filtra_UF(get_dv(paste0(DATA_DIR, FN_PREFIXO, 1998, FN_SUFIXO), full = T), "DF")
-df98 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 1998, FN_SUFIXO), full = T)
+df98 = get_dv(bld_filename(1998), full = T)
 df98$SIGLA_UF <- "DF"  # Corrige erro nos dados
-df02 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2002, FN_SUFIXO), full = T)
-df06 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2006, FN_SUFIXO), full = T)
-df10 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2010, FN_SUFIXO), full = T)
-df14 = get_dv(paste0(DATA_DIR, FN_PREFIXO, 2014, FN_SUFIXO), full = T)
+df02 = get_dv(paste0(DATA_DIR, "2002/", FN_PREFIXO, 2002, FN_SUFIXO), full = T)
+df06 = get_dv(paste0(DATA_DIR, "2006/", FN_PREFIXO, 2006, FN_SUFIXO), full = T)
+df10 = get_dv(paste0(DATA_DIR, "2010/", FN_PREFIXO, 2010, FN_SUFIXO), full = T)
+df14 = get_dv(paste0(DATA_DIR, "2014/", FN_PREFIXO, 2014, FN_SUFIXO), full = T)
 
 parametros = data.frame(
   ANO = rep(NA, 10),
