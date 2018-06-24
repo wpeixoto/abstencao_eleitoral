@@ -1,0 +1,37 @@
+---
+title: "Dados brutos"
+author: "William Peixoto"
+date: "17 de junho de 2018"
+output: html_document
+---
+
+# Dados brutos
+
+Os dados do TSE foram baixados da URL http://www.tse.jus.br/hotSites/pesquisas-eleitorais/resultados.html e tem organização bastante semelhante...
+
+## Arquivos
+
+Anos: 1998, 2002, 2006 e 2014
+
+- detalhe_votacao_secao_2006_DF.txt
+- detalhe_votacao_secao_2002_BR_DF.txt
+- detalhe_votacao_secao_2002_DF.txt
+- detalhe_votacao_secao_2010_DF.txt
+- detalhe_votacao_secao_2014_DF.txt
+- detalhe_votacao_secao_1998_DF.txt
+
+
+
+## Erros nos dados
+
+No ano de 1998, o <segundo turno?> das eleições no DF foram erroneamente atribuídos a Goiás. Verifiquei, pelo número e nome de município, que não era possível que aquelas observações pertencessem de fato a GO. A correção foi sobrepor a UF com o valor correto.
+
+## Organização dos arquivos
+
+Os resultados de cada seção eleitoral para os cargos de Governador, Senador ...
+
+### Casos especiais: Eleição presidencial
+
+- Em 1994, os dados do DF não foram encontrados, parecem estar ausentes. Por esse motivo, esses anos foram excluídos da análise.
+- Nos anos de 
+- Em 2006 e 2014, o resultado para Presidente da República se encontra em um único arquivo com todas as Unidades da Federação.
