@@ -1,0 +1,107 @@
+---
+title: "Zonas eleitorais"
+author: "William Peixoto"
+date: "25 de junho de 2018"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    theme: united
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# DATA_DIR = "/home/william/Downloads/Dados/TSE/mz"
+DATA_DIR = "/home/william/temp/dd/mz"
+
+```
+
+```{r load data, echo=FALSE}
+# source("aux.R")
+
+anoturno = function(ano, turno) {
+  ano_s = as.character(ano)
+  paste0(ano_s, "_", turno)
+}
+
+dados = list()
+for (ano in c(1998, 2002, 2006, 2010, 2014)) {
+  for (turno in c("1", "2")) {
+    
+    filename = paste0(DATA_DIR, "/", anoturno(ano, turno), ".csv")
+    
+    if (!file.exists(filename)) {
+      stop(paste("Arquivo", filename, "não existe"))
+    }
+    
+    df = read.csv(filename, encoding = "ISO-8859", sep = ",", stringsAsFactors = F)
+
+    dados[[anoturno(ano, turno)]] = list(ANO=ano, TURNO=turno, DF=df)
+  }
+}
+```
+
+
+# Zonas eleitorais
+
+As zonas eleitorais são compostas de seções, onde os eleitores efetivamente votam. O TSE divulga as informações agrupadas por zona e por seção. Nesta página, apenas os dados agrupados pelo TSE serão analisados.
+
+![](./imagens/mapa_df_por_zona.png)
+
+A quantidade de zonas aumentou junto com a população de eleitores. Eram 14 em 1998 e são 21 hoje.
+
+## Distribuições de frequências
+
+### Densidades
+
+#### Quantidades de eleitores aptos
+```{r qtd_aptos_density, echo=FALSE, fig.height=3, fig.width=3}
+# source("aux.R")
+for (item in dados) {
+  ## item = dados[[1]]
+  df <- item$DF
+  # print(paste(item$ANO, " ", length(item$DF$QTD_APTOS), nrow(df)))
+  # print(df$QTD_APTOS)
+  # print(item$DF$QTD_APTOS)
+  titulo <- paste(item$ANO, item$TURNO, "turno")
+  # titulo <- paste("Densidade de QTD_APTOS em ", item$ANO, item$TURNO, "turno")
+  plot(density(df$QTD_APTOS), main = titulo)
+}
+```
+
+#### Taxa de abstenção
+```{r Taxa_Abstencao_density, echo=FALSE, fig.height=3, fig.width=3}
+# source("aux.R")
+for (item in dados) {
+  df <- item$DF
+  titulo <- paste(item$ANO, item$TURNO, "turno")
+  plot(density(df$TAXA_ABSTENCAO), main = titulo)
+}
+```
+
+### Gráficos qq-plot
+
+
+
+## Médias e desvios-padrão, por turno
+
+```{r}
+for (ano in c(1998, 2002, 2006, 2010, 2014)) {
+  for (turno in c("1", "2")) {
+    print(anoturno(ano, turno))
+  }
+}
+```
+
+
+## Comparações entre turnos
+
+Para eleições no mesmo ano, há razões suficientes para considerar que sejam observações sucessivas em uma mesma população (Lei das Eleições).
+
+### Força dos testes
+
+## Comparações entre anos distintos
+Foram consideradas independentes as eleições ocorridas em anos distintos.
+
+### Força dos testes
