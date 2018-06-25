@@ -2,39 +2,37 @@
 title: "Zonas eleitorais"
 author: "William Peixoto"
 date: "25 de junho de 2018"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    theme: united
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-DATA_DIR = "/home/william/Downloads/Dados/TSE"
-NOMES_CAMPOS = list()
-NOMES_CAMPOS$ate12 = c("DATA_GERACAO", "HORA_GERACAO", "ANO_ELEICAO", "NUM_TURNO", "DESCRICAO_ELEICAO", "SIGLA_UF", "SIGLA_UE", "CODIGO_MUNICIPIO", "NOME_MUNICIPIO", "NUMERO_ZONA", "CODIGO_CARGO", "DESCRICAO_CARGO", "QTD_APTOS", "QTD_SECOES", "QTD_SECOES_AGREGADAS", "QTD_APTOS_TOT", "QTD_SECOES_TOT", "QTD_COMPARECIMENTO", "QTD_ABSTENCOES", "QTD_VOTOS_NOMINAIS", "QTD_VOTOS_BRANCOS", "QTD_VOTOS_NULOS", "QTD_VOTOS_LEGENDA", "QTD_VOTOS_ANULADOS_APU_SEP", "DATA_ULT_TOTALIZACAO", "HORA_ULT_TOTALIZACAO")
-NOMES_CAMPOS$e2014 = c(NOMES_CAMPOS$ate12, "TRANSITO")
-NOMES_CAMPOS$e2016 = c(NOMES_CAMPOS$e2014, "QTD_VOTOS_ANULADOS")
+DATA_DIR = "/home/william/Downloads/Dados/TSE/mz"
+
 ```
 
 ```{r load data, echo=FALSE}
-source("aux.R")
+# source("aux.R")
+
+anoturno = function(ano, turno) {
+  ano_s = as.character(ano)
+  paste0(ano_s, "_", turno)
+}
+
 dados = list()
 for (ano in c(1998, 2002, 2006, 2010, 2014)) {
-  ano_s = as.character(ano)
-  filename = paste0(DATA_DIR, "/detalhe_votacao_munzona_", ano_s, "_DF.txt")
-  # print(filename)
-  #df = filename
-  df = read.csv(filename, header = F, encoding = "ISO-8859", sep = ";", stringsAsFactors = F)
-  if (ano == 2014) {
-    names(df) = NOMES_CAMPOS$e2014
-  } else {
-    names(df) = NOMES_CAMPOS$ate12
-  }
-  df = df[df$CODIGO_CARGO == 3, ]  # Apenas governador
-  df = df[, c("NUM_TURNO", "NUMERO_ZONA", "CODIGO_CARGO", "QTD_APTOS", "QTD_COMPARECIMENTO", "QTD_ABSTENCOES", "QTD_VOTOS_BRANCOS", "QTD_VOTOS_NULOS")]
-  df$TAXA_ABSTENCAO = df$QTD_ABSTENCOES / df$QTD_APTOS
-  turnos = spliTurno(df)
-  dados[[paste0("a", ano_s, "_1")]] = list(ANO=ano, DF=turnos[[1]])
-  if (length(turnos) == 2) {
-    dados[[paste0("a", ano_s, "_2")]] = turnos[[2]]
+  for (turno in c("1", "2")) {
+    
+    filename = paste0(DATA_DIR, "/", anoturno(ano, turno), ".csv")
+    
+    df = read.csv(filename, encoding = "ISO-8859", sep = ",", stringsAsFactors = F)
+
+    dados[[anoturno(ano, turno)]] = list(ANO=ano, TURNO=turno, DF=df)
   }
 }
 ```
@@ -49,15 +47,44 @@ As zonas eleitorais são compostas de seções, onde os eleitores efetivamente v
 A quantidade de zonas aumentou junto com a população de eleitores. Eram 14 em 1998 e são 21 hoje.
 
 ## Distribuições de frequências
-```{r}
-source("aux.R")
-for (df in dados) {
-  turnos = spliTurno(df)
+
+### Densidades
+
+#### QTD_APTOS
+```{r qtd_aptos_density, echo=FALSE, fig.height=3, fig.width=3}
+# source("aux.R")
+for (item in dados) {
+  ## item = dados[[1]]
+  df <- item$DF
+  # print(paste(item$ANO, " ", length(item$DF$QTD_APTOS), nrow(df)))
+  # print(df$QTD_APTOS)
+  # print(item$DF$QTD_APTOS)
+  titulo <- paste(item$ANO, item$TURNO, "turno")
+  # titulo <- paste("Densidade de QTD_APTOS em ", item$ANO, item$TURNO, "turno")
+  plot(density(df$QTD_APTOS), main = titulo)
 }
 ```
 
+#### TAXA_ABSTENCAO
+```{r Taxa_Abstencao_density, echo=FALSE, fig.height=3, fig.width=3}
+# source("aux.R")
+for (item in dados) {
+  df <- item$DF
+  titulo <- paste(item$ANO, item$TURNO, "turno")
+  plot(density(df$TAXA_ABSTENCAO), main = titulo)
+}
+```
 
 ## Médias e desvios-padrão, por turno
+
+```{r}
+for (ano in c(1998, 2002, 2006, 2010, 2014)) {
+  for (turno in c("1", "2")) {
+    print(anoturno(ano, turno))
+  }
+}
+```
+
 
 ## Comparações entre turnos
 
