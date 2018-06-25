@@ -9,6 +9,25 @@ output: html_document
 
 Os dados do TSE foram baixados da URL http://www.tse.jus.br/hotSites/pesquisas-eleitorais/resultados.html e tem organização bastante semelhante...
 
+## Fontes
+
+### Detalhes de votação por município e zona eleitoral
+- [1998](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_1998.zip)
+- [2002](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_2002.zip)
+- [2006](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_2006.zip)
+- [2010](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_2010.zip)
+- [2014](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_2014.zip)
+
+### Detalhes de votação por seção eleitoral
+Arquivos bem maiores porque são mais detalhados
+
+- [1998](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_1998.zip)
+- [2002](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_2002.zip)
+- [2006](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_2006.zip)
+- [2010](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_2010.zip)
+- [2014](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_secao/detalhe_votacao_secao_2014.zip)
+ 
+
 ## Arquivos
 
 Anos: 1998, 2002, 2006 e 2014
@@ -26,6 +45,8 @@ Anos: 1998, 2002, 2006 e 2014
 
 No ano de 1998, o <segundo turno?> das eleições no DF foram erroneamente atribuídos a Goiás. Verifiquei, pelo número e nome de município, que não era possível que aquelas observações pertencessem de fato a GO. A correção foi sobrepor a UF com o valor correto.
 
+Em 2002 algumas seções eleitorais apareciam no segunto turno, mas não no primeiro. Não consegui descobrir se isso foi um erro ou se houve algum motivo legítimo para isso. Como foi apenas em 2002, parece plausível supor que tenha sido erro.
+
 ## Organização dos arquivos
 
 Os resultados de cada seção eleitoral para os cargos de Governador, Senador ...
@@ -35,3 +56,37 @@ Os resultados de cada seção eleitoral para os cargos de Governador, Senador ..
 - Em 1994, os dados do DF não foram encontrados, parecem estar ausentes. Por esse motivo, esses anos foram excluídos da análise.
 - Nos anos de 
 - Em 2006 e 2014, o resultado para Presidente da República se encontra em um único arquivo com todas as Unidades da Federação.
+
+# Dados mundiais para comparação
+
+A abstenção no Brasil é típica? Uma comparação simples entre as taxas de participação parece dizer que sim. O destaque é a abstenção ser comparável a de países sem voto obrigatório.
+
+```{r}
+setwd("~/data/idea.int")
+library(readr)
+VoterTurnout_World <- read_delim("VoterTurnout_World.csv", 
++     "\t", escape_double = FALSE, locale = locale(date_names = "pt", 
++         decimal_mark = ",", grouping_mark = "."), 
++     trim_ws = TRUE)
+# Parsed with column specification:
+# cols(
+#   Country = col_character(),
+#   Data = col_double()
+# )
+View(VoterTurnout_World)
+
+hist( VoterTurnout_World$Data, breaks = 30)
+# qqplot( VoterTurnout_World$Data)
+
+shapiro.test(VoterTurnout_World$Data)
+```
+
+
+## Dados do Brasil segundo a mesma fonte
+```{r}
+# Importa errado! corrigir depois
+VoterTurnout_Presidential_Brazil <- read_delim("VoterTurnout_Presidential_Brazil.csv", 
++     "\t", escape_double = FALSE, locale = locale(decimal_mark = ",", 
++         grouping_mark = "."), trim_ws = TRUE)
+```
+
