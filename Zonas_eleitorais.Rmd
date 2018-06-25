@@ -50,7 +50,7 @@ A quantidade de zonas aumentou junto com a população de eleitores. Eram 14 em 
 
 ### Densidades
 
-#### QTD_APTOS
+#### Quantidades de eleitores aptos
 ```{r qtd_aptos_density, echo=FALSE, fig.height=3, fig.width=3}
 # source("aux.R")
 for (item in dados) {
@@ -65,7 +65,7 @@ for (item in dados) {
 }
 ```
 
-#### TAXA_ABSTENCAO
+#### Taxa de abstenção
 ```{r Taxa_Abstencao_density, echo=FALSE, fig.height=3, fig.width=3}
 # source("aux.R")
 for (item in dados) {
@@ -74,6 +74,10 @@ for (item in dados) {
   plot(density(df$TAXA_ABSTENCAO), main = titulo)
 }
 ```
+
+### Gráficos qq-plot
+
+
 
 ## Médias e desvios-padrão, por turno
 
