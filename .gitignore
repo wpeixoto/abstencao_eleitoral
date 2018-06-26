@@ -1,8 +1,6 @@
 .RData
-
 *.zip
-
 *.tar.gz
-
 *~lock*
+_o
 
