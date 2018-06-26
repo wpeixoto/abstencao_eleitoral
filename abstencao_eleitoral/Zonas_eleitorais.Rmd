@@ -18,7 +18,7 @@ DATA_DIR = "/home/william/Downloads/Dados/TSE/mz"
 ```
 
 ```{r load data, echo=FALSE}
-# source("aux.R")
+source("aux.R")  # TODO: Como garantir que o source ocorre apenas uma vez? Isso faz diferença?
 
 anoturno = function(ano, turno) {
   ano_s = as.character(ano)
@@ -116,9 +116,10 @@ Apesar de a distribuição evidentemente não ser Normal, serão usados seus mé
 
 Para eleições no mesmo ano, há razões suficientes para considerar que sejam observações sucessivas em uma mesma população (Lei das Eleições).
 
-TODO: A comparação abaixo é geral. Falta comparar dois a dois para calcular região crítica
 
 ```{r Compara turnos, echo=FALSE}
+source("NormalCompara.R")
+
 comparacao = data.frame(
   ano = rep(0, 5),
   media = rep(0, 5),
@@ -145,17 +146,37 @@ for (i in c(1,3,5,7,9)) { # Há 10 data frames com dados de 5 anos
     T$conf.int[2]
   )
   cnt = cnt + 1
+  
+  z1 <- to_z(df1$TAXA_ABSTENCAO)
+  m1 = mean(z1)
+  m1 = mean(df1$TAXA_ABSTENCAO)
+  sd1 = sd(z1)
+  sd1 = ErrP(df1$TAXA_ABSTENCAO)
+  
+  z2 <- to_z(df2$TAXA_ABSTENCAO)
+  z2 = df2$TAXA_ABSTENCAO
+  m2 = mean(z2)
+  sd2 = ErrP(z2) #, sd(z2))
+
+  dnormalComp(m1, sd1, m2, sd2, main_title = paste(dados[[i]]$ANO))
+  # dnormalComp(m1, sd1, m2, sd2, main_title = paste(dados[[i]]$ANO))
+  # print("===")
+  # print(paste(m1, sd1, m2, sd2, paste(dados[[i]]$ANO)))
 }
 ```
 
-```{r Mostra comparacao turnos}
+TODO: A comparação abaixo é geral. Falta comparar dois a dois para calcular região crítica
+
+```{r Mostra comparacao turnos, echo=FALSE}
 library(knitr)
 kable(comparacao, format="pandoc")
 ```
 
-Sob a hipótese nula $H_0$, as médias das diferenças seriam zero por não haver diferenças significativas. Contudo, em todos os anos foi identificada uma diferença com nível confiança de 95%, o que rejeita $H_0$.
+Sob a hipótese nula $H_0$, as médias das diferenças seriam zero por não haver diferenças significativas. Contudo, em todos os anos de 2002 em diante foi identificada uma diferença com nível confiança de 95%, o que rejeita $H_0$. Para 1998, contudo, não é possível rejeitá-la, o que nos deixa inseguros para afirmar que a diferença seja significativa.
 
-```{r}
+Esses resultados podem ser visualizados no seguinte gráfico:
+
+```{r, echo=FALSE}
 library(plotrix)
 # plot(comparacao$media)
 xx = 1:5
@@ -172,6 +193,7 @@ plotCI(c(1998, 2002, 2006, 2010, 2014),
 abline(0,0)
 ```
 
+Observe-se que, para 1998, o intervalo de confiança chega muito perto da igualdade estatística entre as taxas de abstenção do primeiro para o segundo turno. Nessa eleição, houve segunto turno apenas para governador.
 
 ### Força dos testes
 
@@ -185,7 +207,6 @@ Região crítica
 - $\alpha = P(x < x_c | )$ TODO: WTH?
 
 ```{r}
-source("NormalCompara.R")
 source("NormalPadrao.R")
 
 
