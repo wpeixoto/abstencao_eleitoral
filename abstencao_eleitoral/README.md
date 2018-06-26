@@ -8,7 +8,7 @@ Um jornal [afirma](http://www.tse.jus.br/imprensa/noticias-tse/2014/Maio/tse-abs
 
 O jornal afirma que a abstenção está crescendo. Mas realemnte está?
 
-A hipótese a ser testada (H<sub>1</sub>) é: A abstenção eleitoral aumenta de uma eleição para outra. Portanto, a hipótese nula (H<sub>0</sub>) será a de que não há diferença relevante entre as taxas de abstenção de um ano para outro.
+A hipótese a ser testada (H<sub>a</sub>) é: A abstenção eleitoral aumenta de uma eleição para outra. Portanto, a hipótese nula (H<sub>0</sub>) será a de que não há diferença relevante entre as taxas de abstenção de um ano para outro.
 
 ### Pareado ou independente?
 A população é todo o eleitorado do DF. Contudo, essa população varia de um ano eleitoral para outro. Espera-se que grande parte dos eleitores de uma eleição continue o sendo nas eleições seguintes. As variações possíveis são:
