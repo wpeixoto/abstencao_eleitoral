@@ -1,0 +1,569 @@
+{
+  "slides": [
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 264,
+          "y": 212,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "Está crescendo?<br>",
+          "size": 72,
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 0,
+      "selected": false,
+      "active": true,
+      "markdown": "# Abstenção eleitoral",
+      "x": 437,
+      "y": 186
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 4,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 1,
+      "selected": false,
+      "active": false,
+      "markdown": "# Na mídia...",
+      "x": 768,
+      "y": 183
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/tupkMGl.jpg",
+          "type": "Image",
+          "x": 94.71768180376172,
+          "y": 151.5765227056426,
+          "scale": {
+            "x": 0.5732758620689655,
+            "y": 0.5732758620689655,
+            "width": 798,
+            "height": 589.9008620689656
+          },
+          "imageType": "JPG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": -0.58,
+      "index": 2,
+      "selected": false,
+      "active": false,
+      "x": 689,
+      "y": 167
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/NVMOJV5.jpg",
+          "type": "Image",
+          "x": 172,
+          "y": 144,
+          "scale": {
+            "x": 0.5906810035842294,
+            "y": 0.5906810035842294,
+            "width": 824,
+            "height": 611.3548387096774
+          },
+          "imageType": "JPG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0.56,
+      "index": 3,
+      "selected": false,
+      "active": false,
+      "x": 838,
+      "y": 176
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/gkjajWd.jpg",
+          "type": "Image",
+          "x": 19,
+          "y": 13,
+          "scale": {
+            "x": 0.7203389830508474,
+            "y": 0.7203389830508474,
+            "width": 510,
+            "height": 744.1101694915254
+          },
+          "imageType": "JPG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": -1.6,
+      "index": 4,
+      "selected": false,
+      "active": false,
+      "x": 757,
+      "y": 219
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 469,
+          "y": 164,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "<font face=\"'League Gothic', sans-serif\">O QUE NÃO É?</font><br>",
+          "size": 118,
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 5,
+      "selected": false,
+      "active": false,
+      "markdown": "# o que é?",
+      "x": 478,
+      "y": 489
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 210,
+          "y": 55,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 121,
+          "text": "<font face=\"'League Gothic', sans-serif\">Confundida com...<br></font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 213,
+          "y": 61,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 121,
+          "text": "<font face=\"'League Gothic', sans-serif\" color=\"#6f5c5c\"><font color=\"#f2e6e6\">Confundida com...</font><br></font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 4,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 1.57,
+      "index": 6,
+      "selected": false,
+      "active": false,
+      "x": 553,
+      "y": 495
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 105,
+          "y": 121,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 96,
+          "text": "Voto branco<br>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 426,
+          "y": 398,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 96,
+          "text": "Voto nulo<br>",
+          "selected": false
+        },
+        {
+          "markup": "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 50 50\" preserveAspectRatio=\"none\"><rect width=\"50\" height=\"50\"/></svg>",
+          "type": "Shape",
+          "x": 695,
+          "y": 36,
+          "scale": {
+            "width": 287.7242101253335,
+            "height": 308.62647460378065
+          },
+          "selected": false
+        },
+        {
+          "markup": "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 50 50\" preserveAspectRatio=\"none\"><rect width=\"50\" height=\"50\"/></svg>",
+          "type": "Shape",
+          "x": 69,
+          "y": 382,
+          "scale": {
+            "width": 287.7242101253335,
+            "height": 308.62647460378065
+          },
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 7,
+      "selected": false,
+      "active": false,
+      "x": 715,
+      "y": 465
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 8,
+      "selected": false,
+      "active": false,
+      "markdown": "# Alienação Eleitoral\n",
+      "x": 692,
+      "y": 438
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 161,
+          "y": 253,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 87,
+          "text": "<font face=\"'League Gothic', sans-serif\">(Ausentes + <font face=\"'League Gothic', sans-serif\">brancos + nulos)<br></font></font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 302,
+          "y": 361,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 87,
+          "text": "<font face=\"'League Gothic', sans-serif\">Total de eleitores<font face=\"'League Gothic', sans-serif\"><br></font></font>",
+          "selected": false
+        },
+        {
+          "markup": "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 50 50\" preserveAspectRatio=\"none\"><rect width=\"50\" height=\"50\"/></svg>",
+          "type": "Shape",
+          "x": 138,
+          "y": 355,
+          "scale": {
+            "width": 765.9840299375601,
+            "height": 7.893040312265349
+          },
+          "selected": false,
+          "rotate": 0
+        }
+      ],
+      "z": 0,
+      "impScale": 1,
+      "rotateX": -1.12,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 9,
+      "selected": false,
+      "active": false,
+      "x": 700,
+      "y": 405
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 10,
+      "selected": false,
+      "active": false,
+      "markdown": "# Taxa de abstenção\n",
+      "x": 939,
+      "y": 469
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 379,
+          "y": 247,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 87,
+          "text": "<font face=\"'League Gothic', sans-serif\">Ausentes<font face=\"'League Gothic', sans-serif\"><br></font></font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 302,
+          "y": 361,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 87,
+          "text": "<font face=\"'League Gothic', sans-serif\"><font face=\"'League Gothic', sans-serif\">T</font>otal de eleitores<font face=\"'League Gothic', sans-serif\"><br></font></font>",
+          "selected": false
+        },
+        {
+          "markup": "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 50 50\" preserveAspectRatio=\"none\"><rect width=\"50\" height=\"50\"/></svg>",
+          "type": "Shape",
+          "x": 138,
+          "y": 355,
+          "scale": {
+            "width": 765.9840299375601,
+            "height": 7.893040312265349
+          },
+          "selected": false,
+          "rotate": 0
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": -1.02,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 11,
+      "selected": false,
+      "active": false,
+      "x": 932,
+      "y": 392
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/qrMYARW.png",
+          "type": "Image",
+          "x": 29,
+          "y": 59,
+          "scale": {
+            "x": 0.775,
+            "y": 0.775,
+            "width": 930,
+            "height": 620
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 53,
+          "y": 680,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 36,
+          "text": "Fonte: https://www.idea.int/data-tools/country-view/68/40<br>",
+          "selected": false
+        },
+        {
+          "src": "https://www.idea.int/sites/all/themes/idea/images/logo.png",
+          "type": "Image",
+          "x": 863,
+          "y": 520,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "imageType": "PNG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2.5,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 12,
+      "selected": false,
+      "active": false,
+      "x": 146,
+      "y": 467
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 13,
+      "selected": false,
+      "active": false,
+      "markdown": "# Significativa?",
+      "x": 156,
+      "y": 459
+    },
+    {
+      "components": [
+        {
+          "src": "http://www.tse.jus.br/imprensa/noticias-tse/2014/Maio/tse-abstencao-dos-eleitores-causa-prejuizo-ao-contribuinte",
+          "type": "WebFrame",
+          "x": 91.15304541128515,
+          "y": 4.306090822570301,
+          "scale": {
+            "x": 0.8354166666666666,
+            "y": 0.8354166666666666,
+            "width": 801.9999999999999,
+            "height": 641.5999999999999
+          },
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 107,
+          "y": 673,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 36,
+          "text": "Fonte: TSE<br>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": -193,
+          "y": 305,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 61,
+          "text": "<font face=\"League Gothic\">Prejuízo para o contribuinte</font>",
+          "selected": false,
+          "rotate": -1.56
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 14,
+      "selected": false,
+      "active": false,
+      "x": 139,
+      "y": 282
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 1.2,
+      "rotateZ": 0,
+      "index": 15,
+      "selected": false,
+      "active": false,
+      "markdown": "# Referências\n\n* [Voter turnout](https://www.idea.int/data-tools/country-view/68/40)\n* [Voto obrigatório](* http://www.tse.jus.br/eleitor/glossario/termos/voto-obrigatorio) (TSE)\n* [Por que no Brasil é obrigatório votar?](https://brasil.elpais.com/brasil/2014/08/04/politica/1407162732_889288.html) (Jornal El País)\n* [Wikipedia](https://pt.wikipedia.org/wiki/Voto_compulsório)\n\n## TSE\n\n* [Abstenção dos eleitores causa prejuízo ao contribuinte](http://www.tse.jus.br/imprensa/noticias-tse/2014/Maio/tse-abstencao-dos-eleitores-causa-prejuizo-ao-contribuinte)",
+      "x": 161,
+      "y": 402
+    }
+  ],
+  "background": "bg-custom-dcdbd3",
+  "activeSlide": {
+    "components": [
+      {
+        "TextBox": {},
+        "x": 264,
+        "y": 212,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "text": "Está crescendo?<br>",
+        "size": 72,
+        "selected": false
+      }
+    ],
+    "z": 0,
+    "impScale": 3,
+    "rotateX": 0,
+    "rotateY": 0,
+    "rotateZ": 0,
+    "index": 0,
+    "selected": false,
+    "active": true,
+    "markdown": "# Abstenção eleitoral",
+    "x": 437,
+    "y": 186
+  },
+  "fileName": "abstencao_eleitoral_site",
+  "surface": "bg-custom-dcdbd3",
+  "deckVersion": "1.0",
+  "customBackgrounds": {
+    "bgs": [
+      {
+        "klass": "bg-custom-dcdbd3",
+        "style": "#dcdbd3"
+      }
+    ]
+  },
+  "overviewX": 536,
+  "overviewY": 290
+}

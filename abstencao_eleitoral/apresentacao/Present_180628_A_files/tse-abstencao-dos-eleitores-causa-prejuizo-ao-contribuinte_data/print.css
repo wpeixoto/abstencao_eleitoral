@@ -1,0 +1,8 @@
+/*!
+ * Thu Mar 15 2018 11:59:40 GMT-0300 (Hora oficial do Brasil)
+ * portal-justica-eleitoral - Desenvolvido pela equipe da SGWeb
+ * @version v1.7.5
+ * @link http://www.justicaeleitoral.jus.br/
+ * Copyright 2016-2018 SGWeb, SGI todos os direitos reservados.
+ */
+@media print{.nao-imprimir{display:none !important}}@media print{*,*::before,*::after{text-shadow:none !important;box-shadow:none !important}a,a:visited{text-decoration:underline}abbr[title]::after{content:" (" attr(title) ")"}pre{white-space:pre-wrap !important}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}p,h2,h3{orphans:3;widows:3}h2,h3{page-break-after:avoid}.navbar{display:none}.badge{border:1px solid #000}.table{border-collapse:collapse !important}.table td,.table th{background-color:#fff !important}.table-bordered th,.table-bordered td{border:1px solid #ddd !important}.nao-imprimir{display:none !important}.iframe-full iframe,#navegacao-data-noticias,#acessibilidade-rybena,#modal-sugestao-pagina,#voltar-topo a{display:none}#texto-conteudo p{font-size:16px}#conteudo,#content{width:auto;min-width:768px}#conteudo-pagina{position:relative;min-height:1px;padding-left:15px;padding-right:15px}}@media print and (min-width: 1200px){#conteudo-pagina{float:left;width:100%}}@media print{#conteudo-pagina.pagina-com-coluna{position:relative;min-height:1px;padding-left:15px;padding-right:15px}}@media print and (min-width: 1200px){#conteudo-pagina.pagina-com-coluna{float:left;width:100%}}@media print and (min-width: 768px){.centralizar{width:auto;float:left}}@media print and (min-width: 992px){.centralizar{width:auto;float:left}}@media print and (min-width: 1200px){.centralizar{width:auto;float:left}}
