@@ -29,6 +29,25 @@ proba_z_1_2 <- function(z1, z2) {
   round(integral(cnp,z1,z2),4)
 }
 
+t_independent = function(
+  n1, m1, s1,
+  n2, m2, s2,
+  nc = .975
+) {
+  # graus de liberdade
+  df <- (s1^2/n1 + s2^2/n2)^2 / ((s1^2/n1)^2/(n1-1) + (s2^2/n2)^2/(n2-1))
+  # estatística t
+  t <- qt(nc, df)
+  # intervalo de confiança
+  
+  return(list(
+    t = t,
+    ic = (m2 - m1) + c(-1,1) * t * sqrt( s1^2/n1 + s2^2/n2 )
+    )
+  )
+}
+
+
 identix = function(label, particular, seqq) {
   # Compõe um identificador para quadros de avisos
   paste0(label, particular, as.character(seqq))
@@ -81,7 +100,8 @@ tit = function(x) {
   uf = uni(x$SIGLA_UF, "UF")
   ano = uni(x$ANO_ELEICAO, "ANO")
   turno = uni(x$NUM_TURNO, "Turno")
-  return(paste0(uf, ": ", ano, "(", turno, ")"))
+  # return(paste0(uf, ": ", ano, "(", turno, ")"))
+  return(paste0(ano, "(", turno, ")"))
 }
 
 comparaTaxaA = function(x, y, 
