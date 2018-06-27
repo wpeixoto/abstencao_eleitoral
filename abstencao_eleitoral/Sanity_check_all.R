@@ -1,4 +1,4 @@
-# ====================================================================
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Verificação de sanidade dos arquivos
 #
 # Este script tenta descobrir quais arquivos têm problemas que podem
@@ -33,9 +33,9 @@ CAMPOS_MAIS_RELEVANTES = c("ANO_ELEICAO", "NUM_TURNO", "SIGLA_UF", "SIGLA_UE",
                            "QTD_VOTOS_BRANCOS", "QTD_VOTOS_NULOS", "TAXA_ABSTENCAO")
 
 source("get_dv.R")
-# ===============================================================
+# Data frame vazio ===============================================================
 # Construção de Data Frame vazio com colunas adequadas
-# ===============================================================
+# 
 
 MaxSize = length(UFs) * length(ANOS)
 rm(resultados_checagem)
@@ -64,9 +64,9 @@ source("get_filenames.R")
 
 filenames = get_filenames(anos=ANOS, ufs = UFs)
 
-# ===============================================================
-# Carregar os arquivos
-# ===============================================================
+
+# Carregar os arquivos ====
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 filenames = filenames[filenames!=""]
 NOMES_CAMPOS = c("DATA_GERACAO", "HORA_GERACAO", "ANO_ELEICAO", "NUM_TURNO", 
                  "DESCRICAO_ELEICAO", "SIGLA_UF", "SIGLA_UE", "CODIGO_MUNICIPIO", 
