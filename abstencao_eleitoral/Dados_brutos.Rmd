@@ -18,6 +18,12 @@ Os dados do TSE foram baixados da URL http://www.tse.jus.br/hotSites/pesquisas-e
 - [2010](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_2010.zip)
 - [2014](http://agencia.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/detalhe_votacao_munzona_2014.zip)
 
+## Descrição dos dados
+Em cada pacote há um arquivo LEIAME.pdf, em cujo tema "Resultados" os dados são descritos. Os tipos consultados foram:
+- Detalhe da apuração por município e zona, cuja estrutura mudou um pouco a partir de 2014;
+
+# Dados
+
 ### Detalhes de votação por seção eleitoral
 Arquivos bem maiores porque são mais detalhados
 

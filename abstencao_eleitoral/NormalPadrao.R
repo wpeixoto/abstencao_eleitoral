@@ -22,8 +22,8 @@ dnormalp <- function(media=0, dp=1, x1=0, x2=NULL)
       lim <- c(-4,4)
       x <- seq(lim[1], lim[2], by = 0.01)
       
-      # traça a curva normal padronizada
-      plot(x,dnorm(x,0,1),ylab="Densidade",xlab="x",
+      # tra?a a curva normal padronizada
+      ppp = plot(x,dnorm(x,0,1),ylab="Densidade",xlab="x",
            main="Curva normal padronizada",type="l",lwd=2,ylim=c(-0.05,0.4))
       # linha horzontal em zero
       lines(c(lim[1],lim[2]),c(0,0))
@@ -44,7 +44,7 @@ dnormalp <- function(media=0, dp=1, x1=0, x2=NULL)
       # probabilidades
       integral <- function(f,a,b) {i<-integrate(f,a,b); as.numeric(i[1])}
       
-      # hachura da área
+      # hachura da ?rea
       if(!is.null(z1)) {
         if(is.null(z2)) {
           z2 <- lim[2]
@@ -63,5 +63,5 @@ dnormalp <- function(media=0, dp=1, x1=0, x2=NULL)
         text(-4.3,0.35,paste("Area branca =",1-phachura),cex=0.8,pos=4)
         text(-4.3,0.32,paste("x1 =",x1),cex=0.8,pos=4)
       }
-
+  return(ppp)
 }      

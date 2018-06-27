@@ -104,7 +104,7 @@ dnormalComp <- function(
            text.col=c("black", "red"), 
            legend = c(a1n, a2n))
   }
-
+  
   # text(-4, 0.5, "Posição de texto")
 
   return(ppp)

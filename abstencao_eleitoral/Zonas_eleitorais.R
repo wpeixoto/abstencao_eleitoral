@@ -1,29 +1,13 @@
----
-title: "Zonas eleitorais"
-author: "William Peixoto"
-date: "25 de junho de 2018"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
-    number_sections: true
-    theme: united
----
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 # RStudio Version 1.1.442 
-# DATA_DIR = "/home/william/Downloads/Dados/TSE/mz"
-DATA_DIR = "/home/william/temp/dd/mz"
+DATA_DIR = "/home/william/Downloads/Dados/TSE/mz"
+# DATA_DIR = "/home/william/temp/dd/mz"
 
 source("aux.R")
 source("NormalCompara.R")
 library(knitr)
 library(plotrix)
 
-```
-
-```{r load data, echo=FALSE}
 anoturno = function(ano, turno) {
   ano_s = as.character(ano)
   paste0(ano_s, "_", turno)
@@ -44,37 +28,7 @@ for (ano in c(1998, 2002, 2006, 2010, 2014)) {
     dados[[anoturno(ano, turno)]] = list(ANO=ano, TURNO=turno, DF=df)
   }
 }
-```
 
-
-As zonas eleitorais são compostas de seções, onde os eleitores efetivamente votam. O TSE divulga as informações agrupadas por zona e por seção. Nesta página, apenas os dados agrupados pelo TSE serão analisados.
-
-![](./imagens/mapa_df_por_zona.png)
-
-A quantidade de zonas aumentou junto com a população de eleitores. Eram 14 em 1998 e são 21 hoje.
-
-
-# Distribuições de frequências
-
-Foram investgadas as aderências dos dados à distribuição Normal. Nas próximas seções, aparecem os resultados dos testes demonstrando que, embora uma ou outra amostra se aproxime razoavelmente da N~, a maioria diverge fortemente dela. 
-
-
-# Distribuições de frequências
-
-Foram investgadas as aderências dos dados à distribuição Normal. Nas próximas seções, aparecem os resultados dos testes demonstrando que, embora uma ou outra amostra se aproxime razoavelmente da N~, a maioria diverge fortemente dela. 
-
-
-Mais detalhes na [página específica](Zonas_distribuicao.Rmd).
-
-# Comparações
-Apesar de as distribuições evidentemente não serem Normais, serão usados seus métodos para exercitar os conhecimentos adquiridos no curso.
-
-## Comparações entre turnos
-
-Para eleições no mesmo ano, há razões suficientes para considerar que sejam observações sucessivas em uma mesma população (Lei das Eleições).
-
-
-```{r Compara turnos, echo=FALSE, results='markup'}
 
 zera_comparacao <- function() {
   comparacao = data.frame(
@@ -129,30 +83,13 @@ for (i in c(1,3,5,7,9)) { # Há 10 data frames com dados de 5 anos
       "z-calc", z_calc, "p=", format(proba_z_1_2(z_calc, 4)) #, scientific = TRUE)
     )
   )
-
-
 }
-```
-
-### Resultados
-
-TODO: A comparação abaixo é geral. Falta comparar dois a dois para calcular região crítica
-
-```{r Mostra sumário comparacao turnos, echo=FALSE}
 
 kable(comparacao, format="pandoc", caption="Comparações entre turnos")
 
 # TODO: Mostrar esta tabela lá em baixo
 # kable(comparacao2, format="pandoc", caption="Comparações entre anos distintos")
 
-```
-
-
-Sob a hipótese nula $H_0$, as médias das diferenças seriam zero por não haver diferenças significativas. Contudo, em todos os anos de 2002 em diante foi identificada uma diferença com nível confiança de 95%, o que rejeita $H_0$. Para 1998, contudo, não é possível rejeitá-la, o que nos deixa inseguros para afirmar que a diferença seja significativa.
-
-Esses resultados podem ser visualizados no seguinte gráfico:
-
-```{r, echo=FALSE}
 
 # plot(comparacao$media)
 # xx = 1:5
@@ -179,44 +116,12 @@ abline(0,0)
 #        )
 # abline(0,0)
 
-```
 
-Observe-se que, para 1998, o intervalo de confiança chega muito perto da igualdade estatística entre as taxas de abstenção do primeiro para o segundo turno. Nessa eleição, houve segundo turno apenas para governador.
-
-### Força dos testes
-
-TODO: Calcular região crítica
-
-#### Hipóteses
-
-  - $H_0: \mu = 0$
-  - $H_a: \mu \neq 0$
-  
-
-#### Região crítica
-
-#### Erros
-
-  - $\alpha = P(x < -x_c | \mu = 0) + P(x > x_c | \mu = 0)$ 
-  - $\beta = P(-x_c < x < x_c| \mu \neq 0)$
-  - Força do teste = $1-\alpha$
-  - $x_c =$ média do primeiro turno $ +1.96 \times S$ SE
-
-```{r}
 # source("NormalPadrao.R")
 
 
 # dnormalComp()
-```
 
-
-## Comparações entre anos distintos
-Foram consideradas independentes as eleições ocorridas em anos distintos.
-
-<!-- ## Entre anos distintos -->
-Para comparar anos distintos, serão comparados o segundo turno de um ano com o primeiro do outro. Devido às transformações no eleitorado, as amostras serão consideradas indepententes.
-
-```{r compara anos, echo=FALSE}
 comparacao2 = zera_comparacao()
 cnt=1
 for (i in c(2,4,6, 8)) { # Não compara 2014 com eleição ainda não realizada
@@ -256,24 +161,4 @@ for (i in c(2,4,6, 8)) { # Não compara 2014 com eleição ainda não realizada
 }
 
 kable(comparacao2, format="pandoc", caption="Comparações entre anos distintos")
-```
-
-
-Nas três primeiras comparações, não é possível rejeitar $H_0$. Apenas entre 2010 e 2014 foi verificada uma distinção bastante significativa (p << 0.05)
-
-
-### Força dos testes
-
-#### Hipóteses
-
-  - $H_0: \mu_i = \mu_{i+1}$
-  - $H_a: \mu_1 \neq \mu_{i+1}$
-
-#### Regiões críticas
-
-#### Erros
-
-  - $\alpha = P(x < -x_c | \mu_i = \mu_{i+1}) + P(x > x_c | \mu_i = \mu_{i+1})$ 
-  - $\beta = P(-x_c < x < x_c | \mu_1 \neq \mu_{i+1}$
-  - Força do teste = $1-\alpha$
 
