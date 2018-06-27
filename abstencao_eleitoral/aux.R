@@ -20,6 +20,15 @@ to_z = function(x) {
   (x - mean(x))/sd(x)
 }
 
+proba_z_1_2 <- function(z1, z2) {
+  # curva normal padronizada
+  cnp <- function(x) {dnorm(x,0,1)} # curva normal padronizada
+  # probabilidades
+  integral <- function(f,a,b) {i<-integrate(f,a,b); as.numeric(i[1])}
+
+  round(integral(cnp,z1,z2),4)
+}
+
 identix = function(label, particular, seqq) {
   # Compõe um identificador para quadros de avisos
   paste0(label, particular, as.character(seqq))
@@ -84,12 +93,12 @@ comparaTaxaA = function(x, y,
   y_t = spliTurno(y)
   
   if (length(x_t) == 1) {
-    warning(paste("Não há segundo turno pada", tit(x)))
+    warning(paste("Não há segundo turno para", tit(x)))
     return()
   }
   
   if (length(y_t) == 1) {
-    warning(paste("Não há segundo turno pada", tit(y)))
+    warning(paste("Não há segundo turno para", tit(y)))
     return()
   }
   
