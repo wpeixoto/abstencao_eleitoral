@@ -12,10 +12,18 @@ dnormalComp <- function(
   a2n = ""
 )
 {
+  proba_z_1_2 <- function(z1, z2) {
+    # curva normal padronizada
+    cnp <- function(x) {dnorm(x,0,1)} # curva normal padronizada
+    # probabilidades
+    integral <- function(f,a,b) {i<-integrate(f,a,b); as.numeric(i[1])}
+    
+    round(integral(cnp,z1,z2),4)
+  }
   
-  ########################
-  # Script principal
-  ########################
+  # Script principal --------------------------------
+  # split.screen(c(2,1))
+  # screen(1)
   
   # eixo x da curva normal
   lim <- c(
@@ -24,17 +32,18 @@ dnormalComp <- function(
   )
   x <- seq(lim[1], lim[2], by = 0.0001)
   
-  # curva normal
+  # curva normal ========
   cn1 <- function(x) {dnorm(x,media1,dp1)} # curva normal
   cn2 <- function(x) {dnorm(x,media2,dp2)} # curva normal
   
   # traça as curvas normais 1 e 2
+  ppp = NULL
   if(cn1(media1)>=cn2(media2)){
-    plot(x,cn1(x),ylab="Densidade",xlab="x",
+    ppp=plot(x,cn1(x),ylab="Densidade",xlab="x",
          main=main_title,type="l",lwd=2, sub = paste(subtitle, "black"))
     lines(x,cn2(x),lwd=2, col="red")
   } else {
-    plot(x,cn2(x),ylab="Densidade",xlab="x",
+    ppp=plot(x,cn2(x),ylab="Densidade",xlab="x",
          main=main_title,type="l",lwd=2,col="red",
          sub = paste(subtitle, "red"))
     lines(x,cn1(x),lwd=2)
@@ -90,4 +99,5 @@ dnormalComp <- function(
            text.col=c("black", "red"), 
            legend = c(a1n, a2n))
   }
+  return(ppp)
 }
