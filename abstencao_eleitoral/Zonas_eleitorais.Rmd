@@ -12,6 +12,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+# RStudio Version 1.1.442 
 DATA_DIR = "/home/william/Downloads/Dados/TSE/mz"
 # DATA_DIR = "/home/william/temp/dd/mz"
 
@@ -53,6 +54,8 @@ A quantidade de zonas aumentou junto com a população de eleitores. Eram 14 em 
 
 ## Distribuições de frequências
 
+Foram investgadas as aderências dos dados à distribuição Normal. Nas próximas seções, aparecem os resultados dos testes demonstrando que, embora uma ou outra amostra se aproxime razoavelmente da N~, a maioria diverge fortemente dela.
+
 ### Densidades
 
 #### Quantidades de eleitores aptos
@@ -67,6 +70,15 @@ for (item in dados) {
   titulo <- paste(item$ANO, item$TURNO, "turno")
   # titulo <- paste("Densidade de QTD_APTOS em ", item$ANO, item$TURNO, "turno")
   plot(density(df$QTD_APTOS), main = titulo)
+}
+```
+
+#### Quantidades de eleitores *ausentes*
+```{r qtd_ausentes_density, echo=FALSE, fig.height=3, fig.width=3}
+for (item in dados) {
+  df <- item$DF
+  titulo <- paste(item$ANO, item$TURNO, "turno")
+  plot(density(df$QTD_ABSTENCOES), main = titulo, sub="Ausentes")
 }
 ```
 
@@ -85,6 +97,30 @@ Algumas funções de densidade lembram uma Distribuição Saint-Exupery
 
 ### Gráficos qq
 Outra forma de visualizar a semelhança da distribuição dos dados com a Normal é o gráfico quantil-quantil gerado pela função `qqnorm`.
+
+#### Quantidade de eleitores aptos
+```{r QTD_APTOS qqplot, echo=FALSE, fig.height=3, fig.width=3}
+# source("aux.R")
+for (item in dados) {
+  df <- item$DF
+  titulo <- paste(item$ANO, item$TURNO, "turno")
+  qqnorm(df$QTD_APTOS, main = titulo)
+  qqline(df$QTD_APTOS)
+}
+```
+
+
+#### Quantidade de eleitores ausentes
+```{r QTD_ABSTENCOES qqplot, echo=FALSE, fig.height=3, fig.width=3}
+# source("aux.R")
+for (item in dados) {
+  df <- item$DF
+  titulo <- paste(item$ANO, item$TURNO, "turno")
+  qqnorm(df$QTD_ABSTENCOES, main = titulo)
+  qqline(df$QTD_ABSTENCOES)
+}
+```
+
 
 #### Taxas de abstenção
 ```{r Taxa_Abstencao_qqplot, echo=FALSE, fig.height=3, fig.width=3}
@@ -110,14 +146,14 @@ for (ano in c(1998, 2002, 2006, 2010, 2014)) {
 
 
 # Comparações
-Apesar de a distribuição evidentemente não ser Normal, serão usados seus métodos para exercitar os conhecimentos adquiridos no curso.
+Apesar de as distribuições evidentemente não serem Normais, serão usados seus métodos para exercitar os conhecimentos adquiridos no curso.
 
 ## Comparações entre turnos
 
 Para eleições no mesmo ano, há razões suficientes para considerar que sejam observações sucessivas em uma mesma população (Lei das Eleições).
 
 
-```{r Compara turnos, echo=FALSE}
+```{r Compara turnos, echo=FALSE, results='asis'}
 source("NormalCompara.R")
 
 comparacao = data.frame(
@@ -147,30 +183,42 @@ for (i in c(1,3,5,7,9)) { # Há 10 data frames com dados de 5 anos
   )
   cnt = cnt + 1
   
-  z1 <- to_z(df1$TAXA_ABSTENCAO)
-  m1 = mean(z1)
+  # z1 <- to_z(df1$TAXA_ABSTENCAO)
+  z1 <- df1$TAXA_ABSTENCAO
+  # m1 = mean(z1)
   m1 = mean(df1$TAXA_ABSTENCAO)
-  sd1 = sd(z1)
+  # sd1 = sd(z1)
   sd1 = ErrP(df1$TAXA_ABSTENCAO)
   
-  z2 <- to_z(df2$TAXA_ABSTENCAO)
+  # z2 <- to_z(df2$TAXA_ABSTENCAO)
   z2 = df2$TAXA_ABSTENCAO
   m2 = mean(z2)
   sd2 = ErrP(z2) #, sd(z2))
 
-  dnormalComp(m1, sd1, m2, sd2, main_title = paste(dados[[i]]$ANO))
+  dnormalComp(m1, sd1, m2, sd2, 
+              main_title = paste(dados[[i]]$ANO),
+              a1n="1º Turno",
+              a2n="2º Turno")
+  # screen(2) # , new=FALSE)
+  text(-4.3,0.38,paste("Area  =",11),cex=0.8,pos=4)
   # dnormalComp(m1, sd1, m2, sd2, main_title = paste(dados[[i]]$ANO))
   # print("===")
   # print(paste(m1, sd1, m2, sd2, paste(dados[[i]]$ANO)))
+  # Version 1.1.442 
+  print("\n**rwaaa** teste")
+  
 }
 ```
 
+### Resultados
+
 TODO: A comparação abaixo é geral. Falta comparar dois a dois para calcular região crítica
 
-```{r Mostra comparacao turnos, echo=FALSE}
+```{r Mostra sumário comparacao turnos, echo=FALSE}
 library(knitr)
 kable(comparacao, format="pandoc")
 ```
+
 
 Sob a hipótese nula $H_0$, as médias das diferenças seriam zero por não haver diferenças significativas. Contudo, em todos os anos de 2002 em diante foi identificada uma diferença com nível confiança de 95%, o que rejeita $H_0$. Para 1998, contudo, não é possível rejeitá-la, o que nos deixa inseguros para afirmar que a diferença seja significativa.
 
