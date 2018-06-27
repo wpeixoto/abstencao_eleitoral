@@ -109,7 +109,8 @@ for (i in c(1,3,5,7,9)) { # Há 10 data frames com dados de 5 anos
   dnormalComp(m1, sd1, m2, sd2, 
               main_title = paste(dados[[i]]$ANO),
               a1n="1º Turno",
-              a2n="2º Turno")
+              a2n="2º Turno",
+              x_lab = "Diferença entre as médias")
   
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Calcular regiões críticas ----
@@ -145,7 +146,7 @@ Esses resultados podem ser visualizados no seguinte gráfico:
 ```{r, echo=FALSE}
 
 # plot(comparacao$media)
-xx = 1:5
+# xx = 1:5
 # plotCI(xx, comparacao$media, ui=comparacao$upp, li=comparacao$low)
 plotCI(c(1998, 2002, 2006, 2010, 2014), 
        main="Médias das diferenças entre abstenções\ndo primeiro para o segundo turno",
@@ -177,19 +178,20 @@ Observe-se que, para 1998, o intervalo de confiança chega muito perto da iguald
 
 TODO: Calcular região crítica
 
-Hipóteses
+#### Hipóteses
 
   - $H_0: \mu = 0$
   - $H_a: \mu \neq 0$
   
 
-Região crítica
+#### Região crítica
 
-Erros
+#### Erros
 
   - $\alpha = P(x < -x_c | \mu = 0) + P(x > x_c | \mu = 0)$ 
   - $\beta = P(-x_c < x < x_c| \mu \neq 0)$
   - Força do teste = $1-\alpha$
+  - $x_c =$ média do primeiro turno $ +1.96 \times S$ SE
 
 ```{r}
 # source("NormalPadrao.R")
@@ -205,7 +207,7 @@ Foram consideradas independentes as eleições ocorridas em anos distintos.
 <!-- ## Entre anos distintos -->
 Para comparar anos distintos, serão comparados o segundo turno de um ano com o primeiro do outro. Devido às transformações no eleitorado, as amostras serão consideradas indepententes.
 
-```{r}
+```{r compara anos, echo=FALSE}
 comparacao2 = zera_comparacao()
 cnt=1
 for (i in c(2,4,6, 8)) { # Não compara 2014 com eleição ainda não realizada
@@ -240,26 +242,27 @@ for (i in c(2,4,6, 8)) { # Não compara 2014 com eleição ainda não realizada
   dnormalComp(m1, sd1, m2, sd2, 
               main_title = paste(ano1, "x", ano2),
               a1n=paste(ano1, "2º T"),
-              a2n=paste(ano2, "1º T"))
+              a2n=paste(ano2, "1º T"),
+              x_lab="Taxas de abstenção")
 }
 
 kable(comparacao2, format="pandoc", caption="Comparações entre anos distintos")
 ```
 
 
-
+Nas três primeiras comparações, não é possível rejeitar $H_0$. Apenas entre 2010 e 2014 foi verificada uma distinção bastante significativa (p << 0.05)
 
 
 ### Força dos testes
 
-Hipóteses:
+#### Hipóteses
 
   - $H_0: \mu_i = \mu_{i+1}$
   - $H_a: \mu_1 \neq \mu_{i+1}$
 
-Regiões críticas
+#### Regiões críticas
 
-Erros
+#### Erros
 
   - $\alpha = P(x < -x_c | \mu_i = \mu_{i+1}) + P(x > x_c | \mu_i = \mu_{i+1})$ 
   - $\beta = P(-x_c < x < x_c | \mu_1 \neq \mu_{i+1}$
