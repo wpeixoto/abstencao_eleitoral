@@ -68,6 +68,7 @@ Para eleições no mesmo ano, há razões suficientes para considerar que sejam 
 
 ```{r Compara turnos, echo=FALSE, results='asis'}
 source("NormalCompara.R")
+library(knitr)
 
 comparacao = data.frame(
   ano = rep(0, 5),
@@ -118,7 +119,7 @@ for (i in c(1,3,5,7,9)) { # Há 10 data frames com dados de 5 anos
   # print("===")
   # print(paste(m1, sd1, m2, sd2, paste(dados[[i]]$ANO)))
   # Version 1.1.442 
-  print("\n**rwaaa** teste")
+  knit_print(asis_output("\n**rwaaa** teste"))
   
 }
 ```
@@ -128,7 +129,7 @@ for (i in c(1,3,5,7,9)) { # Há 10 data frames com dados de 5 anos
 TODO: A comparação abaixo é geral. Falta comparar dois a dois para calcular região crítica
 
 ```{r Mostra sumário comparacao turnos, echo=FALSE}
-library(knitr)
+
 kable(comparacao, format="pandoc")
 ```
 
