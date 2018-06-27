@@ -9,7 +9,8 @@ dnormalComp <- function(
   main_title = "Curva Normal",
   subtitle = "",
   a1n = "",
-  a2n = ""
+  a2n = "",
+  x_lab = "x"
 )
 {
   proba_z_1_2 <- function(z1, z2) {
@@ -39,13 +40,17 @@ dnormalComp <- function(
   # traça as curvas normais 1 e 2
   ppp = NULL
   if(cn1(media1)>=cn2(media2)){
-    ppp=plot(x,cn1(x),ylab="Densidade",xlab="x",
-         main=main_title,type="l",lwd=2, sub = paste(subtitle, "black"))
+    # x_lab <- "x"
+    ppp=plot(x,cn1(x),ylab="Densidade",xlab=x_lab,
+         main=main_title,type="l",lwd=2, 
+         sub = subtitle  # paste(subtitle, "black")
+         )
     lines(x,cn2(x),lwd=2, col="red")
   } else {
-    ppp=plot(x,cn2(x),ylab="Densidade",xlab="x",
+    ppp=plot(x,cn2(x),ylab="Densidade",xlab=x_lab,
          main=main_title,type="l",lwd=2,col="red",
-         sub = paste(subtitle, "red"))
+         sub = subtitle  # paste(subtitle, "red")
+         )
     lines(x,cn1(x),lwd=2)
   }
   
@@ -99,5 +104,7 @@ dnormalComp <- function(
            text.col=c("black", "red"), 
            legend = c(a1n, a2n))
   }
+  
+  # text(-4, 0.5, "Posição de texto")
   return(ppp)
 }
