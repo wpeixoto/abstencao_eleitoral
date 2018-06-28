@@ -199,7 +199,7 @@ TODO: Calcular região crítica
 
   - $\alpha = P(x < -x_c | \mu = 0) + P(x > x_c | \mu = 0)$ 
   - $\beta = P(-x_c < x < x_c| \mu \neq 0)$
-  - Força do teste = $1-\alpha$
+  - Força do teste = $1-\beta$
   - $x_c =$ média do primeiro turno $ +1.96 \times S$ SE
 
 ```{r}
@@ -275,5 +275,5 @@ Nas três primeiras comparações, não é possível rejeitar $H_0$. Apenas entr
 
   - $\alpha = P(x < -x_c | \mu_i = \mu_{i+1}) + P(x > x_c | \mu_i = \mu_{i+1})$ 
   - $\beta = P(-x_c < x < x_c | \mu_1 \neq \mu_{i+1}$
-  - Força do teste = $1-\alpha$
+  - Força do teste = $1-\beta$
 

@@ -1,0 +1,56 @@
+---
+title: "Clipping"
+author: "William Peixoto"
+date: "27 de junho de 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Fontes de notícias
+
+## Outros jornais
+- [Nível de abstenção nas eleições é o mais alto desde 1998](https://www.ultimasnoticias.inf.br/noticia/nivel-de-abstencao-nas-eleicoes-e-o-mais-alto-desde-1998/) -- Jornal Últimas Notícias, de Formiga/MG
+- sdfsd
+
+## El país
+- [Abstenção é a mais alta desde1998](https://brasil.elpais.com/brasil/2014/10/07/politica/1412713399_211493.html) (eleições de 2014 no Brasil) +shot
+- Tag [Abstencionismo](https://brasil.elpais.com/tag/abstencionismo/a/) do jornal
+
+## G1
+- [Abstenção no primeiro turno das eleições municipais supera 17,5%](http://g1.globo.com/politica/eleicoes/2016/blog/eleicao-2016-em-numeros/post/abstencao-no-primeiro-turno-das-eleicoes-municipais-supera-175.html), <small>3/10/2016, visitado em 26/6/2018</small>
+
+# Fontes de dados
+- [Voter turnout](https://www.idea.int/data-tools/question-view/522) (mundo, segundo turno ou turno único)
+- [Voter turnout by Election Type in Brazil](https://www.idea.int/data-tools/country-view/68/40) +shot
+
+# Órgãos eleitorais
+- [Argentina](https://www.argentina.gob.ar/dine)
+
+# Outros
+
+<ul>
+<li><a href="file:///home/william/Nextcloud_CD/Cursos/Mestrado/MetodosInferenciais01/docs/abstencao_eleitoral/Zonas_eleitorais.html">Zonas eleitorais</a></li>
+<li><a href="http://www.tse.jus.br/hotSites/pesquisas-eleitorais/resultados_anos/1998.html">Pesquisas Eleitorais</a></li>
+<li><a href="file:///home/william/Nextcloud_CD/Cursos/Mestrado/MetodosInferenciais01/abstencao_eleitoral/detalhes_votacao.html">file:///home/william/Nextcloud_CD/Cursos/Mestrado/MetodosInferenciais01/abstencao_eleitoral/detalhes_votacao.html</a></li>
+<li><a href="https://duckduckgo.com/?t=palemoon&q=Absten%C3%A7%C3%A3o+cresce&ia=web">Abstenção cresce at DuckDuckGo</a></li>
+<li><a href="http://gazetaweb.globo.com/portal/especial.php?c=21397">Abstenção cresce no 2º turno destas eleições e fica em 21,6% | Notícias | Gazetaweb.com | O portal de notícias mais completo de Alagoas</a></li>
+<li><a href="https://gazetaweb.globo.com/portal/busca.php?q=Absten%C3%A7%C3%A3o">Gazetaweb.com | O portal de notícias mais completo de Alagoas</a></li>
+<li><a href="https://www.correio24horas.com.br/noticia/nid/abstencao-cresce-mas-votos-brancos-e-nulos-diminuem-em-salvador/">Abstenção cresce, mas votos brancos e nulos diminuem em Salvador - CORREIO | O QUE A BAHIA QUER SABER</a></li>
+<li><a href="http://g1.globo.com/politica/eleicoes/2016/blog/eleicao-2016-em-numeros/post/abstencao-no-primeiro-turno-das-eleicoes-municipais-supera-175.html">Abstenção no primeiro turno das eleições municipais supera 17,5% | Blog Eleição 2016 em Números da Rede Globo</a></li>
+<li><a href="http://atarde.uol.com.br/politica/eleicoes/noticias/1628579-eleicoes-2014-numero-de-abstencao-cresce-na-bahia">We're sorry, but something went wrong (500)</a></li>
+<li><a href="https://www.idea.int/data-tools/question-view/522">Voter Turnout | International IDEA</a></li>
+<li><a href="https://www.idea.int/data-tools/country-view/68/40">Brazil | International IDEA</a></li>
+
+<li><a href="https://brasil.elpais.com/brasil/2014/10/07/politica/1412713399_211493.html">Eleições Brasil 2014: Abstenção é a mais alta desde 1998 | Brasil | EL PAÍS Brasil</a></li>
+<li><a href="https://www.argentina.gob.ar/dine">Dirección Nacional Electoral | Argentina.gob.ar</a></li>
+<li><a href="https://brasil.elpais.com/tag/abstencionismo/a/">Notícias sobre Abstencionismo | EL PAÍS Brasil</a></li>
+<li><a href="https://brasil.elpais.com/brasil/2013/12/16/internacional/1387149703_576179.html">A abstenção no Chile atinge níveis históricos de 59% | Internacional | EL PAÍS Brasil</a></li>
+<li><a href="https://tvuol.uol.com.br/video/nivel-de-abstencao-nas-eleicoes-e-o-mais-alto-desde-1998-04020E983868C8915326/">Nível de abstenção nas eleições é o mais alto desde 1998 - TV UOL</a></li>
+<li><a href="http://g1.globo.com/politica/eleicoes/2014/blog/eleicao-em-numeros/post/nivel-de-abstencao-nas-eleicoes-e-o-mais-alto-desde-1998.html">Nível de abstenção nas eleições é o mais alto desde 1998 | Eleições 2014 no G1 – Eleição em números</a></li>
+<li><a href="https://www.ultimasnoticias.inf.br/noticia/nivel-de-abstencao-nas-eleicoes-e-o-mais-alto-desde-1998/">Nível de abstenção nas eleições é o mais alto desde 1998 - Últimas Notícias</a></li>
+
+<li><a href="http://g1.globo.com/politica/eleicoes/2016/blog/eleicao-2016-em-numeros/post/abstencao-cresce-no-2-turno-destas-eleicoes-e-fica-em-216.html">Abstenção cresce no 2º turno destas eleições e fica em 21,6%; brancos e nulos também aumentam | Blog Eleição 2016 em Números da Rede Globo</a></li>
+</li>

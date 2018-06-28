@@ -1,0 +1,410 @@
+{
+  "slides": [
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 0,
+      "selected": false,
+      "active": false,
+      "markdown": "# Testes de distribuição",
+      "x": 177,
+      "y": 180
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 69,
+          "y": 31,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 168,
+          "text": "<font face=\"'Lato', sans-serif\">Densidade</font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 403,
+          "y": 230,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 48,
+          "text": "Densidade de probabilidade<br>",
+          "selected": false,
+          "skewX": -0.63
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 1,
+      "selected": false,
+      "active": false,
+      "x": 481,
+      "y": 261
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 167,
+          "y": 334,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 24,
+          "text": "<font face=\"'PressStart2P', cursive\">plot(density(df$QTD_APTOS<font face=\"'PressStart2P', cursive\">)</font>)</font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 2,
+      "selected": false,
+      "active": false,
+      "x": 484,
+      "y": 176
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/bmz5TmX.png",
+          "type": "Image",
+          "x": 12,
+          "y": -9,
+          "scale": {
+            "x": 0.44222222222222224,
+            "y": 0.44222222222222224,
+            "width": 597,
+            "height": 768.14
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 621,
+          "y": 72,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 41,
+          "text": "<font face=\"'PressStart2P', cursive\">QTD_APTOS</font><br>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 1,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 3,
+      "selected": false,
+      "active": false,
+      "x": 530,
+      "y": 48
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/cajwkTy.png",
+          "type": "Image",
+          "x": 17,
+          "y": 8,
+          "scale": {
+            "x": 0.39896755162241887,
+            "y": 0.39896755162241887,
+            "width": 541,
+            "height": 743.6755162241888
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 337,
+          "y": 332,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 41,
+          "text": "<font face=\"'PressStart2P', cursive\">QTD_A<font face=\"'PressStart2P', cursive\">BSTENCOES</font></font><br>",
+          "selected": false,
+          "rotate": 1.58
+        }
+      ],
+      "z": 0,
+      "impScale": 1,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": -1.59,
+      "index": 4,
+      "selected": false,
+      "active": false,
+      "x": 637,
+      "y": 45
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/XLxidhj.png",
+          "type": "Image",
+          "x": 202,
+          "y": 74,
+          "scale": {
+            "x": 0.783284742468416,
+            "y": 0.783284742468416,
+            "width": 806,
+            "height": 681.4577259475219
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 20,
+          "y": 16,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 41,
+          "text": "<font face=\"'PressStart2P', cursive\"><font face=\"'PressStart2P', cursive\">TAXA</font>_ABSTENCAO</font><br>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 1,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 5,
+      "selected": false,
+      "active": false,
+      "x": 589,
+      "y": 111
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/sgFWx0B.jpg",
+          "type": "Image",
+          "x": 34,
+          "y": 98,
+          "scale": {
+            "x": 1.6672413793103449,
+            "y": 1.6672413793103449,
+            "width": 967,
+            "height": 500.1724137931035
+          },
+          "imageType": "JPG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 1,
+      "rotateX": 1.2,
+      "rotateY": 0,
+      "rotateZ": 3.18,
+      "index": 6,
+      "selected": false,
+      "active": false,
+      "x": 584,
+      "y": 14
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 7,
+      "selected": false,
+      "active": false,
+      "markdown": "# Quanti-quantil",
+      "x": 851,
+      "y": 116
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/e9kbvg7.png",
+          "type": "Image",
+          "x": 20,
+          "y": 13,
+          "scale": {
+            "x": 0.7142857142857143,
+            "y": 0.7142857142857143,
+            "width": 660,
+            "height": 737.1428571428571
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 302,
+          "y": 652,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 41,
+          "text": "<font face=\"'PressStart2P', cursive\"><font face=\"'PressStart2P', cursive\">TAXA</font>_ABSTENCAO</font><br>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 8,
+      "selected": false,
+      "active": false,
+      "x": 835,
+      "y": 131
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 9,
+      "selected": true,
+      "active": true,
+      "markdown": "# Shapiro-Wilk\n\n<br>\n<br>\n<br>\n<br>\n<br>\n<br>\n\n# Kolmogorov-Smirnov",
+      "x": 1099,
+      "y": 118
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/sgScga1.png",
+          "type": "Image",
+          "x": 13,
+          "y": 127,
+          "scale": {
+            "x": 0.7507645259938838,
+            "y": 0.7507645259938838,
+            "width": 982,
+            "height": 418.92660550458714
+          },
+          "imageType": "PNG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 1,
+      "rotateX": -1.12,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 10,
+      "selected": false,
+      "active": false,
+      "x": 1090,
+      "y": 100
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/g3AYwVS.png",
+          "type": "Image",
+          "x": 163,
+          "y": 55,
+          "scale": {
+            "x": 1.474025974025974,
+            "y": 1.474025974025974,
+            "width": 681,
+            "height": 596.9805194805194
+          },
+          "imageType": "PNG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 1,
+      "rotateX": -1.16,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 11,
+      "selected": false,
+      "active": false,
+      "x": 1090,
+      "y": 230
+    },
+    {
+      "components": [
+        {
+          "src": "https://davepagurek.com/wp-content/uploads/2010/06/TrollFace.gif",
+          "type": "Image",
+          "x": 219,
+          "y": 96,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "imageType": "GIF",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 1,
+      "rotateX": 1.1,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 12,
+      "selected": false,
+      "active": false,
+      "x": 1089,
+      "y": 257
+    }
+  ],
+  "activeSlide": {
+    "components": [],
+    "z": 0,
+    "impScale": 3,
+    "rotateX": 0,
+    "rotateY": 0,
+    "rotateZ": 0,
+    "index": 9,
+    "selected": true,
+    "active": true,
+    "markdown": "# Shapiro-Wilk\n\n<br>\n<br>\n<br>\n<br>\n<br>\n<br>\n\n# Kolmogorov-Smirnov",
+    "x": 1099,
+    "y": 118
+  },
+  "fileName": "DistribuicaoDados",
+  "deckVersion": "1.0",
+  "customBackgrounds": {
+    "bgs": []
+  },
+  "overviewX": 638,
+  "overviewY": 137.5
+}

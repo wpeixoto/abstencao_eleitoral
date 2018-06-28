@@ -1,0 +1,713 @@
+{
+  "slides": [
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 0,
+      "selected": false,
+      "active": false,
+      "markdown": "# A diferença é significativa?\n",
+      "x": 478,
+      "y": 140
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 1,
+      "selected": false,
+      "active": false,
+      "markdown": "# Dados\n",
+      "x": 440,
+      "y": 596
+    },
+    {
+      "components": [
+        {
+          "src": "http://www.tse.jus.br/hotSites/pesquisas-eleitorais/resultados.html",
+          "type": "WebFrame",
+          "x": 125,
+          "y": 25,
+          "scale": {
+            "x": 0.8864583333333333,
+            "y": 0.8864583333333333,
+            "width": 851,
+            "height": 680.8
+          },
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": -197,
+          "y": 342,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "Repositório de dados eleitorais<br>",
+          "size": 40,
+          "selected": false,
+          "rotate": -1.57
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 1.34,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 2,
+      "selected": false,
+      "active": false,
+      "x": 446,
+      "y": 590,
+      "background": "bg-solid-smoke"
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 122,
+          "y": 191,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "Pareado?",
+          "size": 72,
+          "selected": false,
+          "rotate": -0.52
+        },
+        {
+          "TextBox": {},
+          "x": 520,
+          "y": 95,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "Independente?",
+          "size": 72,
+          "selected": false,
+          "rotate": 0.33
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 3,
+      "selected": false,
+      "active": false,
+      "markdown": "\n\n",
+      "x": 748,
+      "y": 225
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 162,
+          "y": 170,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 93,
+          "text": "Entre turnos<br>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 4,
+      "selected": false,
+      "active": false,
+      "x": 767,
+      "y": 140
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 20,
+          "y": 198,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 43,
+          "text": "Art. 91. Nenhum requerimento de inscrição eleitoral<br>&nbsp;ou de transferência será recebido dentro dos <br>cento e cinqüenta dias anteriores à data da eleição.",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": -1.2,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 5,
+      "selected": false,
+      "active": false,
+      "x": 757,
+      "y": 133
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": -1.46,
+      "rotateY": 0,
+      "rotateZ": -1.41,
+      "index": 6,
+      "selected": false,
+      "active": false,
+      "markdown": "# Pareado\n",
+      "x": 984,
+      "y": 81
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 7,
+      "selected": false,
+      "active": false,
+      "markdown": "# Turnos\n## Mesmo ano\n",
+      "x": 1092,
+      "y": 158
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/na9j4Dz.png",
+          "type": "Image",
+          "x": 152,
+          "y": 111,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "imageType": "PNG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 1.24,
+      "rotateY": 0,
+      "rotateZ": -0.54,
+      "index": 8,
+      "selected": false,
+      "active": false,
+      "x": 1027,
+      "y": 167
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/6OPAANR.png",
+          "type": "Image",
+          "x": 45,
+          "y": 18,
+          "scale": {
+            "x": 0.6703125,
+            "y": 0.6703125,
+            "width": 429,
+            "height": 321.75
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "src": "https://i.imgur.com/WhwJJD5.png",
+          "type": "Image",
+          "x": 536,
+          "y": 32,
+          "scale": {
+            "x": 0.6671874999999999,
+            "y": 0.6671874999999999,
+            "width": 426.99999999999994,
+            "height": 320.24999999999994
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "src": "https://i.imgur.com/u6BqVVS.png",
+          "type": "Image",
+          "x": 45,
+          "y": 379,
+          "scale": {
+            "x": 0.7015625,
+            "y": 0.7015625,
+            "width": 449,
+            "height": 336.75
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "src": "https://i.imgur.com/mWAhPJ7.png",
+          "type": "Image",
+          "x": 539,
+          "y": 393,
+          "scale": {
+            "x": 0.6609374999999998,
+            "y": 0.6609374999999998,
+            "width": 422.9999999999999,
+            "height": 317.24999999999994
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 71,
+          "y": 11,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "2002",
+          "size": 51,
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 51,
+          "y": 377,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "2010",
+          "size": 51,
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 542,
+          "y": 394,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "2014",
+          "size": 51,
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 547,
+          "y": 24,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "2006",
+          "size": 51,
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 1.24,
+      "rotateY": 0.02,
+      "rotateZ": 0.36,
+      "index": 9,
+      "selected": true,
+      "active": true,
+      "x": 1135,
+      "y": 212
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 10,
+      "selected": false,
+      "active": false,
+      "markdown": "# Anos distintos\n",
+      "x": 895,
+      "y": 418
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 142,
+          "y": 70,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 96,
+          "text": "<font face=\"'Fredoka One', cursive\" color=\"#542f2f\">População muda<br></font>",
+          "selected": false
+        },
+        {
+          "TextBox": {},
+          "x": 219,
+          "y": 349,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 24,
+          "text": "<font face=\"'PressStart2P', cursive\">t.test(x,y, <br><font face=\"'PressStart2P', cursive\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font>paired=FALSE, <br><font face=\"'PressStart2P', cursive\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font>var.equal=FALSE)<br></font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": -1.52,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 11,
+      "selected": false,
+      "active": false,
+      "x": 894,
+      "y": 326
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/OWL0XdP.png",
+          "type": "Image",
+          "x": 17,
+          "y": 14,
+          "scale": {
+            "x": 0.740625,
+            "y": 0.740625,
+            "width": 474,
+            "height": 355.5
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "src": "https://i.imgur.com/DsKoX3D.png",
+          "type": "Image",
+          "x": 516,
+          "y": 31,
+          "scale": {
+            "x": 0.728125,
+            "y": 0.728125,
+            "width": 466,
+            "height": 349.5
+          },
+          "imageType": "PNG",
+          "selected": false
+        },
+        {
+          "src": "https://i.imgur.com/d5EtMDa.png",
+          "type": "Image",
+          "x": 45,
+          "y": 392,
+          "scale": {
+            "x": 0.6734375,
+            "y": 0.6734375,
+            "width": 431,
+            "height": 323.25
+          },
+          "imageType": "PNG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 0.96,
+      "rotateY": 0,
+      "rotateZ": -0.42,
+      "index": 12,
+      "selected": false,
+      "active": false,
+      "x": 843,
+      "y": 429
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/pQkO7xW.png",
+          "type": "Image",
+          "x": 212,
+          "y": 138,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "imageType": "PNG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 0.94,
+      "rotateY": 0,
+      "rotateZ": 0.44,
+      "index": 13,
+      "selected": false,
+      "active": false,
+      "x": 931,
+      "y": 446
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 14,
+      "selected": false,
+      "active": false,
+      "markdown": "# Conclusões\n",
+      "x": 191,
+      "y": 427
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 32,
+          "y": 216,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 116,
+          "text": "<font face=\"League Gothic\">Há diferenças significativas<br></font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 1.46,
+      "rotateY": 0,
+      "rotateZ": -0.59,
+      "index": 15,
+      "selected": false,
+      "active": false,
+      "x": 149,
+      "y": 424
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 107,
+          "y": 227,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 116,
+          "text": "<font face=\"League Gothic\">Nem sempre<br></font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 1.45,
+      "rotateY": 0,
+      "rotateZ": 0.62,
+      "index": 16,
+      "selected": false,
+      "active": false,
+      "x": 213,
+      "y": 414
+    },
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 107,
+          "y": 227,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 116,
+          "text": "<font face=\"League Gothic\">Não há padrão emergente<br></font>",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 1.4,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 17,
+      "selected": false,
+      "active": false,
+      "x": 208,
+      "y": 269
+    }
+  ],
+  "activeSlide": {
+    "components": [
+      {
+        "src": "https://i.imgur.com/6OPAANR.png",
+        "type": "Image",
+        "x": 45,
+        "y": 18,
+        "scale": {
+          "x": 0.6703125,
+          "y": 0.6703125,
+          "width": 429,
+          "height": 321.75
+        },
+        "imageType": "PNG",
+        "selected": false
+      },
+      {
+        "src": "https://i.imgur.com/WhwJJD5.png",
+        "type": "Image",
+        "x": 536,
+        "y": 32,
+        "scale": {
+          "x": 0.6671874999999999,
+          "y": 0.6671874999999999,
+          "width": 426.99999999999994,
+          "height": 320.24999999999994
+        },
+        "imageType": "PNG",
+        "selected": false
+      },
+      {
+        "src": "https://i.imgur.com/u6BqVVS.png",
+        "type": "Image",
+        "x": 45,
+        "y": 379,
+        "scale": {
+          "x": 0.7015625,
+          "y": 0.7015625,
+          "width": 449,
+          "height": 336.75
+        },
+        "imageType": "PNG",
+        "selected": false
+      },
+      {
+        "src": "https://i.imgur.com/mWAhPJ7.png",
+        "type": "Image",
+        "x": 539,
+        "y": 393,
+        "scale": {
+          "x": 0.6609374999999998,
+          "y": 0.6609374999999998,
+          "width": 422.9999999999999,
+          "height": 317.24999999999994
+        },
+        "imageType": "PNG",
+        "selected": false
+      },
+      {
+        "TextBox": {},
+        "x": 71,
+        "y": 11,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "text": "2002",
+        "size": 51,
+        "selected": false
+      },
+      {
+        "TextBox": {},
+        "x": 51,
+        "y": 377,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "text": "2010",
+        "size": 51,
+        "selected": false
+      },
+      {
+        "TextBox": {},
+        "x": 542,
+        "y": 394,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "text": "2014",
+        "size": 51,
+        "selected": false
+      },
+      {
+        "TextBox": {},
+        "x": 547,
+        "y": 24,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "text": "2006",
+        "size": 51,
+        "selected": false
+      }
+    ],
+    "z": 0,
+    "impScale": 3,
+    "rotateX": 1.24,
+    "rotateY": 0.02,
+    "rotateZ": 0.36,
+    "index": 9,
+    "selected": true,
+    "active": true,
+    "x": 1135,
+    "y": 212
+  },
+  "fileName": "ResultadosPesquisa",
+  "surface": "bg-custom-eeeeee",
+  "deckVersion": "1.0",
+  "customBackgrounds": {
+    "bgs": [
+      {
+        "klass": "bg-custom-eeeeee",
+        "style": "#eeeeee"
+      }
+    ]
+  },
+  "overviewX": 642,
+  "overviewY": 338.5
+}

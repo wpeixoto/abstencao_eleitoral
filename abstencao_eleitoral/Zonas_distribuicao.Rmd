@@ -13,13 +13,14 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # RStudio Version 1.1.442 
-DATA_DIR = "/home/william/Downloads/Dados/TSE/mz"
-# DATA_DIR = "/home/william/temp/dd/mz"
+# DATA_DIR = "/home/william/Downloads/Dados/TSE/mz"
+DATA_DIR = "/home/william/temp/dd/mz"
 
 ```
 
 ```{r load data, echo=FALSE}
 source("aux.R")  # TODO: Como garantir que o source ocorre apenas uma vez? Isso faz diferença?
+library(knitr)
 
 anoturno = function(ano, turno) {
   ano_s = as.character(ano)
@@ -124,6 +125,41 @@ for (item in dados) {
   qqline(df$TAXA_ABSTENCAO)
 }
 ```
+
+## Testes de Shapiro-Wilk e Kolmogorov-Smirnov
+
+```{r Shapiro abstencoes, echo=FALSE} 
+#, results='asis'}
+
+testes_norm = data.frame(
+  ano_turno=NA,
+  W = 0,
+  W_p = 0,
+  D = 0,
+  D_p = 0
+)
+
+cnt=1
+for (item in dados) {
+  df <- item$DF
+  titulo <- paste(item$ANO, item$TURNO, "turno")
+  
+  S = shapiro.test(df$TAXA_ABSTENCAO)
+  K = ks.test(to_z(df$TAXA_ABSTENCAO), "pnorm")
+  # print("==================================================================")
+  testes_norm[cnt, ] = list(
+    ano_turno = titulo,
+    S$statistic,
+    S$p.value,
+    K$statistic,
+    K$p.value
+  )
+  cnt = cnt+1
+}
+
+kable(testes_norm)
+```
+
 
 ## Médias e desvios-padrão, por turno
 

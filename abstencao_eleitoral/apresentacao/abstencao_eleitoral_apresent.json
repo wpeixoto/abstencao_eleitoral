@@ -113,6 +113,20 @@
           },
           "imageType": "JPG",
           "selected": false
+        },
+        {
+          "src": "https://i.imgur.com/6gWLD1l.jpg",
+          "type": "Image",
+          "x": 498,
+          "y": 274,
+          "scale": {
+            "x": 0.5356004250797024,
+            "y": 0.5356004250797024,
+            "width": 503.99999999999994,
+            "height": 471.3283740701381
+          },
+          "imageType": "JPG",
+          "selected": false
         }
       ],
       "z": 0,
@@ -124,7 +138,8 @@
       "selected": false,
       "active": false,
       "x": 757,
-      "y": 219
+      "y": 219,
+      "markdown": ""
     },
     {
       "components": [
@@ -211,8 +226,8 @@
         },
         {
           "TextBox": {},
-          "x": 426,
-          "y": 398,
+          "x": 408,
+          "y": 449,
           "scale": {
             "x": 1,
             "y": 1
@@ -225,23 +240,47 @@
         {
           "markup": "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 50 50\" preserveAspectRatio=\"none\"><rect width=\"50\" height=\"50\"/></svg>",
           "type": "Shape",
-          "x": 695,
-          "y": 36,
+          "x": 671,
+          "y": 57,
           "scale": {
-            "width": 287.7242101253335,
-            "height": 308.62647460378065
+            "width": 252.95695663335098,
+            "height": 303.6053815371388
           },
           "selected": false
         },
         {
           "markup": "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 50 50\" preserveAspectRatio=\"none\"><rect width=\"50\" height=\"50\"/></svg>",
           "type": "Shape",
-          "x": 69,
-          "y": 382,
+          "x": 77,
+          "y": 368,
           "scale": {
-            "width": 287.7242101253335,
-            "height": 308.62647460378065
+            "width": 239.8526416798946,
+            "height": 283.5970505575204
           },
+          "selected": false
+        },
+        {
+          "src": "https://i.imgur.com/Q8XVhp8.jpg",
+          "type": "Image",
+          "x": 692,
+          "y": 79,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "imageType": "JPG",
+          "selected": false
+        },
+        {
+          "src": "https://i.imgur.com/EOmovmL.jpg",
+          "type": "Image",
+          "x": 91,
+          "y": 379,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "imageType": "JPG",
           "selected": false
         }
       ],
@@ -391,6 +430,62 @@
     {
       "components": [
         {
+          "src": "https://i.imgur.com/WTtqIom.jpg",
+          "type": "Image",
+          "x": 437,
+          "y": 12,
+          "scale": {
+            "x": 0.9456706281833617,
+            "y": 0.9456706281833617,
+            "width": 557,
+            "height": 708.3073005093379
+          },
+          "imageType": "JPG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2.8,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 12,
+      "selected": false,
+      "active": false,
+      "x": 132,
+      "y": 577
+    },
+    {
+      "components": [
+        {
+          "src": "https://i.imgur.com/FTsTAPI.jpg",
+          "type": "Image",
+          "x": 34,
+          "y": 16,
+          "scale": {
+            "x": 0.5112359550561798,
+            "y": 0.5112359550561798,
+            "width": 455,
+            "height": 717.7752808988764
+          },
+          "imageType": "JPG",
+          "selected": false
+        }
+      ],
+      "z": 0,
+      "impScale": 2,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 13,
+      "selected": false,
+      "active": false,
+      "x": 117,
+      "y": 577
+    },
+    {
+      "components": [
+        {
           "src": "https://i.imgur.com/qrMYARW.png",
           "type": "Image",
           "x": 29,
@@ -431,15 +526,15 @@
         }
       ],
       "z": 0,
-      "impScale": 2.5,
+      "impScale": 2,
       "rotateX": 0,
       "rotateY": 0,
       "rotateZ": 0,
-      "index": 12,
+      "index": 14,
       "selected": false,
       "active": false,
-      "x": 146,
-      "y": 467
+      "x": 124,
+      "y": 460
     },
     {
       "components": [],
@@ -448,12 +543,12 @@
       "rotateX": 0,
       "rotateY": 0,
       "rotateZ": 0,
-      "index": 13,
+      "index": 15,
       "selected": false,
       "active": false,
       "markdown": "# Significativa?",
-      "x": 156,
-      "y": 459
+      "x": 165,
+      "y": 429
     },
     {
       "components": [
@@ -503,7 +598,7 @@
       "rotateX": 0,
       "rotateY": 0,
       "rotateZ": 0,
-      "index": 14,
+      "index": 16,
       "selected": false,
       "active": false,
       "x": 139,
@@ -516,12 +611,26 @@
       "rotateX": 0,
       "rotateY": 1.2,
       "rotateZ": 0,
-      "index": 15,
+      "index": 17,
       "selected": false,
       "active": false,
       "markdown": "# Referências\n\n* [Voter turnout](https://www.idea.int/data-tools/country-view/68/40)\n* [Voto obrigatório](* http://www.tse.jus.br/eleitor/glossario/termos/voto-obrigatorio) (TSE)\n* [Por que no Brasil é obrigatório votar?](https://brasil.elpais.com/brasil/2014/08/04/politica/1407162732_889288.html) (Jornal El País)\n* [Wikipedia](https://pt.wikipedia.org/wiki/Voto_compulsório)\n\n## TSE\n\n* [Abstenção dos eleitores causa prejuízo ao contribuinte](http://www.tse.jus.br/imprensa/noticias-tse/2014/Maio/tse-abstencao-dos-eleitores-causa-prejuizo-ao-contribuinte)",
-      "x": 161,
-      "y": 402
+      "x": 276,
+      "y": 358
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 1.18,
+      "rotateZ": 0,
+      "index": 18,
+      "selected": false,
+      "active": false,
+      "markdown": "# Referências\n\n## Jornal El País\n* [Abstenção é a mais alta desde 1998](https://brasil.elpais.com/brasil/2014/10/07/politica/1412713399_211493.html)\n\n## G1\n\n* [Nível de abstenção nas eleições é o mais alto desde 1998](http://g1.globo.com/politica/eleicoes/2014/blog/eleicao-em-numeros/post/nivel-de-abstencao-nas-eleicoes-e-o-mais-alto-desde-1998.html)",
+      "x": 121,
+      "y": 221
     }
   ],
   "background": "bg-custom-dcdbd3",
@@ -564,6 +673,6 @@
       }
     ]
   },
-  "overviewX": 536,
-  "overviewY": 290
+  "overviewX": 528,
+  "overviewY": 372
 }
