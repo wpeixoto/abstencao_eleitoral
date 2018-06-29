@@ -1,0 +1,33 @@
+Electoral abstention is a phenomenon that draws a lot of attention and is covered in a distorted way, and this makes it difficult to understand the issue. In this essay, a scientific approach was experimented over the voter turnout data from Distrito Federal in order to verify the statistical significance (or lack thereof) in bastention rates, defined as the ration between the amount of absent electors over the total, by comparing pairs of them. Elections in the same year was considered paired experiments, and the ones in different years were regarded as independet observations. The statistical significance of the variation of the abstention rates was found to be varied, both significant and insignificant. 
+
+Chamada de notícias
+
+O que é abstenção?
+
+Com o que é comparada?
+
+O que pretendo descobrir?
+
+De onde vêm os dados?
+
+Como eles são?
+
+Como os tratei?
+
+    Erros e desistência
+    Distribuição e Saint-Exupery
+    Que métodos inferenciais?
+    
+Resultados
+
+Conclusão
+
+Further research
+
+----
+Imagens
+    Chepéu
+    Densidades de prob.
+     
+     
+     .
