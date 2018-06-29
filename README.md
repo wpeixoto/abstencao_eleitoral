@@ -13,6 +13,8 @@ A hipótese a ser testada (H<sub>a</sub>) é: A abstenção eleitoral apresenta 
 
 - [Apresentação](https://wpeixoto.github.io/abstencao_eleitoral/#/step-1)
 - [Resultados](https://wpeixoto.github.io/abstencao_eleitoral/#/step-18)
+    - [Análise de distribuição](https://wpeixoto.github.io/abstencao_eleitoral/Zonas_distribuicao.html)
+    - [Comparações](https://wpeixoto.github.io/abstencao_eleitoral/Zonas_eleitorais.html)
 
 
 
