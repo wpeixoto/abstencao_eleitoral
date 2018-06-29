@@ -7,9 +7,13 @@ Embora não se espere nenhum espanto do público geral diante de uma afirmação
 
 ## Hipóteses
 
-O jornal afirma que a abstenção está crescendo. Mas realemnte está?
+A hipótese a ser testada (H<sub>a</sub>) é: A abstenção eleitoral apresenta diferenças relevantes de uma eleição para outra. Portanto, a hipótese nula (H<sub>0</sub>) será a de que não há diferença relevante entre as taxas de abstenção de um ano para outro.
 
-A hipótese a ser testada (H<sub>a</sub>) é: A abstenção eleitoral aumenta de uma eleição para outra. Portanto, a hipótese nula (H<sub>0</sub>) será a de que não há diferença relevante entre as taxas de abstenção de um ano para outro.
+## Pesquisa
+
+- [Apresentação](https://wpeixoto.github.io/abstencao_eleitoral/#/step-1)
+- [Resultados](https://wpeixoto.github.io/abstencao_eleitoral/#/step-18)
+
 
 
 ## Outras pesquisas
